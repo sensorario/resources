@@ -1,0 +1,15 @@
+{
+    "name": "sensorario/value-object",
+    "description": "A Value Object Implementation in PHP",
+    "require": {
+        "phpunit/phpunit": "@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simone Gentili",
+            "email": "sensorario@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
