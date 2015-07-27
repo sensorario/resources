@@ -3,13 +3,60 @@
 namespace Sensorario\ValueObject;
 
 use PHPUnit_Framework_TestCase;
+use RuntimeException;
 
-final class HttpRequestTest extends PHPUnit_Framework_TestCase
+final class ValueOjectTest extends PHPUnit_Framework_TestCase
 {
-    public function test()
+    /**
+     * @expectedException RuntimeException
+     */
+    public function testNotallowedFieldThroghRuntimeException()
     {
-        $valueObject = GenericValueObject::box();
+        $fullName = FullNameValueObject::box([
+            'name'    => 'Simone',
+            'surname' => 'Gentili',
+            'not'     => 'allowed',
+        ]);
+    }
 
-        echo var_express($valueObject, true);
+    /**
+     * @expectedException RuntimeException
+     */
+    public function testMissingMandatoryFieldThroghRuntimeException()
+    {
+        $fullName = FullNameValueObject::box([]);
+    }
+
+    public function testValueObjectWithoutMandatoryProperties()
+    {
+        $valueObject = EmptyValueObject::box([
+            // ...
+        ]);
+
+        $this->assertInstanceOf(
+            'Sensorario\\valueObject\\EmptyValueObject',
+            $valueObject
+        );
+    }
+
+    public function testMandatoryFieldsAreAuthomaticallyAllowed()
+    {
+        $fullName = FullNameValueObject::box([
+            'name'    => 'Simone',
+            'surname' => 'Gentili',
+        ]);
+    }
+
+    public function testGetters()
+    {
+        $fullName = FullNameValueObject::box([
+            'name'    => 'Simone',
+            'surname' => 'Gentili',
+        ]);
+
+        $this->assertEquals(
+            'Simone',
+            $fullName->name()
+        );
     }
 }

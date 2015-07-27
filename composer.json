@@ -11,5 +11,10 @@
             "email": "sensorario@gmail.com"
         }
     ],
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
     "minimum-stability": "dev"
 }
