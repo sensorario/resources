@@ -1,5 +1,11 @@
 <?php
+/**
+ * @author Simone Gentili
+ */
 
+/**
+ * @author Simone Gentili
+ */
 namespace Sensorario\ValueObject;
 
 use RuntimeException;
