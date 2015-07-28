@@ -17,5 +17,8 @@
             "src/"
         ]
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "dev-master"
+    }
 }
