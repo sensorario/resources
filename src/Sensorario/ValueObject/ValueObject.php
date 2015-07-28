@@ -1,9 +1,5 @@
 <?php
 
-/**
- * A Value Object implementation in php.
- */
-
 namespace Sensorario\ValueObject;
 
 use RuntimeException;
