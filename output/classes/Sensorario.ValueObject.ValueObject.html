@@ -114,12 +114,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">13</span>
+                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">13</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">10</span>
                                 </a>
                             </li>
                             <li>
@@ -144,29 +144,47 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-874040261"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-65492597"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-874040261" class="accordion-body collapse in">
+            <div id="namespace-65492597" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1144126709"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1353155153"></a>
                                 <a href="../namespaces/Sensorario.html" style="margin-left: 30px; padding-left: 0">Sensorario</a>
             </div>
-            <div id="namespace-1144126709" class="accordion-body collapse ">
+            <div id="namespace-1353155153" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1750384116"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1055456329"></a>
                                 <a href="../namespaces/Sensorario.ValueObject.html" style="margin-left: 30px; padding-left: 0">ValueObject</a>
             </div>
-            <div id="namespace-1750384116" class="accordion-body collapse ">
+            <div id="namespace-1055456329" class="accordion-body collapse ">
                 <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-961973357"></a>
+                                <a href="../namespaces/Sensorario.ValueObject.Exceptions.html" style="margin-left: 30px; padding-left: 0">Exceptions</a>
+            </div>
+            <div id="namespace-961973357" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Sensorario.ValueObject.Exceptions.NotAllowedParameterEceptions.html">NotAllowedParameterEceptions</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
                     
                     <ul>
@@ -205,7 +223,7 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\Sensorario\ValueObject</small>ValueObject</h1>
-                    <p><em>Ciao</em></p>
+                    <p><em>A Value Object implementation in php.</em></p>
                     
                     
                                         
@@ -268,7 +286,7 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/ValueObject.html"><div class="path-wrapper">ValueObject.php</div></a></dd>
+                            <dd><a href="../files/value-object.src.Sensorario.ValueObject.ValueObject.html"><div class="path-wrapper">value-object/src/Sensorario/ValueObject/ValueObject.php</div></a></dd>
                                                 <dt>Package</dt>
                             <dd><div class="namespace-wrapper">Default</div></dd>
                                                 <dt>Class hierarchy</dt>
@@ -283,7 +301,14 @@
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                            <tr>
+                            <th>
+                                todo
+                            </th>
+                            <td>
+                                                                    <p>complete this dock bloc comment</p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
@@ -334,21 +359,22 @@
             <article class="method">
                 <h3 class="public ">__call()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__call(  <span class="argument">$functionName</span>,   <span class="argument">$arguments</span>) </pre>
+                <pre class="signature" style="margin-right: 54px;">__call(string  <span class="argument">$functionName</span>, array  <span class="argument">$arguments</span>) </pre>
                 <p><em></em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$functionName </td>
-                                <td></td>
+                                <td><p>function name</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>array</td>
                                 <td>$arguments </td>
-                                <td></td>
+                                <td><p>arguments passed to that function
+{@example test/unit/Sensorario/ValueObject/ValueObjectTest.php 50 61}</p></td>
                             </tr>
                                             </table>
                 
@@ -362,7 +388,14 @@
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>complete this dock bloc comment</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -373,7 +406,7 @@
             <article class="method">
                 <h3 class="public ">box()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">box(array  <span class="argument">$properties</span>) </pre>
+                <pre class="signature" style="margin-right: 54px;">box(array  <span class="argument">$properties</span>) : \Sensorario\ValueObject\ValueObject</pre>
                 <p><em></em></p>
                 
 
@@ -387,7 +420,10 @@
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    <a href="../classes/Sensorario.ValueObject.ValueObject.html">\Sensorario\ValueObject\ValueObject</a>
+                                            &mdash; <p>new ValueObject instance</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -397,7 +433,16 @@
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>complete this dock bloc comment
+Generic constructor.
+This method aims to generate all Value Objects.</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -417,7 +462,7 @@
                                                     <tr>
                                 <td>array</td>
                                 <td>$properties </td>
-                                <td></td>
+                                <td><p>all the properties of the Value Object</p></td>
                             </tr>
                                             </table>
                 
@@ -431,7 +476,14 @@
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>complete this dock bloc comment</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -447,6 +499,11 @@
                 
 
                 
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\RuntimeException</dt>
+                            <dd><p>if mandatory parameter is not configured</p></dd>
+                                                                    </dl>
                 
                 				
                             </article>
@@ -457,7 +514,15 @@
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>complete this dock bloc comment</p>
+                                                                                            <p>create a MissingMandatoryException class</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -473,6 +538,11 @@
                 
 
                 
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\RuntimeException</dt>
+                            <dd><p>if not allowed parameter is set</p></dd>
+                                                                    </dl>
                 
                 				
                             </article>
@@ -483,7 +553,15 @@
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>complete this dock bloc comment</p>
+                                                                                            <p>create a NotallowedParameterException class</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -494,13 +572,16 @@
             <article class="method">
                 <h3 class="protected ">mandatory()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">mandatory() </pre>
+                <pre class="signature" style="margin-right: 54px;">mandatory() : array</pre>
                 <p><em></em></p>
                 
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>the array of mandatory properties</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -510,7 +591,16 @@
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>complete this dock bloc comment
+Mandatory properties.
+This method returns the array corresponding to the list of all mandatory properties.</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -521,13 +611,16 @@
             <article class="method">
                 <h3 class="protected ">allowed()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">allowed() </pre>
+                <pre class="signature" style="margin-right: 54px;">allowed() : array</pre>
                 <p><em></em></p>
                 
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>the array of allowed properties</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -537,7 +630,16 @@
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>complete this dock bloc comment
+Allowed properties.
+This method returns the array corresponding to the list of all allowed properties.</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -551,7 +653,7 @@
             <h3 id="source-view-label">ValueObject.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/ValueObject.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/value-object/src/Sensorario/ValueObject/ValueObject.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
@@ -592,7 +694,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 28th, 2015 at 04:03.
+                    on July 28th, 2015 at 07:26.
                 </section>
             </section>
         </section>

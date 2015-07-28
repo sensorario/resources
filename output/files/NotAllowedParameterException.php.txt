@@ -1,0 +1,9 @@
+<?php
+
+namespace Sensorario\ValueObject\Exceptions;
+
+final class NotAllowedParameterEceptions extends Exception
+{
+    // ...
+}
+

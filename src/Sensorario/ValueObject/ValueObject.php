@@ -1,9 +1,11 @@
 <?php
 /**
+ * @todo complete this dock bloc comment
  * @author Simone Gentili
  */
 
 /**
+ * @todo complete this dock bloc comment
  * @author Simone Gentili
  */
 namespace Sensorario\ValueObject;
@@ -12,12 +14,14 @@ use RuntimeException;
 
 /**
  * A Value Object implementation in php.
+ * @todo complete this dock bloc comment
  */
 abstract class ValueObject
 {
     protected $properties = [];
 
     /**
+     * @todo complete this dock bloc comment
      * @param string $functionName function name
      * @param array  $arguments    arguments passed to that function
      * {@example test/unit/Sensorario/ValueObject/ValueObjectTest.php 50 61}
@@ -30,6 +34,7 @@ abstract class ValueObject
     }
 
     /**
+     * @todo complete this dock bloc comment
      * @param array $properties all the properties of the Value Object
      */
     protected function __construct(array $properties)
@@ -41,6 +46,7 @@ abstract class ValueObject
     }
 
     /**
+     * @todo complete this dock bloc comment
      * @todo create a MissingMandatoryException class
      * @throws RuntimeException if mandatory parameter is not configured
      */
@@ -56,6 +62,7 @@ abstract class ValueObject
     }
 
     /**
+     * @todo complete this dock bloc comment
      * @todo create a NotallowedParameterException class
      * @throws RuntimeException if not allowed parameter is set
      */
@@ -76,6 +83,7 @@ abstract class ValueObject
     }
 
     /**
+     * @todo complete this dock bloc comment
      * Generic constructor.
      * This method aims to generate all Value Objects.
      *
@@ -89,6 +97,7 @@ abstract class ValueObject
     }
 
     /**
+     * @todo complete this dock bloc comment
      * Mandatory properties.
      * This method returns the array corresponding to the list of all mandatory properties.
      *
@@ -100,6 +109,7 @@ abstract class ValueObject
     }
 
     /**
+     * @todo complete this dock bloc comment
      * Allowed properties.
      * This method returns the array corresponding to the list of all allowed properties.
      *
