@@ -5,7 +5,7 @@ namespace Sensorario\ValueObject;
 use PHPUnit_Framework_TestCase;
 use RuntimeException;
 
-final class ValueOjectTest extends PHPUnit_Framework_TestCase
+final class ValueObjectTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException RuntimeException
