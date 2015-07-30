@@ -1,6 +1,9 @@
 <?php
+
 /**
- * @todo complete this dock bloc comment
+ * Value Object base class.
+ * This class aims to be a base class for all kind of Value Objects.
+ *
  * @author Simone Gentili
  */
 
@@ -14,14 +17,20 @@ use RuntimeException;
 
 /**
  * A Value Object implementation in php.
- * @todo complete this dock bloc comment
  */
 abstract class ValueObject
 {
+    /**
+     * $properties array the properties of the concept whole.
+     */
     protected $properties = [];
 
     /**
-     * @todo complete this dock bloc comment
+     * Automatically manage getters with magic methods.
+     * For each property called propertyX, is possible to call a method propertyX() tha returns that property.
+     * And is possible to override this method, simply creating it: __call is called only when a REAL method does not
+     * exists.
+     *
      * @param string $functionName function name
      * @param array  $arguments    arguments passed to that function
      * {@example test/unit/Sensorario/ValueObject/ValueObjectTest.php 50 61}
@@ -34,7 +43,11 @@ abstract class ValueObject
     }
 
     /**
-     * @todo complete this dock bloc comment
+     * The constructor.
+     * The keyworkd __construct does not tell to developers what this method does.
+     * Enforcing developers to use a more speaking API, it could be better the creation of new instance throw public
+     * static methods.
+     *
      * @param array $properties all the properties of the Value Object
      */
     protected function __construct(array $properties)
@@ -46,7 +59,9 @@ abstract class ValueObject
     }
 
     /**
-     * @todo complete this dock bloc comment
+     * Mandatory properties.
+     * All mandatory properties must be defined. In contrary, an exception is thrown.
+     *
      * @todo create a MissingMandatoryException class
      * @throws RuntimeException if mandatory parameter is not configured
      */
@@ -62,7 +77,9 @@ abstract class ValueObject
     }
 
     /**
-     * @todo complete this dock bloc comment
+     * Allowed properties.
+     * If a not allowed keyword is used, an exception is thrown.
+     *
      * @todo create a NotallowedParameterException class
      * @throws RuntimeException if not allowed parameter is set
      */
@@ -83,9 +100,10 @@ abstract class ValueObject
     }
 
     /**
-     * @todo complete this dock bloc comment
      * Generic constructor.
      * This method aims to generate all Value Objects.
+     *
+     * @param array $properties the list of properties to be used to create new instance of current value object.
      *
      * @return ValueObject new ValueObject instance
      */
@@ -97,7 +115,6 @@ abstract class ValueObject
     }
 
     /**
-     * @todo complete this dock bloc comment
      * Mandatory properties.
      * This method returns the array corresponding to the list of all mandatory properties.
      *
@@ -109,7 +126,6 @@ abstract class ValueObject
     }
 
     /**
-     * @todo complete this dock bloc comment
      * Allowed properties.
      * This method returns the array corresponding to the list of all allowed properties.
      *
