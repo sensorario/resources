@@ -2,6 +2,8 @@
 <phpdoc>
     <files>
         <directory>src/*</directory>
+        <directory>examples/*</directory>
+        <directory>test/*</directory>
     </files>
 
     <logging>
