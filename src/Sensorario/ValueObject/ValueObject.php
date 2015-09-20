@@ -106,9 +106,11 @@ abstract class ValueObject
      */
     public static function __callStatic($method, array $args)
     {
-         return new static(
-            $args[0]
-         );
+        return new static(
+           isset($args[0])
+           ? $args[0]
+           : []
+        );
     }
 
     /**
