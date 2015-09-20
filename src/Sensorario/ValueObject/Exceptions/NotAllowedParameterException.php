@@ -10,7 +10,6 @@ use Exception;
 
 /**
  * Not allowed parameter exceptions.
- * @todo a fix on message?
  */
 final class NotAllowedParameterException extends Exception
 {

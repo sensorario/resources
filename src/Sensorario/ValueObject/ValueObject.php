@@ -8,7 +8,6 @@
  */
 
 /**
- * @todo complete this dock bloc comment
  * @author Simone Gentili
  */
 namespace Sensorario\ValueObject;
@@ -62,7 +61,6 @@ abstract class ValueObject
      * Mandatory properties.
      * All mandatory properties must be defined. In contrary, an exception is thrown.
      *
-     * @todo create a MissingMandatoryException class
      * @throws RuntimeException if mandatory parameter is not configured
      */
     protected function ensureMandatoryProperties()
@@ -80,7 +78,6 @@ abstract class ValueObject
      * Allowed properties.
      * If a not allowed keyword is used, an exception is thrown.
      *
-     * @todo create a NotallowedParameterException class
      * @throws RuntimeException if not allowed parameter is set
      */
     protected function ensureAllowedProperties()
@@ -101,15 +98,13 @@ abstract class ValueObject
 
     /**
      * Static Interceptor
-     * This method is called each time a static method is invoked. This means 
-     * the if we have not defined any public static constructor, with a specific 
-     * behavior, we have this default constructor.
      *
-     * @param array $properties the list of properties to be used to create new instance of current value object.
+     * @param string $method method name
+     * @param array $args the list of properties
      *
      * @return ValueObject new ValueObject instance
      */
-    public static function __callStatic($method, $args)
+    public static function __callStatic($method, array $args)
     {
          return new static(
             $args[0]

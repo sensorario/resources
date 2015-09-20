@@ -1,13 +1,26 @@
 <?php
 
+/**
+ * This is a summary
+ *
+ * This is a description
+ */
+
 namespace Sensorario\ValueObject;
 
 use PHPUnit_Framework_TestCase;
 use RuntimeException;
 
+/**
+ * This is a summary
+ *
+ * this is a descripion
+ */
 final class ValueObjectTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * You can use ONLY allowed fields
+     *
      * @expectedException RuntimeException
      */
     public function testNotallowedFieldThroghRuntimeException()
@@ -20,6 +33,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Cannot forget mandator fields
+     *
      * @expectedException RuntimeException
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
@@ -27,6 +42,9 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         $fullName = FullNameValueObject::box([]);
     }
 
+    /**
+     * You are not allowed to create a Value Object without mandatory fields
+     */
     public function testValueObjectWithoutMandatoryProperties()
     {
         $valueObject = EmptyValueObject::box([
@@ -39,6 +57,11 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Is obvious, but mandatory fields are allowed by default
+     *
+     * this means that if you dont specify them as allowed, dont through exception
+     */
     public function testMandatoryFieldsAreAuthomaticallyAllowed()
     {
         $fullName = FullNameValueObject::box([
@@ -47,6 +70,11 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
+    /**
+     * Mmmm a test for a getter.
+     *
+     * Maybe just for code coverage, ... 
+     */
     public function testGetters()
     {
         $fullName = FullNameValueObject::box([
