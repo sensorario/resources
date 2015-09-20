@@ -21,7 +21,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     /**
      * You can use ONLY allowed fields
      *
-     * @expectedException RuntimeException
+     * @expectedException        RuntimeException
+     * @expectedExceptionMessage Key not is not allowed
      */
     public function testNotallowedFieldThroghRuntimeException()
     {
@@ -35,7 +36,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     /**
      * Cannot forget mandator fields
      *
-     * @expectedException RuntimeException
+     * @expectedException        RuntimeException
+     * @expectedExceptionMessage Property name is mandatory but not set
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
     {
