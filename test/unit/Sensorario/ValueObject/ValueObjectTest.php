@@ -89,4 +89,15 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             $fullName->name()
         );
     }
+
+    /** @todo some names are reserved ... */
+    public function testCanHaveDefaultValues()
+    {
+        $browser = Browser::hello();
+
+        $this->assertEquals(
+            'Firefox',
+            $browser->name()
+        );
+    }
 }

@@ -29,6 +29,7 @@ abstract class ValueObject
      * For each property called propertyX, is possible to call a method propertyX() tha returns that property.
      * And is possible to override this method, simply creating it: __call is called only when a REAL method does not
      * exists.
+     * For non setted values, default ones are configurable
      *
      * @param string $functionName function name
      * @param array  $arguments    arguments passed to that function
@@ -36,9 +37,12 @@ abstract class ValueObject
      */
     public function __call($functionName, $arguments)
     {
-        return $this->properties[
-            $key = strtolower($functionName)
-        ];
+        $index = strtolower($functionName);
+
+        return isset($this->properties[$index])
+            ? $this->properties[$index]
+            : $this->defaults()[$index]
+        ;
     }
 
     /**
@@ -131,6 +135,17 @@ abstract class ValueObject
      * @return array the array of allowed properties
      */
     protected static function allowed()
+    {
+        return [];
+    }
+
+    /**
+     * Default values
+     * Instead of writing custom factory, use default values
+     *
+     * @return array the array of defalt properties's value
+     */
+    protected static function defaults()
     {
         return [];
     }
