@@ -100,18 +100,20 @@ abstract class ValueObject
     }
 
     /**
-     * Generic constructor.
-     * This method aims to generate all Value Objects.
+     * Static Interceptor
+     * This method is called each time a static method is invoked. This means 
+     * the if we have not defined any public static constructor, with a specific 
+     * behavior, we have this default constructor.
      *
      * @param array $properties the list of properties to be used to create new instance of current value object.
      *
      * @return ValueObject new ValueObject instance
      */
-    public static function box(array $properties)
+    public static function __callStatic($method, $args)
     {
-        return new static(
-            $properties
-        );
+         return new static(
+            $args[0]
+         );
     }
 
     /**
