@@ -76,6 +76,10 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /** @todo some names are reserved ... */
+
+    /**
+     * A value object could have default vaules
+     */
     public function testCanHaveDefaultValues()
     {
         $foo = Bar::hello();
@@ -87,8 +91,16 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 }
 
+/**
+ * Example class
+ *
+ * This kind of Vo provide one mandatory field, and two allowed
+ */
 final class Foo extends ValueObject
 {
+    /**
+     * Only one mandatory field here
+     */
     public static function mandatory()
     {
         return [
@@ -96,6 +108,9 @@ final class Foo extends ValueObject
         ];
     }
 
+    /**
+     * This VO allows two fields
+     */
     public static function allowed()
     {
         return [
@@ -105,8 +120,14 @@ final class Foo extends ValueObject
     }
 }
 
+/**
+ * In this case, we have a default value
+ */
 final class Bar extends ValueObject
 {
+    /**
+     * Only one mandatory field here
+     */
     public static function allowed()
     {
         return [
@@ -114,6 +135,9 @@ final class Bar extends ValueObject
         ];
     }
 
+    /**
+     * Only one default value
+     */
     public static function defaults()
     {
         return [
