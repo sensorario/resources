@@ -151,4 +151,11 @@ abstract class ValueObject
     {
         return [];
     }
+
+    public function properyExists($propertyName)
+    {
+        return isset(
+            $this->properties[$propertyName]
+        );
+    }
 }

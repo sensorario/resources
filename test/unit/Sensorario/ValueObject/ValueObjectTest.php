@@ -89,6 +89,15 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             $foo->name()
         );
     }
+
+    public function testProperyExists()
+    {
+        $foo = Bar::hello();
+
+        $this->assertFalse(
+            $foo->properyExists('nonExistentProperty')
+        );
+    }
 }
 
 /**
