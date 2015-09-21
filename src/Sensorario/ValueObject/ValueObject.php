@@ -71,9 +71,11 @@ abstract class ValueObject
     {
         foreach ($this->mandatory() as $key) {
             if (!isset($this->properties[$key])) {
-                throw new RuntimeException(
-                    "Property $key is mandatory but not set"
-                );
+                if (!isset(static::defaults()[$key])) {
+                    throw new RuntimeException(
+                        "Property $key is mandatory but not set"
+                    );
+                }
             }
         }
     }
