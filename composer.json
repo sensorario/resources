@@ -1,23 +1,21 @@
 {
     "name": "sensorario/value-object",
+    "minimum-stability": "dev",
     "description": "A Value Object Implementation in PHP",
-    "require": {
-        "phpunit/phpunit": "@dev"
-    },
-    "license": "MIT",
     "authors": [
         {
             "name": "Simone Gentili",
             "email": "sensorario@gmail.com"
         }
     ],
+    "license": "MIT",
     "autoload": {
         "classmap": [
             "src/"
         ]
     },
-    "minimum-stability": "dev",
     "require-dev": {
-        "phpdocumentor/phpdocumentor": "dev-master"
+        "phpunit/phpunit": "@dev",
+        "phpdocumentor/phpdocumentor": "@dev"
     }
 }
