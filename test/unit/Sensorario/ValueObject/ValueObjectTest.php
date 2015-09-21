@@ -26,7 +26,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testNotallowedFieldThroghRuntimeException()
     {
-        $fullName = FullNameValueObject::box([
+        $foo = Foo::box([
             'name'    => 'Simone',
             'surname' => 'Gentili',
             'not'     => 'allowed',
@@ -41,22 +41,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
     {
-        $fullName = FullNameValueObject::box([]);
-    }
-
-    /**
-     * You are not allowed to create a Value Object without mandatory fields
-     */
-    public function testValueObjectWithoutMandatoryProperties()
-    {
-        $valueObject = EmptyValueObject::box([
-            // ...
-        ]);
-
-        $this->assertInstanceOf(
-            'Sensorario\\valueObject\\EmptyValueObject',
-            $valueObject
-        );
+        $foo = Foo::box([]);
     }
 
     /**
@@ -66,7 +51,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testMandatoryFieldsAreAuthomaticallyAllowed()
     {
-        $fullName = FullNameValueObject::box([
+        $foo = Foo::box([
             'name'    => 'Simone',
             'surname' => 'Gentili',
         ]);
@@ -79,25 +64,60 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetters()
     {
-        $fullName = FullNameValueObject::box([
+        $foo = Foo::box([
             'name'    => 'Simone',
             'surname' => 'Gentili',
         ]);
 
         $this->assertEquals(
             'Simone',
-            $fullName->name()
+            $foo->name()
         );
     }
 
     /** @todo some names are reserved ... */
     public function testCanHaveDefaultValues()
     {
-        $browser = Browser::hello();
+        $foo = Bar::hello();
 
         $this->assertEquals(
             'Firefox',
-            $browser->name()
+            $foo->name()
         );
+    }
+}
+
+final class Foo extends ValueObject
+{
+    public static function mandatory()
+    {
+        return [
+            'name',
+        ];
+    }
+
+    public static function allowed()
+    {
+        return [
+            'name',
+            'surname',
+        ];
+    }
+}
+
+final class Bar extends ValueObject
+{
+    public static function allowed()
+    {
+        return [
+            'name',
+        ];
+    }
+
+    public static function defaults()
+    {
+        return [
+            'name' => 'Firefox',
+        ];
     }
 }
