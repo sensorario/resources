@@ -152,10 +152,27 @@ abstract class ValueObject
         return [];
     }
 
-    public function propertyExists($propertyName)
+    final public function propertyExists($propertyName)
     {
         return isset(
             $this->properties[$propertyName]
         );
+    }
+
+    final public function get($propertyName)
+    {
+        if (!isset($this->properties[$propertyName])) {
+            if (isset($this->defaults()[$propertyName])) {
+                return $this->defaults()[$propertyName];
+            }
+
+            throw new RuntimeException(
+                'No value nor method `'
+                . $propertyName
+                . '` found in this Value Object'
+            );
+        }
+
+        return $this->properties[$propertyName];
     }
 }

@@ -98,6 +98,37 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             $foo->propertyExists('nonExistentProperty')
         );
     }
+
+    public function testAllowAccessToProperties()
+    {
+        $foo = Bar::hello([
+            'name' => 'Firefox'
+        ]);
+
+        $this->assertEquals(
+            'Firefox',
+            $foo->get('name')
+        );
+    }
+
+    public function testAllowAccessToPropertiesThroughDefaultValue()
+    {
+        $foo = Bar::hello();
+
+        $this->assertEquals(
+            'Firefox',
+            $foo->get('name')
+        );
+    }
+
+    /**
+     * @expectedException RuntimeException
+     */
+    public function testThroughExceptionWhenNoValuesProvided()
+    {
+        $foo = Bar::hello();
+        $foo->get('foo');
+    }
 }
 
 /**
