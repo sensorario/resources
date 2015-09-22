@@ -22,7 +22,7 @@ abstract class ValueObject
     /**
      * $properties array the properties of the concept whole.
      */
-    protected $properties = [];
+    private $properties = [];
 
     /**
      * Automatically manage getters with magic methods.
