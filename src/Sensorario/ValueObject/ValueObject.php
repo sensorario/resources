@@ -13,6 +13,7 @@
 namespace Sensorario\ValueObject;
 
 use RuntimeException;
+use Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException;
 
 /**
  * A Value Object implementation in php.
@@ -65,14 +66,14 @@ abstract class ValueObject
      * Mandatory properties.
      * All mandatory properties must be defined. In contrary, an exception is thrown.
      *
-     * @throws RuntimeException if mandatory parameter is not configured
+     * @throws Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException if mandatory parameter is not configured
      */
     protected function ensureMandatoryProperties()
     {
         foreach ($this->mandatory() as $key) {
             if (!isset($this->properties[$key])) {
                 if (!isset(static::defaults()[$key])) {
-                    throw new RuntimeException(
+                    throw new UndefinedMandatoryPropertyException(
                         "Property $key is mandatory but not set"
                     );
                 }

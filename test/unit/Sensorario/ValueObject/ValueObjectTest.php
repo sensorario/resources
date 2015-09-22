@@ -10,6 +10,7 @@ namespace Sensorario\ValueObject;
 
 use PHPUnit_Framework_TestCase;
 use RuntimeException;
+use Sensorario\ValueObject\Exception\UndefinedMandatoryPropertyException;
 
 /**
  * This is a summary
@@ -36,7 +37,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     /**
      * Cannot forget mandator fields
      *
-     * @expectedException        RuntimeException
+     * @expectedException        Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
      * @expectedExceptionMessage Property name is mandatory but not set
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
