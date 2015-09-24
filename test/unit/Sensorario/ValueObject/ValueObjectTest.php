@@ -11,6 +11,7 @@ namespace Sensorario\ValueObject;
 use PHPUnit_Framework_TestCase;
 use RuntimeException;
 use Sensorario\ValueObject\Exception\UndefinedMandatoryPropertyException;
+use Sensorario\ValueObject\Exception\InvalidKeyException;
 
 /**
  * This is a summary
@@ -22,7 +23,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     /**
      * You can use ONLY allowed fields
      *
-     * @expectedException        RuntimeException
+     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidKeyException
      * @expectedExceptionMessage Key not is not allowed
      */
     public function testNotAllowedFieldThroghRuntimeException()

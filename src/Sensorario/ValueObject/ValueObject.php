@@ -13,8 +13,9 @@
 namespace Sensorario\ValueObject;
 
 use RuntimeException;
-use Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException;
 use Sensorario\ValueObject\Exceptions\InvalidFactoryMethodException;
+use Sensorario\ValueObject\Exceptions\InvalidKeyException;
+use Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException;
 
 /**
  * A Value Object implementation in php.
@@ -86,7 +87,7 @@ abstract class ValueObject
      * Allowed properties.
      * If a not allowed keyword is used, an exception is thrown.
      *
-     * @throws RuntimeException if not allowed parameter is set
+     * @throws Sensorario\ValueObject\Exceptions\InvalidKeyException if not allowed parameter is set
      */
     protected function ensureAllowedProperties()
     {
@@ -97,7 +98,7 @@ abstract class ValueObject
 
         foreach ($this->properties as $key => $property) {
             if (!in_array($key, $allowed)) {
-                throw new RuntimeException(
+                throw new InvalidKeyException(
                     "Key $key is not allowed"
                 );
             }
