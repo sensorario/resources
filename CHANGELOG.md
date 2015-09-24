@@ -1,3 +1,7 @@
+# Release 0.1.5
+
+* Removed php 5.4 support
+
 # Release 0.1.4
 
 * Init test suite, written readme file and defined composer required libs
