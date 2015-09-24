@@ -14,6 +14,7 @@ namespace Sensorario\ValueObject;
 
 use RuntimeException;
 use Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException;
+use Sensorario\ValueObject\Exceptions\InvalidFactoryMethodException;
 
 /**
  * A Value Object implementation in php.
@@ -113,11 +114,15 @@ abstract class ValueObject
      */
     public static function __callStatic($method, array $args)
     {
-        return new static(
-           isset($args[0])
-           ? $args[0]
-           : []
-        );
+        if ($method == 'box') {
+            return new static(
+               isset($args[0])
+               ? $args[0]
+               : []
+            );
+        }
+
+        throw new InvalidFactoryMethodException();
     }
 
     /**

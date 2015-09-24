@@ -25,7 +25,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
      * @expectedException        RuntimeException
      * @expectedExceptionMessage Key not is not allowed
      */
-    public function testNotallowedFieldThroghRuntimeException()
+    public function testNotAllowedFieldThroghRuntimeException()
     {
         $foo = Foo::box([
             'name'    => 'Simone',
@@ -76,14 +76,20 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /** @todo some names are reserved ... */
+    /**
+     * @expectedException Sensorario\ValueObject\Exceptions\InvalidFactoryMethodException
+     */
+    public function testFactoryMethodShouldBeBox()
+    {
+        Bar::invalidFactoryName();
+    }
 
     /**
      * A value object could have default vaules
      */
     public function testCanHaveDefaultValues()
     {
-        $foo = Bar::hello();
+        $foo = Bar::box();
 
         $this->assertEquals(
             'Firefox',
@@ -93,7 +99,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testPropertyExists()
     {
-        $foo = Bar::hello();
+        $foo = Bar::box();
 
         $this->assertFalse(
             $foo->propertyExists('nonExistentProperty')
@@ -102,7 +108,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testAllowAccessToProperties()
     {
-        $foo = Bar::hello([
+        $foo = Bar::box([
             'name' => 'Firefox'
         ]);
 
@@ -114,7 +120,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testAllowAccessToPropertiesThroughDefaultValue()
     {
-        $foo = Bar::hello();
+        $foo = Bar::box();
 
         $this->assertEquals(
             'Firefox',
@@ -127,7 +133,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testThroughExceptionWhenNoValuesProvided()
     {
-        $foo = Bar::hello();
+        $foo = Bar::box();
         $foo->get('foo');
     }
 }
