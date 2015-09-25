@@ -1,6 +1,8 @@
 # Release 0.1.5
 
 * Removed php 5.4 support
+* Contraints in values that a property can have
+* Removed doc folder, in favour of test suite as documentation
 
 # Release 0.1.4
 

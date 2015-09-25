@@ -137,6 +137,37 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         $foo = Bar::box();
         $foo->get('foo');
     }
+
+    /**
+     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidValueException
+     * @expectedExceptionMessage Value `42` is not allowed for key `someApiParameter`
+     */
+    public function testAllowedValueForAField()
+    {
+        SomeApiRequest::box([
+            'someApiParameter' => 42
+        ]);
+    }
+}
+
+final class SomeApiRequest extends ValueObject
+{
+    public static function mandatory()
+    {
+        return [
+            'someApiParameter',
+        ];
+    }
+
+    public static function allowedValues()
+    {
+        return [
+            'someApiParameter' => [
+                'hello',
+                'world'
+            ],
+        ];
+    }
 }
 
 /**

@@ -15,6 +15,7 @@ namespace Sensorario\ValueObject;
 use RuntimeException;
 use Sensorario\ValueObject\Exceptions\InvalidFactoryMethodException;
 use Sensorario\ValueObject\Exceptions\InvalidKeyException;
+use Sensorario\ValueObject\Exceptions\InvalidValueException;
 use Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException;
 
 /**
@@ -62,6 +63,7 @@ abstract class ValueObject
 
         $this->ensureMandatoryProperties();
         $this->ensureAllowedProperties();
+        $this->ensureAllowedValues();
     }
 
     /**
@@ -105,6 +107,20 @@ abstract class ValueObject
         }
     }
 
+    protected function ensureAllowedValues()
+    {
+        foreach ($this->properties as $key => $value) {
+            if (isset($this->allowedValues()[$key])) {
+                if (!in_array($value, $this->allowedValues()[$key])) {
+                    throw new InvalidValueException(
+                        'Value `' . $value . '` is not allowed '
+                        . 'for key `' . $key. '`'
+                    );
+                }
+            }
+        }
+    }
+
     /**
      * Static Interceptor
      *
@@ -144,6 +160,11 @@ abstract class ValueObject
      * @return array the array of allowed properties
      */
     protected static function allowed()
+    {
+        return [];
+    }
+
+    protected static function allowedValues()
     {
         return [];
     }
