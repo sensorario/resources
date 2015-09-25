@@ -3,6 +3,7 @@
 * Removed php 5.4 support
 * Contraints in values that a property can have
 * Removed doc folder, in favour of test suite as documentation
+* Added a list of reserved keywords for public static method
 
 # Release 0.1.4
 

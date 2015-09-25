@@ -131,7 +131,14 @@ abstract class ValueObject
      */
     public static function __callStatic($method, array $args)
     {
-        if ($method == 'box') {
+        $isMethodNameAllowed = in_array(
+            $method, [
+                'box',
+                'allowedValues'
+            ]
+        );
+
+        if ($isMethodNameAllowed) {
             return new static(
                isset($args[0])
                ? $args[0]

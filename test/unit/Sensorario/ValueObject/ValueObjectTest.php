@@ -80,7 +80,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException Sensorario\ValueObject\Exceptions\InvalidFactoryMethodException
      */
-    public function testFactoryMethodShouldBeBox()
+    public function testFactoryMethods()
     {
         Bar::invalidFactoryName();
     }
