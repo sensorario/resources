@@ -114,7 +114,7 @@ abstract class ValueObject
                 if (!in_array($value, $this->allowedValues()[$key])) {
                     throw new InvalidValueException(
                         'Value `' . $value . '` is not allowed '
-                        . 'for key `' . $key. '`'
+                        . 'for key `' . $key . '`'
                     );
                 }
             }
