@@ -140,9 +140,9 @@ abstract class ValueObject
 
         if ($isMethodNameAllowed) {
             return new static(
-               isset($args[0])
-               ? $args[0]
-               : []
+                isset($args[0])
+                ? $args[0]
+                : []
             );
         }
 
