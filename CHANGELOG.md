@@ -1,3 +1,7 @@
+# Release 0.1.6
+
+* Properties could hava a type
+
 # Release 0.1.5
 
 * Removed php 5.4 support

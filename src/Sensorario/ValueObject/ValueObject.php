@@ -59,6 +59,24 @@ abstract class ValueObject
      */
     protected function __construct(array $properties)
     {
+        foreach ($properties as $key => $value) {
+            if (isset(static::types()[$key])) {
+                $type = static::types()[$key];
+
+                if (!is_object($properties[$key])) {
+                    throw new RuntimeException(
+                        'Must be an object'
+                    );
+                }
+
+                if (get_class($properties[$key]) != $type) {
+                    throw new RuntimeException(
+                        'Must be an object of type ' . $type
+                    );
+                }
+            }
+        }
+
         $this->properties = $properties;
 
         $this->ensureMandatoryProperties();
@@ -176,6 +194,11 @@ abstract class ValueObject
         return [];
     }
 
+    protected static function types()
+    {
+        return [];
+    }
+
     /**
      * Default values
      * Instead of writing custom factory, use default values
@@ -209,5 +232,18 @@ abstract class ValueObject
         }
 
         return $this->properties[$propertyName];
+    }
+
+    public function getPropertyType($index)
+    {
+        if (is_object($this->properties[$index])) {
+            return get_class(
+                $this->properties[$index]
+            );
+        }
+
+        return gettype(
+            $this->properties[$index]
+        );
     }
 }

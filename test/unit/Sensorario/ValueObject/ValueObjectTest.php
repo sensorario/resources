@@ -12,6 +12,8 @@ use PHPUnit_Framework_TestCase;
 use RuntimeException;
 use Sensorario\ValueObject\Exception\UndefinedMandatoryPropertyException;
 use Sensorario\ValueObject\Exception\InvalidKeyException;
+use DateTime;
+use DateInterval;
 
 /**
  * This is a summary
@@ -62,7 +64,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     /**
      * Mmmm a test for a getter.
      *
-     * Maybe just for code coverage, ... 
+     * Maybe just for code coverage, ...
      */
     public function testGetters()
     {
@@ -147,6 +149,69 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         SomeApiRequest::box([
             'someApiParameter' => 42
         ]);
+    }
+
+    /**
+     * @expectedException        RuntimeException
+     * @expectedExceptionMessage Must be an object
+     */
+    public function testPropertyCouldBeAnObject()
+    {
+        $birthday = BirthDay::box([
+            'date' => 'not a date',
+        ]);
+    }
+
+    /**
+     * @expectedException        RuntimeException
+     * @expectedExceptionMessage Must be an object of type DateTime
+     */
+    public function testPropertyCouldBeTheRightnObject()
+    {
+        $birthday = BirthDay::box([
+            'date' => new DateInterval('P1D'),
+        ]);
+    }
+
+    public function testPropertiesTypeWhenObject()
+    {
+        $birthday = BirthDay::box([
+            'date' => new DateTime('2015'),
+        ]);
+
+        $this->assertEquals(
+            'DateTime',
+            $birthday->getPropertyType('date')
+        );
+    }
+
+    public function testPropertiesTypeWhenString()
+    {
+        $foo = Foo::box([
+            'name' => 'Simone'
+        ]);
+
+        $this->assertEquals(
+            'string',
+            $foo->getPropertyType('name')
+        );
+    }
+}
+
+final class BirthDay extends ValueObject
+{
+    public static function allowed()
+    {
+        return [
+            'date',
+        ];
+    }
+
+    public static function types()
+    {
+        return [
+            'date' => 'DateTime',
+        ];
     }
 }
 
