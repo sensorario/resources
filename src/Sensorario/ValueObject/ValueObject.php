@@ -41,11 +41,11 @@ abstract class ValueObject
      */
     public function __call($functionName, $arguments)
     {
-        $index = strtolower($functionName);
+        $properyName = strtolower($functionName);
 
-        return isset($this->properties[$index])
-            ? $this->properties[$index]
-            : $this->defaults()[$index]
+        return isset($this->properties[$properyName])
+            ? $this->properties[$properyName]
+            : $this->defaults()[$properyName]
         ;
     }
 
@@ -59,29 +59,33 @@ abstract class ValueObject
      */
     protected function __construct(array $properties)
     {
-        foreach ($properties as $key => $value) {
+        $this->properties = $properties;
+
+        $this->ensureRightType();
+        $this->ensureMandatoryProperties();
+        $this->ensureAllowedProperties();
+        $this->ensureAllowedValues();
+    }
+
+    protected function ensureRightType()
+    {
+        foreach ($this->properties as $key => $value) {
             if (isset(static::types()[$key])) {
                 $type = static::types()[$key];
 
-                if (!is_object($properties[$key])) {
+                if (!is_object($this->properties[$key])) {
                     throw new RuntimeException(
                         'Must be an object'
                     );
                 }
 
-                if (get_class($properties[$key]) != $type) {
+                if (get_class($this->properties[$key]) != $type) {
                     throw new RuntimeException(
                         'Must be an object of type ' . $type
                     );
                 }
             }
         }
-
-        $this->properties = $properties;
-
-        $this->ensureMandatoryProperties();
-        $this->ensureAllowedProperties();
-        $this->ensureAllowedValues();
     }
 
     /**
@@ -234,16 +238,16 @@ abstract class ValueObject
         return $this->properties[$propertyName];
     }
 
-    public function getPropertyType($index)
+    public function getPropertyType($properyName)
     {
-        if (is_object($this->properties[$index])) {
+        if (is_object($this->properties[$properyName])) {
             return get_class(
-                $this->properties[$index]
+                $this->properties[$properyName]
             );
         }
 
         return gettype(
-            $this->properties[$index]
+            $this->properties[$properyName]
         );
     }
 }
