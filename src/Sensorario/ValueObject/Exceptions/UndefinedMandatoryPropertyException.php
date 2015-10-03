@@ -13,4 +13,7 @@ namespace Sensorario\ValueObject\Exceptions;
 
 use Exception;
 
+/**
+ * All properties defined as mandatory, must be valorized
+ */
 final class UndefinedMandatoryPropertyException extends Exception { }
