@@ -13,4 +13,7 @@ namespace Sensorario\ValueObject\Exceptions;
 
 use Exception;
 
+/**
+ * Only explicit factory method are allowed
+ */
 final class InvalidFactoryMethodException extends Exception { }
