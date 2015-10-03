@@ -42,14 +42,14 @@ abstract class ValueObject
      */
     public function __call($functionName, $arguments)
     {
-        $properyName = strtolower($functionName);
+        $propertyName = strtolower($functionName);
 
-        if (isset($this->properties[$properyName])) {
-            return $this->properties[$properyName];
+        if (isset($this->properties[$propertyName])) {
+            return $this->properties[$propertyName];
         }
 
-        if (isset($this->defaults()[$properyName])) {
-            return $this->defaults()[$properyName];
+        if (isset($this->defaults()[$propertyName])) {
+            return $this->defaults()[$propertyName];
         }
 
         throw new InvalidMethodException(
@@ -246,16 +246,16 @@ abstract class ValueObject
         return $this->properties[$propertyName];
     }
 
-    public function getPropertyType($properyName)
+    public function getPropertyType($propertyName)
     {
-        if (is_object($this->properties[$properyName])) {
+        if (is_object($this->properties[$propertyName])) {
             return get_class(
-                $this->properties[$properyName]
+                $this->properties[$propertyName]
             );
         }
 
         return gettype(
-            $this->properties[$properyName]
+            $this->properties[$propertyName]
         );
     }
 }
