@@ -298,6 +298,9 @@ abstract class ValueObject
         );
     }
 
+    /**
+     * Export in Json Format
+     */
     public function toJson()
     {
         $jsonResult = [];
