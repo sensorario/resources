@@ -4,6 +4,7 @@
 * Check if a method is not yet implemented
 * Fixed typos
 * Added some dockblock comments
+* Export to Json a Value Object
 
 # Release 0.1.5
 
