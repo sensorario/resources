@@ -3,7 +3,7 @@
 * Properties could hava a type
 * Check if a method is not yet implemented
 * Fixed typos
-* Added some dockblock comments
+* Covered all production code with phpdocumentor
 * Export to Json a Value Object
 
 # Release 0.1.5
