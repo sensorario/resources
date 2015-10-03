@@ -2,9 +2,10 @@
 
 * Properties could hava a type
 * Check if a method is not yet implemented
-* Fixed typos
 * Covered all production code with phpdocumentor
 * Export to Json a Value Object
+* Added all domain exception
+* Minor fixes
 
 # Release 0.1.5
 

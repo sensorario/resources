@@ -11,10 +11,11 @@
 
 namespace Sensorario\ValueObject;
 
-use RuntimeException;
 use Sensorario\ValueObject\Exceptions\InvalidFactoryMethodException;
 use Sensorario\ValueObject\Exceptions\InvalidKeyException;
+use Sensorario\ValueObject\Exceptions\InvalidKeyOrValueException;
 use Sensorario\ValueObject\Exceptions\InvalidMethodException;
+use Sensorario\ValueObject\Exceptions\InvalidTypeException;
 use Sensorario\ValueObject\Exceptions\InvalidValueException;
 use Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException;
 
@@ -87,13 +88,13 @@ abstract class ValueObject
                 $type = static::types()[$key];
 
                 if (!is_object($this->properties[$key])) {
-                    throw new RuntimeException(
+                    throw new InvalidTypeException(
                         'Must be an object'
                     );
                 }
 
                 if (get_class($this->properties[$key]) != $type) {
-                    throw new RuntimeException(
+                    throw new InvalidTypeException(
                         'Must be an object of type ' . $type
                     );
                 }
@@ -268,7 +269,7 @@ abstract class ValueObject
                 return $this->defaults()[$propertyName];
             }
 
-            throw new RuntimeException(
+            throw new InvalidKeyOrValueException(
                 'No value nor method `'
                 . $propertyName
                 . '` found in this Value Object'

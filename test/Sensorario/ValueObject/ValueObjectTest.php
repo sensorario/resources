@@ -12,7 +12,6 @@
 namespace Sensorario\ValueObject;
 
 use PHPUnit_Framework_TestCase;
-use RuntimeException;
 use Sensorario\ValueObject\Exception\UndefinedMandatoryPropertyException;
 use Sensorario\ValueObject\Exception\InvalidKeyException;
 use DateTime;
@@ -149,7 +148,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException RuntimeException
+     * @expectedException Sensorario\ValueObject\Exceptions\InvalidKeyOrValueException
      */
     public function testThroughExceptionWhenNoValuesProvided()
     {
@@ -169,7 +168,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        RuntimeException
+     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidTypeException
      * @expectedExceptionMessage Must be an object
      */
     public function testPropertyCouldBeAnObject()
@@ -180,7 +179,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        RuntimeException
+     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidTypeException
      * @expectedExceptionMessage Must be an object of type DateTime
      */
     public function testPropertyCouldBeTheRightnObject()
