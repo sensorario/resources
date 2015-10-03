@@ -13,4 +13,7 @@ namespace Sensorario\ValueObject\Exceptions;
 
 use Exception;
 
+/**
+ * A value object property must be part of allowed and/or mandtory properties
+ */
 final class InvalidKeyException extends Exception { }
