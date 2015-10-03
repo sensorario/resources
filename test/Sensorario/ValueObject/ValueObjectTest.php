@@ -213,6 +213,20 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             $foo->getPropertyType('name')
         );
     }
+
+    public function testCouldExportInJsonFormat()
+    {
+        $expectedJsonFormat = json_encode([
+            'date' => (new DateTime('10 september 1982'))
+        ]);
+
+        $this->assertEquals(
+            $expectedJsonFormat,
+            BirthDay::box([
+                'date' => new DateTime('10 september 1982')
+            ])->toJson()
+        );
+    }
 }
 
 final class BirthDay extends ValueObject

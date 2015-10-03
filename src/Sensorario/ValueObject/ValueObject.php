@@ -297,4 +297,17 @@ abstract class ValueObject
             $this->properties[$propertyName]
         );
     }
+
+    public function toJson()
+    {
+        $jsonResult = [];
+
+        foreach ($this->properties as $key => $value) {
+            $jsonResult[$key] = $value;
+        }
+
+        return json_encode(
+            $jsonResult
+        );
+    }
 }
