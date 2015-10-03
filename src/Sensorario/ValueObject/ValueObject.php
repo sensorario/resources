@@ -15,6 +15,7 @@ namespace Sensorario\ValueObject;
 use RuntimeException;
 use Sensorario\ValueObject\Exceptions\InvalidFactoryMethodException;
 use Sensorario\ValueObject\Exceptions\InvalidKeyException;
+use Sensorario\ValueObject\Exceptions\InvalidMethodException;
 use Sensorario\ValueObject\Exceptions\InvalidValueException;
 use Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException;
 
@@ -43,10 +44,17 @@ abstract class ValueObject
     {
         $properyName = strtolower($functionName);
 
-        return isset($this->properties[$properyName])
-            ? $this->properties[$properyName]
-            : $this->defaults()[$properyName]
-        ;
+        if (isset($this->properties[$properyName])) {
+            return $this->properties[$properyName];
+        }
+
+        if (isset($this->defaults()[$properyName])) {
+            return $this->defaults()[$properyName];
+        }
+
+        throw new InvalidMethodException(
+            'Method `' . $functionName . '` is not yet implemented'
+        );
     }
 
     /**

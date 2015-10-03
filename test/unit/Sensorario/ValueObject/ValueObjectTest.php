@@ -23,6 +23,20 @@ use DateInterval;
 final class ValueObjectTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidMethodException
+     * @expectedExceptionMessage Method `notYetImplementedMethod` is not yet implemented
+     */
+    public function testExceptionIsThrownWhenNotYetImplementedMethodIsCalled()
+    {
+        $foo = Foo::box([
+            'name'    => 'Simone',
+            'surname' => 'Gentili',
+        ]);
+
+        $foo->notYetImplementedMethod();
+    }
+
+    /**
      * You can use ONLY allowed fields
      *
      * @expectedException        Sensorario\ValueObject\Exceptions\InvalidKeyException
