@@ -75,6 +75,12 @@ abstract class ValueObject
         $this->ensureAllowedValues();
     }
 
+    /**
+     * Check property type
+     *
+     * When a property must be a specific instance of a class, an exception is thrown when is not an object or the class is different.
+     *
+     */
     protected function ensureRightType()
     {
         foreach ($this->properties as $key => $value) {
@@ -137,6 +143,9 @@ abstract class ValueObject
         }
     }
 
+    /**
+     * When a value not allowed is used to set a property, an exception is thrown
+     */
     protected function ensureAllowedValues()
     {
         foreach ($this->properties as $key => $value) {
@@ -201,11 +210,21 @@ abstract class ValueObject
         return [];
     }
 
+    /**
+     * Allowed values
+     *
+     * To allow only specifi value to a property
+     */
     protected static function allowedValues()
     {
         return [];
     }
 
+    /**
+     * Property types
+     *
+     * Define all the type of property
+     */
     protected static function types()
     {
         return [];
@@ -222,6 +241,13 @@ abstract class ValueObject
         return [];
     }
 
+    /**
+     * Property value
+     *
+     * This method tells if a property with a specific name exists in current value object
+     *
+     * @param $propertyname the property name
+     */
     final public function propertyExists($propertyName)
     {
         return isset(
@@ -229,6 +255,13 @@ abstract class ValueObject
         );
     }
 
+    /**
+     * Property value
+     *
+     * This method allow developer to get the value of a specific property
+     *
+     * @param $propertyname the property name
+     */
     final public function get($propertyName)
     {
         if (!isset($this->properties[$propertyName])) {
@@ -246,6 +279,13 @@ abstract class ValueObject
         return $this->properties[$propertyName];
     }
 
+    /**
+     * property type
+     *
+     * this method allow developer to know the type of a property
+     *
+     * @param $propertyname the property name
+     */
     public function getPropertyType($propertyName)
     {
         if (is_object($this->properties[$propertyName])) {

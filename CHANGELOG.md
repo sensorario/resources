@@ -3,6 +3,7 @@
 * Properties could hava a type
 * Check if a method is not yet implemented
 * Fixed typos
+* Added some dockblock comments
 
 # Release 0.1.5
 
