@@ -13,4 +13,7 @@ namespace Sensorario\ValueObject\Exceptions;
 
 use Exception;
 
+/**
+ * This expception is thrown when code try to assign a not allowed value to a propery
+ */
 final class InvalidValueException extends Exception { }
