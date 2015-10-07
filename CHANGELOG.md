@@ -1,4 +1,4 @@
-# Release 0.1.6
+# Release 0.2
 
 * Properties could hava a type
 * Check if a method is not yet implemented
@@ -6,6 +6,8 @@
 * Export to Json a Value Object
 * Added all domain exception
 * Minor fixes
+* Expose property accessor
+* Adoption of semantic versioning
 
 # Release 0.1.5
 
