@@ -226,6 +226,19 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             ])->toJson()
         );
     }
+
+    public function testPropertiesAccessor()
+    {
+        $foo = Foo::box([
+            'name' => 'Sam',
+        ]);
+
+        $this->assertEquals([
+                'name' => 'Sam',
+            ],
+            $foo->properties()
+        );
+    }
 }
 
 final class BirthDay extends ValueObject

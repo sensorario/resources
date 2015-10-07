@@ -314,4 +314,9 @@ abstract class ValueObject
             $jsonResult
         );
     }
+
+    public function properties()
+    {
+        return $this->properties;
+    }
 }
