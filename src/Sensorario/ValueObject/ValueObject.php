@@ -315,6 +315,9 @@ abstract class ValueObject
         );
     }
 
+    /**
+     * Returns all the properties of current value object
+     */
     public function properties()
     {
         return $this->properties;
