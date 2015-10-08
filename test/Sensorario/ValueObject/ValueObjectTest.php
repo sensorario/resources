@@ -179,8 +179,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidTypeException
-     * @expectedExceptionMessage Must be an object of type DateTime
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidTypeException
+     * @expectedExceptionMessageRegExp #Attribute `.*` must be an object of type DateTime#
      */
     public function testPropertyCouldBeTheRightnObject()
     {

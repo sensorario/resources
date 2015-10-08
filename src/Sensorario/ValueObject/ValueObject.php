@@ -98,9 +98,9 @@ abstract class ValueObject
                 }
 
                 if (get_class($this->properties[$key]) != $type) {
-                    /** @todo improve message */
                     throw new InvalidTypeException(
-                        'Must be an object of type ' . $type
+                        'Attribute `' . $key
+                        . '` must be an object of type ' . $type
                     );
                 }
             }
