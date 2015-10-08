@@ -52,7 +52,6 @@ abstract class ValueObject
             return $this->defaults()[$propertyName];
         }
 
-        /** @todo show class name */
         throw new InvalidMethodException(
             'Method `' . get_class($this)
             . '::' . $functionName 
