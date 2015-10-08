@@ -53,7 +53,9 @@ abstract class ValueObject
         }
 
         throw new InvalidMethodException(
-            'Method `' . $functionName . '` is not yet implemented'
+            'Method `' . get_class($this)
+            . '::' . $functionName 
+            . '()` is not yet implemented'
         );
     }
 
@@ -69,6 +71,7 @@ abstract class ValueObject
     {
         $this->properties = $properties;
 
+        /** @todo break out these responsibilities */
         $this->ensureRightType();
         $this->ensureMandatoryProperties();
         $this->ensureAllowedProperties();
@@ -89,13 +92,15 @@ abstract class ValueObject
 
                 if (!is_object($this->properties[$key])) {
                     throw new InvalidTypeException(
-                        'Must be an object'
+                        'Attribute `' . $key
+                        . '` must be an object'
                     );
                 }
 
                 if (get_class($this->properties[$key]) != $type) {
                     throw new InvalidTypeException(
-                        'Must be an object of type ' . $type
+                        'Attribute `' . $key
+                        . '` must be an object of type ' . $type
                     );
                 }
             }
@@ -110,9 +115,11 @@ abstract class ValueObject
      */
     protected function ensureMandatoryProperties()
     {
+        /** @todo introduce conditional compulsory */
         foreach ($this->mandatory() as $key) {
             if (!isset($this->properties[$key])) {
                 if (!isset(static::defaults()[$key])) {
+                    /** @todo add the name of class inside the message */
                     throw new UndefinedMandatoryPropertyException(
                         "Property $key is mandatory but not set"
                     );
@@ -129,6 +136,7 @@ abstract class ValueObject
      */
     protected function ensureAllowedProperties()
     {
+        /** @todo introduce conditional allowing of a property */
         $allowed = array_merge(
             $this->allowed(),
             $this->mandatory()
@@ -136,6 +144,7 @@ abstract class ValueObject
 
         foreach ($this->properties as $key => $property) {
             if (!in_array($key, $allowed)) {
+                /** @todo add the name of class in exception message */
                 throw new InvalidKeyException(
                     "Key $key is not allowed"
                 );
@@ -170,6 +179,7 @@ abstract class ValueObject
      */
     public static function __callStatic($method, array $args)
     {
+        /** @todo rename this variable as method white list */
         $isMethodNameAllowed = in_array(
             $method, [
                 'box',
@@ -301,6 +311,7 @@ abstract class ValueObject
 
     /**
      * Export in Json Format
+     * @todo break out this responsibility
      */
     public function toJson()
     {
