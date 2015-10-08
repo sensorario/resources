@@ -25,8 +25,8 @@ use DateInterval;
 final class ValueObjectTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidMethodException
-     * @expectedExceptionMessage Method `notYetImplementedMethod` is not yet implemented
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidMethodException
+     * @expectedExceptionMessageRegExp #Method `.*::.*()` is not yet implemented#
      */
     public function testExceptionIsThrownWhenNotYetImplementedMethodIsCalled()
     {
@@ -41,8 +41,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     /**
      * You can use ONLY allowed fields
      *
-     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidKeyException
-     * @expectedExceptionMessage Key not is not allowed
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidKeyException
+     * @expectedExceptionMessageRegExp #Key `.*::.*` is not allowed#
      */
     public function testNotAllowedFieldThroghRuntimeException()
     {
@@ -56,8 +56,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     /**
      * Cannot forget mandator fields
      *
-     * @expectedException        Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
-     * @expectedExceptionMessage Property name is mandatory but not set
+     * @expectedException              Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
+     * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
     {
@@ -168,8 +168,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidTypeException
-     * @expectedExceptionMessage Must be an object
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidTypeException
+     * @expectedExceptionMessageRegExp #Attribute `.*` must be an object#
      */
     public function testPropertyCouldBeAnObject()
     {
@@ -179,8 +179,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidTypeException
-     * @expectedExceptionMessage Must be an object of type DateTime
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidTypeException
+     * @expectedExceptionMessageRegExp #Attribute `.*` must be an object of type DateTime#
      */
     public function testPropertyCouldBeTheRightnObject()
     {
