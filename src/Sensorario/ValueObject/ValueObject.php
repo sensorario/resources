@@ -144,9 +144,9 @@ abstract class ValueObject
 
         foreach ($this->properties as $key => $property) {
             if (!in_array($key, $allowed)) {
-                /** @todo add the name of class in exception message */
                 throw new InvalidKeyException(
-                    "Key $key is not allowed"
+                    "Key `" . get_class($this)
+                    . "::\$$key` is not allowed"
                 );
             }
         }

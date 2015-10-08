@@ -41,8 +41,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     /**
      * You can use ONLY allowed fields
      *
-     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidKeyException
-     * @expectedExceptionMessage Key not is not allowed
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidKeyException
+     * @expectedExceptionMessageRegExp #Key `.*::.*` is not allowed#
      */
     public function testNotAllowedFieldThroghRuntimeException()
     {
