@@ -54,7 +54,9 @@ abstract class ValueObject
 
         /** @todo show class name */
         throw new InvalidMethodException(
-            'Method `' . $functionName . '` is not yet implemented'
+            'Method `' . get_class($this)
+            . '::' . $functionName 
+            . '()` is not yet implemented'
         );
     }
 

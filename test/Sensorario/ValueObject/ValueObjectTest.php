@@ -25,8 +25,8 @@ use DateInterval;
 final class ValueObjectTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidMethodException
-     * @expectedExceptionMessage Method `notYetImplementedMethod` is not yet implemented
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidMethodException
+     * @expectedExceptionMessageRegExp #Method `.*::.*()` is not yet implemented#
      */
     public function testExceptionIsThrownWhenNotYetImplementedMethodIsCalled()
     {
