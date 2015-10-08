@@ -4,7 +4,7 @@ namespace Sensorario\Services;
 
 use Sensorario\ValueObject\ValueObject;
 
-final class ExportJSON
+final class JsonExporter
 {
     public static function fromValueObject(ValueObject $value)
     {

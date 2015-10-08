@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase;
 use Sensorario\ValueObject\ValueObject;
 use Sensorario\Resources\BirthDay;
 
-final class ExportJSONTest extends PHPUnit_Framework_TestCase
+final class JsonExporterTest extends PHPUnit_Framework_TestCase
 {
     public function testCouldExportInJsonFormat()
     {
@@ -17,7 +17,7 @@ final class ExportJSONTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             $expectedJsonFormat,
-            ExportJSON::fromValueObject(
+            JsonExporter::fromValueObject(
                 BirthDay::box([
                     'date' => new DateTime('10 september 1982')
                 ])
