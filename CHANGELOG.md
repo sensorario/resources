@@ -5,7 +5,7 @@
 * Covered all production code with phpdocumentor
 * Export to Json a Value Object
 * Added all domain exception
-* Minor fixes
+* Minor fixes and improvements
 * Expose property accessor
 * Adoption of semantic versioning
 
