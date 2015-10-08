@@ -168,8 +168,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidTypeException
-     * @expectedExceptionMessage Must be an object
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidTypeException
+     * @expectedExceptionMessageRegExp #Attribute `.*` must be an object#
      */
     public function testPropertyCouldBeAnObject()
     {

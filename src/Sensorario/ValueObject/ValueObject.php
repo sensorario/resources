@@ -91,9 +91,9 @@ abstract class ValueObject
                 $type = static::types()[$key];
 
                 if (!is_object($this->properties[$key])) {
-                    /** @todo improve message */
                     throw new InvalidTypeException(
-                        'Must be an object'
+                        'Attribute `' . $key
+                        . '` must be an object'
                     );
                 }
 
