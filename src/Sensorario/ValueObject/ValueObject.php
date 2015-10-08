@@ -312,23 +312,6 @@ abstract class ValueObject
     }
 
     /**
-     * Export in Json Format
-     * @todo break out this responsibility
-     */
-    public function toJson()
-    {
-        $jsonResult = [];
-
-        foreach ($this->properties as $key => $value) {
-            $jsonResult[$key] = $value;
-        }
-
-        return json_encode(
-            $jsonResult
-        );
-    }
-
-    /**
      * Returns all the properties of current value object
      */
     public function properties()

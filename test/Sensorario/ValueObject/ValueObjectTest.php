@@ -11,11 +11,13 @@
 
 namespace Sensorario\ValueObject;
 
-use PHPUnit_Framework_TestCase;
-use Sensorario\ValueObject\Exception\UndefinedMandatoryPropertyException;
-use Sensorario\ValueObject\Exception\InvalidKeyException;
-use DateTime;
 use DateInterval;
+use DateTime;
+use PHPUnit_Framework_TestCase;
+use Sensorario\Resources\BirthDay;
+use Sensorario\Services\ExportJSON;
+use Sensorario\ValueObject\Exception\InvalidKeyException;
+use Sensorario\ValueObject\Exception\UndefinedMandatoryPropertyException;
 
 /**
  * This is a summary
@@ -213,20 +215,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCouldExportInJsonFormat()
-    {
-        $expectedJsonFormat = json_encode([
-            'date' => (new DateTime('10 september 1982'))
-        ]);
-
-        $this->assertEquals(
-            $expectedJsonFormat,
-            BirthDay::box([
-                'date' => new DateTime('10 september 1982')
-            ])->toJson()
-        );
-    }
-
     public function testPropertiesAccessor()
     {
         $foo = Foo::box([
@@ -238,23 +226,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             ],
             $foo->properties()
         );
-    }
-}
-
-final class BirthDay extends ValueObject
-{
-    public static function allowed()
-    {
-        return [
-            'date',
-        ];
-    }
-
-    public static function types()
-    {
-        return [
-            'date' => 'DateTime',
-        ];
     }
 }
 
