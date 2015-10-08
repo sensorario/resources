@@ -119,9 +119,9 @@ abstract class ValueObject
         foreach ($this->mandatory() as $key) {
             if (!isset($this->properties[$key])) {
                 if (!isset(static::defaults()[$key])) {
-                    /** @todo add the name of class inside the message */
                     throw new UndefinedMandatoryPropertyException(
-                        "Property $key is mandatory but not set"
+                        "Property `" . get_class($this)
+                        . "::\$$key` is mandatory but not set"
                     );
                 }
             }

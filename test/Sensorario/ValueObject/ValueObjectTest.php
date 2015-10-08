@@ -56,8 +56,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     /**
      * Cannot forget mandator fields
      *
-     * @expectedException        Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
-     * @expectedExceptionMessage Property name is mandatory but not set
+     * @expectedException              Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
+     * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
     {
