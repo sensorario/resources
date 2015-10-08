@@ -19,11 +19,6 @@ use Sensorario\Services\ExportJSON;
 use Sensorario\ValueObject\Exception\InvalidKeyException;
 use Sensorario\ValueObject\Exception\UndefinedMandatoryPropertyException;
 
-/**
- * This is a summary
- *
- * this is a descripion
- */
 final class ValueObjectTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -41,8 +36,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * You can use ONLY allowed fields
-     *
      * @expectedException              Sensorario\ValueObject\Exceptions\InvalidKeyException
      * @expectedExceptionMessageRegExp #Key `.*::.*` is not allowed#
      */
@@ -56,8 +49,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Cannot forget mandator fields
-     *
      * @expectedException              Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
      * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
      */
@@ -66,11 +57,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         $foo = Foo::box([]);
     }
 
-    /**
-     * Is obvious, but mandatory fields are allowed by default
-     *
-     * this means that if you dont specify them as allowed, dont through exception
-     */
     public function testMandatoryFieldsAreAuthomaticallyAllowed()
     {
         $foo = Foo::box([
@@ -79,11 +65,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    /**
-     * Mmmm a test for a getter.
-     *
-     * Maybe just for code coverage, ...
-     */
     public function testGetters()
     {
         $foo = Foo::box([
@@ -105,9 +86,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         Bar::invalidFactoryName();
     }
 
-    /**
-     * A value object could have default vaules
-     */
     public function testCanHaveDefaultValues()
     {
         $foo = Bar::box();
