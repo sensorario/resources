@@ -172,22 +172,24 @@ abstract class ValueObject
     /**
      * Static Interceptor
      *
-     * @param string $method method name
+     * @param string $methodName method name
      * @param array $args the list of properties
      *
      * @return ValueObject new ValueObject instance
      */
-    public static function __callStatic($method, array $args)
+    public static function __callStatic($methodName, array $args)
     {
-        /** @todo rename this variable as method white list */
-        $isMethodNameAllowed = in_array(
-            $method, [
-                'box',
-                'allowedValues'
-            ]
+        $methodWhiteList = [
+            'box',
+            'allowedValues'
+        ];
+
+        $isMethodNameWhiteListed = in_array(
+            $methodName,
+            $methodWhiteList
         );
 
-        if ($isMethodNameAllowed) {
+        if ($isMethodNameWhiteListed) {
             return new static(
                isset($args[0])
                ? $args[0]
