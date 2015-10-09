@@ -7,6 +7,7 @@
 * Expose property accessor
 * Adoption of semantic versioning
 * Added a service to export ValueObject in JSON
+* Added conditional mandatory properties
 
 # Release 0.1.5
 
