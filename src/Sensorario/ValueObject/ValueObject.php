@@ -115,13 +115,21 @@ abstract class ValueObject
      */
     protected function ensureMandatoryProperties()
     {
-        /** @todo introduce conditional compulsory */
-        foreach ($this->mandatory() as $key) {
-            if (!isset($this->properties[$key])) {
-                if (!isset(static::defaults()[$key])) {
+        foreach ($this->mandatory() as $key => $value) {
+            if (is_numeric($key) && !isset($this->properties[$value])) {
+                if (!isset(static::defaults()[$value])) {
                     throw new UndefinedMandatoryPropertyException(
                         "Property `" . get_class($this)
-                        . "::\$$key` is mandatory but not set"
+                        . "::\$$value` is mandatory but not set"
+                    );
+                }
+            }
+
+            if (!is_numeric($key) && isset($this->properties[$value['if_present']])) {
+                if (!isset($this->properties[$key])) {
+                    throw new UndefinedMandatoryPropertyException(
+                        "Property `" . get_class($this)
+                        . "::\${$key}` is mandatory but not set"
                     );
                 }
             }

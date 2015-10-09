@@ -205,6 +205,39 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             $foo->properties()
         );
     }
+
+    /**
+     * @expectedException              Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
+     * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
+     */
+    public function test()
+    {
+        MandatoryDependency::box([
+            'foo' => 'bar',
+            'world' => 'bar',
+        ]);
+    }
+}
+
+final class MandatoryDependency extends ValueObject
+{
+    public static function mandatory()
+    {
+        return [
+            'foo',
+            'hello' => [
+                'if_present' => 'world',
+            ]
+        ];
+    }
+
+    public static function allowed()
+    {
+        return [
+            'hello',
+            'world',
+        ];
+    }
 }
 
 final class SomeApiRequest extends ValueObject
