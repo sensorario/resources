@@ -322,11 +322,10 @@ abstract class ValueObject
     {
         $property = $this->get($propertyName);
 
-        if (is_object($property)) {
-            return get_class($property);
-        }
-
-        return gettype($property);
+        return is_object($property)
+            ? get_class($property)
+            : gettype($property)
+        ;
     }
 
     /**
