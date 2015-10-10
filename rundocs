@@ -1,2 +1,2 @@
 #!/bin/bash
-php vendor/bin/phpdoc
+php vendor/bin/phpdoc -d src

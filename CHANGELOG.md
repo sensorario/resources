@@ -1,3 +1,14 @@
+# Release 1.0
+
+* Properties can have a type
+* Check not yet implemented methods
+* Added all domain exception
+* Minor fixes and improvements
+* Expose property accessor
+* Adoption of semantic versioning
+* Added a service to export ValueObject in JSON
+* Added conditional mandatory properties
+
 # Release 0.1.5
 
 * Removed php 5.4 support

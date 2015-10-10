@@ -14,6 +14,6 @@ namespace Sensorario\ValueObject\Exceptions;
 use Exception;
 
 /**
- * Only explicit factory method are allowed
+ * When someone try to get a propery that does not exists
  */
-final class InvalidFactoryMethodException extends Exception { }
+final class InvalidKeyOrValueException extends Exception { }

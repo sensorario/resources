@@ -14,6 +14,6 @@ namespace Sensorario\ValueObject\Exceptions;
 use Exception;
 
 /**
- * Only explicit factory method are allowed
+ * If a property must be an instance of a class
  */
-final class InvalidFactoryMethodException extends Exception { }
+final class InvalidTypeException extends Exception { }

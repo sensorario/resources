@@ -14,6 +14,6 @@ namespace Sensorario\ValueObject\Exceptions;
 use Exception;
 
 /**
- * Only explicit factory method are allowed
+ * Exception thrown when a method is called on value object, but is not yet defined
  */
-final class InvalidFactoryMethodException extends Exception { }
+final class InvalidMethodException extends Exception { }

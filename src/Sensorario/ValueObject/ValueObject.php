@@ -1,20 +1,21 @@
 <?php
 
 /**
- * Value Object base class.
- * This class aims to be a base class for all kind of Value Objects.
+ * This file is part of sensorario/value-object repository
  *
- * @author Simone Gentili
+ * (c) Simone Gentili <sensorario@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-/**
- * @author Simone Gentili
- */
 namespace Sensorario\ValueObject;
 
-use RuntimeException;
 use Sensorario\ValueObject\Exceptions\InvalidFactoryMethodException;
 use Sensorario\ValueObject\Exceptions\InvalidKeyException;
+use Sensorario\ValueObject\Exceptions\InvalidKeyOrValueException;
+use Sensorario\ValueObject\Exceptions\InvalidMethodException;
+use Sensorario\ValueObject\Exceptions\InvalidTypeException;
 use Sensorario\ValueObject\Exceptions\InvalidValueException;
 use Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException;
 
@@ -41,12 +42,21 @@ abstract class ValueObject
      */
     public function __call($functionName, $arguments)
     {
-        $index = strtolower($functionName);
+        $propertyName = strtolower($functionName);
 
-        return isset($this->properties[$index])
-            ? $this->properties[$index]
-            : $this->defaults()[$index]
-        ;
+        if (isset($this->properties[$propertyName])) {
+            return $this->properties[$propertyName];
+        }
+
+        if (isset($this->defaults()[$propertyName])) {
+            return $this->defaults()[$propertyName];
+        }
+
+        throw new InvalidMethodException(
+            'Method `' . get_class($this)
+            . '::' . $functionName 
+            . '()` is not yet implemented'
+        );
     }
 
     /**
@@ -61,9 +71,40 @@ abstract class ValueObject
     {
         $this->properties = $properties;
 
+        /** @todo break out these responsibilities */
+        $this->ensureRightType();
         $this->ensureMandatoryProperties();
         $this->ensureAllowedProperties();
         $this->ensureAllowedValues();
+    }
+
+    /**
+     * Check property type
+     *
+     * When a property must be a specific instance of a class, an exception is thrown when is not an object or the class is different.
+     *
+     */
+    protected function ensureRightType()
+    {
+        foreach ($this->properties as $key => $value) {
+            if (isset(static::types()[$key])) {
+                $type = static::types()[$key];
+
+                if (!is_object($this->properties[$key])) {
+                    throw new InvalidTypeException(
+                        'Attribute `' . $key
+                        . '` must be an object'
+                    );
+                }
+
+                if (get_class($this->properties[$key]) != $type) {
+                    throw new InvalidTypeException(
+                        'Attribute `' . $key
+                        . '` must be an object of type ' . $type
+                    );
+                }
+            }
+        }
     }
 
     /**
@@ -74,11 +115,21 @@ abstract class ValueObject
      */
     protected function ensureMandatoryProperties()
     {
-        foreach ($this->mandatory() as $key) {
-            if (!isset($this->properties[$key])) {
-                if (!isset(static::defaults()[$key])) {
+        foreach ($this->mandatory() as $key => $value) {
+            if (is_numeric($key) && !isset($this->properties[$value])) {
+                if (!isset(static::defaults()[$value])) {
                     throw new UndefinedMandatoryPropertyException(
-                        "Property $key is mandatory but not set"
+                        "Property `" . get_class($this)
+                        . "::\$$value` is mandatory but not set"
+                    );
+                }
+            }
+
+            if (!is_numeric($key) && isset($this->properties[$value['if_present']])) {
+                if (!isset($this->properties[$key])) {
+                    throw new UndefinedMandatoryPropertyException(
+                        "Property `" . get_class($this)
+                        . "::\${$key}` is mandatory but not set"
                     );
                 }
             }
@@ -93,6 +144,7 @@ abstract class ValueObject
      */
     protected function ensureAllowedProperties()
     {
+        /** @todo introduce conditional allowing of a property */
         $allowed = array_merge(
             $this->allowed(),
             $this->mandatory()
@@ -101,12 +153,16 @@ abstract class ValueObject
         foreach ($this->properties as $key => $property) {
             if (!in_array($key, $allowed)) {
                 throw new InvalidKeyException(
-                    "Key $key is not allowed"
+                    "Key `" . get_class($this)
+                    . "::\$$key` is not allowed"
                 );
             }
         }
     }
 
+    /**
+     * When a value not allowed is used to set a property, an exception is thrown
+     */
     protected function ensureAllowedValues()
     {
         foreach ($this->properties as $key => $value) {
@@ -124,21 +180,24 @@ abstract class ValueObject
     /**
      * Static Interceptor
      *
-     * @param string $method method name
+     * @param string $methodName method name
      * @param array $args the list of properties
      *
      * @return ValueObject new ValueObject instance
      */
-    public static function __callStatic($method, array $args)
+    public static function __callStatic($methodName, array $args)
     {
-        $isMethodNameAllowed = in_array(
-            $method, [
-                'box',
-                'allowedValues'
-            ]
+        $methodWhiteList = [
+            'box',
+            'allowedValues'
+        ];
+
+        $isMethodNameWhiteListed = in_array(
+            $methodName,
+            $methodWhiteList
         );
 
-        if ($isMethodNameAllowed) {
+        if ($isMethodNameWhiteListed) {
             return new static(
                 isset($args[0])
                 ? $args[0]
@@ -171,7 +230,22 @@ abstract class ValueObject
         return [];
     }
 
+    /**
+     * Allowed values
+     *
+     * To allow only specifi value to a property
+     */
     protected static function allowedValues()
+    {
+        return [];
+    }
+
+    /**
+     * Property types
+     *
+     * Define all the type of property
+     */
+    protected static function types()
     {
         return [];
     }
@@ -187,6 +261,13 @@ abstract class ValueObject
         return [];
     }
 
+    /**
+     * Property value
+     *
+     * This method tells if a property with a specific name exists in current value object
+     *
+     * @param $propertyname the property name
+     */
     final public function propertyExists($propertyName)
     {
         return isset(
@@ -194,6 +275,13 @@ abstract class ValueObject
         );
     }
 
+    /**
+     * Property value
+     *
+     * This method allow developer to get the value of a specific property
+     *
+     * @param $propertyname the property name
+     */
     final public function get($propertyName)
     {
         if (!isset($this->properties[$propertyName])) {
@@ -201,7 +289,7 @@ abstract class ValueObject
                 return $this->defaults()[$propertyName];
             }
 
-            throw new RuntimeException(
+            throw new InvalidKeyOrValueException(
                 'No value nor method `'
                 . $propertyName
                 . '` found in this Value Object'
@@ -209,5 +297,33 @@ abstract class ValueObject
         }
 
         return $this->properties[$propertyName];
+    }
+
+    /**
+     * property type
+     *
+     * this method allow developer to know the type of a property
+     *
+     * @param $propertyname the property name
+     */
+    public function getPropertyType($propertyName)
+    {
+        if (is_object($this->properties[$propertyName])) {
+            return get_class(
+                $this->properties[$propertyName]
+            );
+        }
+
+        return gettype(
+            $this->properties[$propertyName]
+        );
+    }
+
+    /**
+     * Returns all the properties of current value object
+     */
+    public function properties()
+    {
+        return $this->properties;
     }
 }

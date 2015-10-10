@@ -1,30 +1,43 @@
 <?php
 
 /**
- * This is a summary
+ * This file is part of sensorario/value-object repository
  *
- * This is a description
+ * (c) Simone Gentili <sensorario@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Sensorario\ValueObject;
 
+use DateInterval;
+use DateTime;
 use PHPUnit_Framework_TestCase;
-use RuntimeException;
-use Sensorario\ValueObject\Exception\UndefinedMandatoryPropertyException;
+use Sensorario\Resources\BirthDay;
+use Sensorario\Services\ExportJSON;
 use Sensorario\ValueObject\Exception\InvalidKeyException;
+use Sensorario\ValueObject\Exception\UndefinedMandatoryPropertyException;
 
-/**
- * This is a summary
- *
- * this is a descripion
- */
 final class ValueObjectTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * You can use ONLY allowed fields
-     *
-     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidKeyException
-     * @expectedExceptionMessage Key not is not allowed
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidMethodException
+     * @expectedExceptionMessageRegExp #Method `.*::.*()` is not yet implemented#
+     */
+    public function testExceptionIsThrownWhenNotYetImplementedMethodIsCalled()
+    {
+        $foo = Foo::box([
+            'name'    => 'Simone',
+            'surname' => 'Gentili',
+        ]);
+
+        $foo->notYetImplementedMethod();
+    }
+
+    /**
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidKeyException
+     * @expectedExceptionMessageRegExp #Key `.*::.*` is not allowed#
      */
     public function testNotAllowedFieldThroghRuntimeException()
     {
@@ -36,21 +49,14 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Cannot forget mandator fields
-     *
-     * @expectedException        Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
-     * @expectedExceptionMessage Property name is mandatory but not set
+     * @expectedException              Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
+     * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
     {
         $foo = Foo::box([]);
     }
 
-    /**
-     * Is obvious, but mandatory fields are allowed by default
-     *
-     * this means that if you dont specify them as allowed, dont through exception
-     */
     public function testMandatoryFieldsAreAuthomaticallyAllowed()
     {
         $foo = Foo::box([
@@ -59,11 +65,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    /**
-     * Mmmm a test for a getter.
-     *
-     * Maybe just for code coverage, ... 
-     */
     public function testGetters()
     {
         $foo = Foo::box([
@@ -85,9 +86,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         Bar::invalidFactoryName();
     }
 
-    /**
-     * A value object could have default vaules
-     */
     public function testCanHaveDefaultValues()
     {
         $foo = Bar::box();
@@ -130,7 +128,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException RuntimeException
+     * @expectedException Sensorario\ValueObject\Exceptions\InvalidKeyOrValueException
      */
     public function testThroughExceptionWhenNoValuesProvided()
     {
@@ -147,6 +145,98 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         SomeApiRequest::box([
             'someApiParameter' => 42
         ]);
+    }
+
+    /**
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidTypeException
+     * @expectedExceptionMessageRegExp #Attribute `.*` must be an object#
+     */
+    public function testPropertyCouldBeAnObject()
+    {
+        $birthday = BirthDay::box([
+            'date' => 'not a date',
+        ]);
+    }
+
+    /**
+     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidTypeException
+     * @expectedExceptionMessageRegExp #Attribute `.*` must be an object of type DateTime#
+     */
+    public function testPropertyCouldBeTheRightnObject()
+    {
+        $birthday = BirthDay::box([
+            'date' => new DateInterval('P1D'),
+        ]);
+    }
+
+    public function testPropertiesTypeWhenObject()
+    {
+        $birthday = BirthDay::box([
+            'date' => new DateTime('2015'),
+        ]);
+
+        $this->assertEquals(
+            'DateTime',
+            $birthday->getPropertyType('date')
+        );
+    }
+
+    public function testPropertiesTypeWhenString()
+    {
+        $foo = Foo::box([
+            'name' => 'Simone'
+        ]);
+
+        $this->assertEquals(
+            'string',
+            $foo->getPropertyType('name')
+        );
+    }
+
+    public function testPropertiesAccessor()
+    {
+        $foo = Foo::box([
+            'name' => 'Sam',
+        ]);
+
+        $this->assertEquals([
+                'name' => 'Sam',
+            ],
+            $foo->properties()
+        );
+    }
+
+    /**
+     * @expectedException              Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
+     * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
+     */
+    public function test()
+    {
+        MandatoryDependency::box([
+            'foo' => 'bar',
+            'world' => 'bar',
+        ]);
+    }
+}
+
+final class MandatoryDependency extends ValueObject
+{
+    public static function mandatory()
+    {
+        return [
+            'foo',
+            'hello' => [
+                'if_present' => 'world',
+            ]
+        ];
+    }
+
+    public static function allowed()
+    {
+        return [
+            'hello',
+            'world',
+        ];
     }
 }
 

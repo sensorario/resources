@@ -2,7 +2,7 @@
 <phpunit bootstrap="./bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="Value Objects">
-            <directory>./test/unit</directory>
+            <directory>./test</directory>
         </testsuite>
     </testsuites>
 </phpunit>
