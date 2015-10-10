@@ -44,7 +44,7 @@ abstract class ValueObject
     {
         $propertyName = strtolower($functionName);
 
-        if ($this->propertyExists($propertyName)) {
+        if ($this->hasProperty($propertyName)) {
             return $this->get($propertyName);
         }
 
@@ -116,7 +116,7 @@ abstract class ValueObject
     protected function ensureMandatoryProperties()
     {
         foreach ($this->mandatory() as $key => $value) {
-            if (is_numeric($key) && !$this->propertyExists($value)) {
+            if (is_numeric($key) && $this->hasNotProperty($value)) {
                 if (!isset(static::defaults()[$value])) {
                     throw new UndefinedMandatoryPropertyException(
                         "Property `" . get_class($this)
@@ -125,8 +125,8 @@ abstract class ValueObject
                 }
             }
 
-            if (!is_numeric($key) && $this->propertyExists($value['if_present'])) {
-                if (!$this->propertyExists($key)) {
+            if (!is_numeric($key) && $this->hasProperty($value['if_present'])) {
+                if ($this->hasNotProperty($key)) {
                     throw new UndefinedMandatoryPropertyException(
                         "Property `" . get_class($this)
                         . "::\${$key}` is mandatory but not set"
@@ -268,11 +268,23 @@ abstract class ValueObject
      *
      * @param $propertyname the property name
      */
-    final public function propertyExists($propertyName)
+    final public function hasProperty($propertyName)
     {
         return isset(
             $this->properties[$propertyName]
         );
+    }
+
+    /**
+     * Property value
+     *
+     * This method tells if a property with a specific name exists in current value object
+     *
+     * @param $propertyname the property name
+     */
+    final public function hasNotProperty($propertyName)
+    {
+        return !$this->hasProperty($propertyName);
     }
 
     /**
@@ -284,7 +296,7 @@ abstract class ValueObject
      */
     final public function get($propertyName)
     {
-        if (!$this->propertyExists($propertyName)) {
+        if ($this->hasNotProperty($propertyName)) {
             if (isset($this->defaults()[$propertyName])) {
                 return $this->defaults()[$propertyName];
             }
