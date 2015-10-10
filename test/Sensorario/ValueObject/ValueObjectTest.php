@@ -16,13 +16,11 @@ use DateTime;
 use PHPUnit_Framework_TestCase;
 use Sensorario\Resources\BirthDay;
 use Sensorario\Services\ExportJSON;
-use Sensorario\ValueObject\Exception\InvalidKeyException;
-use Sensorario\ValueObject\Exception\UndefinedMandatoryPropertyException;
 
 final class ValueObjectTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidMethodException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Method `.*::.*()` is not yet implemented#
      */
     public function testExceptionIsThrownWhenNotYetImplementedMethodIsCalled()
@@ -36,7 +34,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidKeyException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Key `.*::.*` is not allowed#
      */
     public function testNotAllowedFieldThroghRuntimeException()
@@ -49,7 +47,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
@@ -79,7 +77,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Sensorario\ValueObject\Exceptions\InvalidFactoryMethodException
+     * @expectedException RuntimeException
      */
     public function testFactoryMethods()
     {
@@ -128,7 +126,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Sensorario\ValueObject\Exceptions\InvalidKeyOrValueException
+     * @expectedException RuntimeException
      */
     public function testThroughExceptionWhenNoValuesProvided()
     {
@@ -137,7 +135,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidValueException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessage Value `42` is not allowed for key `someApiParameter`
      */
     public function testAllowedValueForAField()
@@ -148,7 +146,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidTypeException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Attribute `.*` must be an object#
      */
     public function testPropertyCouldBeAnObject()
@@ -159,7 +157,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidTypeException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Attribute `.*` must be an object of type DateTime#
      */
     public function testPropertyCouldBeTheRightnObject()
@@ -207,7 +205,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
      */
     public function test()
@@ -260,16 +258,8 @@ final class SomeApiRequest extends ValueObject
     }
 }
 
-/**
- * Example class
- *
- * This kind of Vo provide one mandatory field, and two allowed
- */
 final class Foo extends ValueObject
 {
-    /**
-     * Only one mandatory field here
-     */
     public static function mandatory()
     {
         return [
@@ -277,9 +267,6 @@ final class Foo extends ValueObject
         ];
     }
 
-    /**
-     * This VO allows two fields
-     */
     public static function allowed()
     {
         return [
@@ -289,14 +276,8 @@ final class Foo extends ValueObject
     }
 }
 
-/**
- * In this case, we have a default value
- */
 final class Bar extends ValueObject
 {
-    /**
-     * Only one mandatory field here
-     */
     public static function allowed()
     {
         return [
@@ -304,9 +285,6 @@ final class Bar extends ValueObject
         ];
     }
 
-    /**
-     * Only one default value
-     */
     public static function defaults()
     {
         return [
