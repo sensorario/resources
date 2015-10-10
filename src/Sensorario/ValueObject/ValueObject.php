@@ -44,8 +44,8 @@ abstract class ValueObject
     {
         $propertyName = strtolower($functionName);
 
-        if (isset($this->properties[$propertyName])) {
-            return $this->properties[$propertyName];
+        if ($this->propertyExists($propertyName)) {
+            return $this->get($propertyName);
         }
 
         if (isset($this->defaults()[$propertyName])) {
@@ -86,18 +86,18 @@ abstract class ValueObject
      */
     protected function ensureRightType()
     {
-        foreach ($this->properties as $key => $value) {
+        foreach ($this->properties() as $key => $value) {
             if (isset(static::types()[$key])) {
                 $type = static::types()[$key];
 
-                if (!is_object($this->properties[$key])) {
+                if (!is_object($this->get($key))) {
                     throw new InvalidTypeException(
                         'Attribute `' . $key
                         . '` must be an object'
                     );
                 }
 
-                if (get_class($this->properties[$key]) != $type) {
+                if (get_class($this->get($key)) != $type) {
                     throw new InvalidTypeException(
                         'Attribute `' . $key
                         . '` must be an object of type ' . $type
@@ -116,7 +116,7 @@ abstract class ValueObject
     protected function ensureMandatoryProperties()
     {
         foreach ($this->mandatory() as $key => $value) {
-            if (is_numeric($key) && !isset($this->properties[$value])) {
+            if (is_numeric($key) && !$this->propertyExists($value)) {
                 if (!isset(static::defaults()[$value])) {
                     throw new UndefinedMandatoryPropertyException(
                         "Property `" . get_class($this)
@@ -125,8 +125,8 @@ abstract class ValueObject
                 }
             }
 
-            if (!is_numeric($key) && isset($this->properties[$value['if_present']])) {
-                if (!isset($this->properties[$key])) {
+            if (!is_numeric($key) && $this->propertyExists($value['if_present'])) {
+                if (!$this->propertyExists($key)) {
                     throw new UndefinedMandatoryPropertyException(
                         "Property `" . get_class($this)
                         . "::\${$key}` is mandatory but not set"
@@ -150,7 +150,7 @@ abstract class ValueObject
             $this->mandatory()
         );
 
-        foreach ($this->properties as $key => $property) {
+        foreach ($this->properties() as $key => $property) {
             if (!in_array($key, $allowed)) {
                 throw new InvalidKeyException(
                     "Key `" . get_class($this)
@@ -165,7 +165,7 @@ abstract class ValueObject
      */
     protected function ensureAllowedValues()
     {
-        foreach ($this->properties as $key => $value) {
+        foreach ($this->properties() as $key => $value) {
             if (isset($this->allowedValues()[$key])) {
                 if (!in_array($value, $this->allowedValues()[$key])) {
                     throw new InvalidValueException(
@@ -284,7 +284,7 @@ abstract class ValueObject
      */
     final public function get($propertyName)
     {
-        if (!isset($this->properties[$propertyName])) {
+        if (!$this->propertyExists($propertyName)) {
             if (isset($this->defaults()[$propertyName])) {
                 return $this->defaults()[$propertyName];
             }
@@ -308,15 +308,13 @@ abstract class ValueObject
      */
     public function getPropertyType($propertyName)
     {
-        if (is_object($this->properties[$propertyName])) {
-            return get_class(
-                $this->properties[$propertyName]
-            );
+        $property = $this->get($propertyName);
+
+        if (is_object($property)) {
+            return get_class($property);
         }
 
-        return gettype(
-            $this->properties[$propertyName]
-        );
+        return gettype($property);
     }
 
     /**
