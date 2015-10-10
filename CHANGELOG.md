@@ -8,6 +8,7 @@
 * Adoption of semantic versioning
 * Added a service to export ValueObject in JSON
 * Added conditional mandatory properties
+* Removed some code duplications
 
 # Release 0.1.5
 
