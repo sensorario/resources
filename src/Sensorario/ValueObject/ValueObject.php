@@ -200,16 +200,6 @@ abstract class ValueObject
         return $this->properties[$propertyName];
     }
 
-    public function getPropertyType($propertyName)
-    {
-        $property = $this->get($propertyName);
-
-        return is_object($property)
-            ? get_class($property)
-            : gettype($property)
-        ;
-    }
-
     public function properties()
     {
         return $this->properties;

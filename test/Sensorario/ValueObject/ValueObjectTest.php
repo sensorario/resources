@@ -15,7 +15,9 @@ use DateInterval;
 use DateTime;
 use PHPUnit_Framework_TestCase;
 use Sensorario\Resources\BirthDay;
+use Sensorario\Resources\Foo;
 use Sensorario\Services\ExportJSON;
+use Sensorario\Services\PropertyType;
 
 final class ValueObjectTest extends PHPUnit_Framework_TestCase
 {
@@ -167,30 +169,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    public function testPropertiesTypeWhenObject()
-    {
-        $birthday = BirthDay::box([
-            'date' => new DateTime('2015'),
-        ]);
-
-        $this->assertEquals(
-            'DateTime',
-            $birthday->getPropertyType('date')
-        );
-    }
-
-    public function testPropertiesTypeWhenString()
-    {
-        $foo = Foo::box([
-            'name' => 'Simone'
-        ]);
-
-        $this->assertEquals(
-            'string',
-            $foo->getPropertyType('name')
-        );
-    }
-
     public function testPropertiesAccessor()
     {
         $foo = Foo::box([
@@ -254,24 +232,6 @@ final class SomeApiRequest extends ValueObject
                 'hello',
                 'world'
             ],
-        ];
-    }
-}
-
-final class Foo extends ValueObject
-{
-    public static function mandatory()
-    {
-        return [
-            'name',
-        ];
-    }
-
-    public static function allowed()
-    {
-        return [
-            'name',
-            'surname',
         ];
     }
 }
