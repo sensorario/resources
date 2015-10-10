@@ -10,7 +10,7 @@ use Sensorario\Resources\Foo;
 
 final class PropertyTypeTest extends PHPUnit_Framework_TestCase
 {
-    public function testPropertiesTypeWhenObject()
+    public function testClassNameWhenTypeIsAnObject()
     {
         $birthday = BirthDay::box([
             'date' => new DateTime('2015'),
@@ -25,7 +25,7 @@ final class PropertyTypeTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testPropertiesTypeWhenString()
+    public function testScalarTypeWhenTypeIsAString()
     {
         $foo = Foo::box([
             'name' => 'Simone'
@@ -39,6 +39,5 @@ final class PropertyTypeTest extends PHPUnit_Framework_TestCase
             )
         );
     }
-
 }
 
