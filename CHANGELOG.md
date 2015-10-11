@@ -1,12 +1,12 @@
 # Release 1.0
 
+* [closed #6] Added conditional mandatory properties
 * Properties can have a type
 * Check not yet implemented methods
 * Minor fixes and improvements
 * Expose property accessor
 * Adoption of semantic versioning
 * Added a service to export ValueObject in JSON
-* Added conditional mandatory properties
 * Removed some code duplications
 * Removed phpdocumentor support
 
