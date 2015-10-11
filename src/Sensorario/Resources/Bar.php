@@ -11,23 +11,21 @@
 
 namespace Sensorario\Resources;
 
-use DateTime;
-use PHPUnit_Framework_TestCase;
 use Sensorario\ValueObject\ValueObject;
 
-final class BirthDay extends ValueObject
+final class Bar extends ValueObject
 {
     public static function allowed()
     {
         return [
-            'date',
+            'name',
         ];
     }
 
-    public static function types()
+    public static function defaults()
     {
         return [
-            'date' => 'DateTime',
+            'name' => 'Firefox',
         ];
     }
 }

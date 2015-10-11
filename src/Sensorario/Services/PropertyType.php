@@ -13,18 +13,17 @@ namespace Sensorario\Services;
 
 use Sensorario\ValueObject\ValueObject;
 
-final class JsonExporter
+final class PropertyType
 {
-    public static function fromValueObject(ValueObject $value)
+    public static function asString(ValueObject $valueObject, $propertyName)
     {
-        $jsonResult = [];
-
-        foreach ($value->properties() as $key => $value) {
-            $jsonResult[$key] = $value;
-        }
-
-        return json_encode(
-            $jsonResult
+        $property = $valueObject->get(
+            $propertyName
         );
+
+        return is_object($property)
+            ? get_class($property)
+            : gettype($property)
+        ;
     }
 }

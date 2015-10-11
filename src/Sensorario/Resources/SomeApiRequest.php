@@ -11,23 +11,24 @@
 
 namespace Sensorario\Resources;
 
-use DateTime;
-use PHPUnit_Framework_TestCase;
 use Sensorario\ValueObject\ValueObject;
 
-final class BirthDay extends ValueObject
+final class SomeApiRequest extends ValueObject
 {
-    public static function allowed()
+    public static function mandatory()
     {
         return [
-            'date',
+            'someApiParameter',
         ];
     }
 
-    public static function types()
+    public static function allowedValues()
     {
         return [
-            'date' => 'DateTime',
+            'someApiParameter' => [
+                'hello',
+                'world'
+            ],
         ];
     }
 }

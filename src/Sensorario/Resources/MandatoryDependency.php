@@ -11,23 +11,25 @@
 
 namespace Sensorario\Resources;
 
-use DateTime;
-use PHPUnit_Framework_TestCase;
 use Sensorario\ValueObject\ValueObject;
 
-final class BirthDay extends ValueObject
+final class MandatoryDependency extends ValueObject
 {
-    public static function allowed()
+    public static function mandatory()
     {
         return [
-            'date',
+            'foo',
+            'hello' => [
+                'if_present' => 'world',
+            ]
         ];
     }
 
-    public static function types()
+    public static function allowed()
     {
         return [
-            'date' => 'DateTime',
+            'hello',
+            'world',
         ];
     }
 }

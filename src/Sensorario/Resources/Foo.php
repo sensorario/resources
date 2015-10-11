@@ -15,19 +15,20 @@ use DateTime;
 use PHPUnit_Framework_TestCase;
 use Sensorario\ValueObject\ValueObject;
 
-final class BirthDay extends ValueObject
+final class Foo extends ValueObject
 {
-    public static function allowed()
+    public static function mandatory()
     {
         return [
-            'date',
+            'name',
         ];
     }
 
-    public static function types()
+    public static function allowed()
     {
         return [
-            'date' => 'DateTime',
+            'name',
+            'surname',
         ];
     }
 }
