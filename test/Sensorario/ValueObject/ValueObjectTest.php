@@ -14,8 +14,11 @@ namespace Sensorario\ValueObject;
 use DateInterval;
 use DateTime;
 use PHPUnit_Framework_TestCase;
+use Sensorario\Resources\Bar;
 use Sensorario\Resources\BirthDay;
 use Sensorario\Resources\Foo;
+use Sensorario\Resources\MandatoryDependency;
+use Sensorario\Resources\SomeApiRequest;
 use Sensorario\Services\ExportJSON;
 use Sensorario\Services\PropertyType;
 
@@ -192,63 +195,5 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             'foo' => 'bar',
             'world' => 'bar',
         ]);
-    }
-}
-
-final class MandatoryDependency extends ValueObject
-{
-    public static function mandatory()
-    {
-        return [
-            'foo',
-            'hello' => [
-                'if_present' => 'world',
-            ]
-        ];
-    }
-
-    public static function allowed()
-    {
-        return [
-            'hello',
-            'world',
-        ];
-    }
-}
-
-final class SomeApiRequest extends ValueObject
-{
-    public static function mandatory()
-    {
-        return [
-            'someApiParameter',
-        ];
-    }
-
-    public static function allowedValues()
-    {
-        return [
-            'someApiParameter' => [
-                'hello',
-                'world'
-            ],
-        ];
-    }
-}
-
-final class Bar extends ValueObject
-{
-    public static function allowed()
-    {
-        return [
-            'name',
-        ];
-    }
-
-    public static function defaults()
-    {
-        return [
-            'name' => 'Firefox',
-        ];
     }
 }
