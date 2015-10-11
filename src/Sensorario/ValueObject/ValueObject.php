@@ -143,7 +143,9 @@ abstract class ValueObject
             );
         }
 
-        throw new RuntimeException();
+        throw new RuntimeException(
+            'Invalid factory method'
+        );
     }
 
     protected static function mandatory()

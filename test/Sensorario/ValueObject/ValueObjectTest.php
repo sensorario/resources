@@ -82,7 +82,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException RuntimeException
+     * @expectedException              RuntimeException
+     * @expectedExceptionMessageRegExp #Invalid factory method#
      */
     public function testFactoryMethods()
     {
