@@ -200,7 +200,7 @@ abstract class ValueObject
         return $this->properties[$propertyName];
     }
 
-    public function properties()
+    final public function properties()
     {
         return $this->properties;
     }
