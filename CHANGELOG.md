@@ -1,13 +1,15 @@
-# Release 0.2
+# Release 1.0
 
-* Properties could hava a type
-* Check if a method is not yet implemented
-* Covered all production code with phpdocumentor
-* Export to Json a Value Object
-* Added all domain exception
+* [closed #6] Added conditional mandatory properties
+* Added Validator classes
+* Properties can have a type
+* Check not yet implemented methods
 * Minor fixes and improvements
 * Expose property accessor
 * Adoption of semantic versioning
+* Added a service to export ValueObject in JSON
+* Removed some code duplications
+* Removed phpdocumentor support
 
 # Release 0.1.5
 

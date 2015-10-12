@@ -11,21 +11,21 @@
 
 namespace Sensorario\ValueObject;
 
-use PHPUnit_Framework_TestCase;
-use Sensorario\ValueObject\Exception\UndefinedMandatoryPropertyException;
-use Sensorario\ValueObject\Exception\InvalidKeyException;
-use DateTime;
 use DateInterval;
+use DateTime;
+use PHPUnit_Framework_TestCase;
+use Sensorario\Resources\Bar;
+use Sensorario\Resources\BirthDay;
+use Sensorario\Resources\Foo;
+use Sensorario\Resources\MandatoryDependency;
+use Sensorario\Resources\SomeApiRequest;
+use Sensorario\Services\ExportJSON;
+use Sensorario\Services\PropertyType;
 
-/**
- * This is a summary
- *
- * this is a descripion
- */
 final class ValueObjectTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidMethodException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Method `.*::.*()` is not yet implemented#
      */
     public function testExceptionIsThrownWhenNotYetImplementedMethodIsCalled()
@@ -39,9 +39,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * You can use ONLY allowed fields
-     *
-     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidKeyException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Key `.*::.*` is not allowed#
      */
     public function testNotAllowedFieldThroghRuntimeException()
@@ -54,9 +52,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Cannot forget mandator fields
-     *
-     * @expectedException              Sensorario\ValueObject\Exceptions\UndefinedMandatoryPropertyException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
@@ -64,11 +60,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         $foo = Foo::box([]);
     }
 
-    /**
-     * Is obvious, but mandatory fields are allowed by default
-     *
-     * this means that if you dont specify them as allowed, dont through exception
-     */
     public function testMandatoryFieldsAreAuthomaticallyAllowed()
     {
         $foo = Foo::box([
@@ -77,11 +68,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    /**
-     * Mmmm a test for a getter.
-     *
-     * Maybe just for code coverage, ...
-     */
     public function testGetters()
     {
         $foo = Foo::box([
@@ -96,16 +82,14 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Sensorario\ValueObject\Exceptions\InvalidFactoryMethodException
+     * @expectedException              RuntimeException
+     * @expectedExceptionMessageRegExp #Invalid factory method#
      */
     public function testFactoryMethods()
     {
         Bar::invalidFactoryName();
     }
 
-    /**
-     * A value object could have default vaules
-     */
     public function testCanHaveDefaultValues()
     {
         $foo = Bar::box();
@@ -121,7 +105,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         $foo = Bar::box();
 
         $this->assertFalse(
-            $foo->propertyExists('nonExistentProperty')
+            $foo->hasProperty('nonExistentProperty')
         );
     }
 
@@ -148,7 +132,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Sensorario\ValueObject\Exceptions\InvalidKeyOrValueException
+     * @expectedException RuntimeException
      */
     public function testThroughExceptionWhenNoValuesProvided()
     {
@@ -157,7 +141,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        Sensorario\ValueObject\Exceptions\InvalidValueException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessage Value `42` is not allowed for key `someApiParameter`
      */
     public function testAllowedValueForAField()
@@ -168,7 +152,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidTypeException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Attribute `.*` must be an object#
      */
     public function testPropertyCouldBeAnObject()
@@ -179,7 +163,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              Sensorario\ValueObject\Exceptions\InvalidTypeException
+     * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Attribute `.*` must be an object of type DateTime#
      */
     public function testPropertyCouldBeTheRightnObject()
@@ -187,44 +171,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         $birthday = BirthDay::box([
             'date' => new DateInterval('P1D'),
         ]);
-    }
-
-    public function testPropertiesTypeWhenObject()
-    {
-        $birthday = BirthDay::box([
-            'date' => new DateTime('2015'),
-        ]);
-
-        $this->assertEquals(
-            'DateTime',
-            $birthday->getPropertyType('date')
-        );
-    }
-
-    public function testPropertiesTypeWhenString()
-    {
-        $foo = Foo::box([
-            'name' => 'Simone'
-        ]);
-
-        $this->assertEquals(
-            'string',
-            $foo->getPropertyType('name')
-        );
-    }
-
-    public function testCouldExportInJsonFormat()
-    {
-        $expectedJsonFormat = json_encode([
-            'date' => (new DateTime('10 september 1982'))
-        ]);
-
-        $this->assertEquals(
-            $expectedJsonFormat,
-            BirthDay::box([
-                'date' => new DateTime('10 september 1982')
-            ])->toJson()
-        );
     }
 
     public function testPropertiesAccessor()
@@ -239,96 +185,16 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             $foo->properties()
         );
     }
-}
-
-final class BirthDay extends ValueObject
-{
-    public static function allowed()
-    {
-        return [
-            'date',
-        ];
-    }
-
-    public static function types()
-    {
-        return [
-            'date' => 'DateTime',
-        ];
-    }
-}
-
-final class SomeApiRequest extends ValueObject
-{
-    public static function mandatory()
-    {
-        return [
-            'someApiParameter',
-        ];
-    }
-
-    public static function allowedValues()
-    {
-        return [
-            'someApiParameter' => [
-                'hello',
-                'world'
-            ],
-        ];
-    }
-}
-
-/**
- * Example class
- *
- * This kind of Vo provide one mandatory field, and two allowed
- */
-final class Foo extends ValueObject
-{
-    /**
-     * Only one mandatory field here
-     */
-    public static function mandatory()
-    {
-        return [
-            'name',
-        ];
-    }
 
     /**
-     * This VO allows two fields
+     * @expectedException              RuntimeException
+     * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
      */
-    public static function allowed()
+    public function testFieldBecomeMandatoryOnlyIfAnotherOneIsPresent()
     {
-        return [
-            'name',
-            'surname',
-        ];
-    }
-}
-
-/**
- * In this case, we have a default value
- */
-final class Bar extends ValueObject
-{
-    /**
-     * Only one mandatory field here
-     */
-    public static function allowed()
-    {
-        return [
-            'name',
-        ];
-    }
-
-    /**
-     * Only one default value
-     */
-    public static function defaults()
-    {
-        return [
-            'name' => 'Firefox',
-        ];
+        MandatoryDependency::box([
+            'foo' => 'bar',
+            'world' => 'bar',
+        ]);
     }
 }
