@@ -12,6 +12,7 @@
 namespace Sensorario\ValueObject;
 
 use RuntimeException;
+use Sensorario\Services\ValueObjectValidator;
 
 abstract class ValueObject
 {
@@ -40,7 +41,7 @@ abstract class ValueObject
     {
         $this->properties = $properties;
 
-        \Sensorario\Services\ValueObjectValidator::validate($this);
+        ValueObjectValidator::validate($this);
     }
 
     public static function __callStatic($methodName, array $args)
