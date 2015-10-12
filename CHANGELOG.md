@@ -1,4 +1,4 @@
-# Release 1.0
+# Release 1.0.0
 
 * Added conditional mandatory properties
 * Added Validator classes
