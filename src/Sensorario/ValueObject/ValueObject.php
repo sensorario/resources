@@ -40,87 +40,7 @@ abstract class ValueObject
     {
         $this->properties = $properties;
 
-        $this->ensureRightType();
-        $this->ensureMandatoryProperties();
-        $this->ensureAllowedProperties();
-        $this->ensureAllowedValues();
-    }
-
-    protected function ensureRightType()
-    {
-        foreach ($this->properties() as $key => $value) {
-            if (isset(static::types()[$key])) {
-                $type = static::types()[$key];
-
-                if (!is_object($this->get($key))) {
-                    throw new RuntimeException(
-                        'Attribute `' . $key
-                        . '` must be an object'
-                    );
-                }
-
-                if (get_class($this->get($key)) != $type) {
-                    throw new RuntimeException(
-                        'Attribute `' . $key
-                        . '` must be an object of type ' . $type
-                    );
-                }
-            }
-        }
-    }
-
-    protected function ensureMandatoryProperties()
-    {
-        foreach ($this->mandatory() as $key => $value) {
-            if (is_numeric($key) && $this->hasNotProperty($value)) {
-                if (!isset(static::defaults()[$value])) {
-                    throw new RuntimeException(
-                        "Property `" . get_class($this)
-                        . "::\$$value` is mandatory but not set"
-                    );
-                }
-            }
-
-            if (!is_numeric($key) && $this->hasProperty($value['if_present'])) {
-                if ($this->hasNotProperty($key)) {
-                    throw new RuntimeException(
-                        "Property `" . get_class($this)
-                        . "::\${$key}` is mandatory but not set"
-                    );
-                }
-            }
-        }
-    }
-
-    protected function ensureAllowedProperties()
-    {
-        $allowed = array_merge(
-            $this->allowed(),
-            $this->mandatory()
-        );
-
-        foreach ($this->properties() as $key => $property) {
-            if (!in_array($key, $allowed)) {
-                throw new RuntimeException(
-                    "Key `" . get_class($this)
-                    . "::\$$key` is not allowed"
-                );
-            }
-        }
-    }
-
-    protected function ensureAllowedValues()
-    {
-        foreach ($this->properties() as $key => $value) {
-            if (isset($this->allowedValues()[$key])) {
-                if (!in_array($value, $this->allowedValues()[$key])) {
-                    throw new RuntimeException(
-                        'Value `' . $value . '` is not allowed '
-                        . 'for key `' . $key . '`'
-                    );
-                }
-            }
-        }
+        \Sensorario\Services\ValueObjectValidator::validate($this);
     }
 
     public static function __callStatic($methodName, array $args)
@@ -144,31 +64,31 @@ abstract class ValueObject
         }
 
         throw new RuntimeException(
-            'Invalid factory method'
+            'Invalid factory method `' . $methodName . '`'
         );
     }
 
-    protected static function mandatory()
+    public static function mandatory()
     {
         return [];
     }
 
-    protected static function allowed()
+    public static function allowed()
     {
         return [];
     }
 
-    protected static function allowedValues()
+    public static function allowedValues()
     {
         return [];
     }
 
-    protected static function types()
+    public static function types()
     {
         return [];
     }
 
-    protected static function defaults()
+    public static function defaults()
     {
         return [];
     }

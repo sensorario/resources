@@ -1,6 +1,7 @@
 # Release 1.0
 
 * [closed #6] Added conditional mandatory properties
+* Added Validator classes
 * Properties can have a type
 * Check not yet implemented methods
 * Minor fixes and improvements
