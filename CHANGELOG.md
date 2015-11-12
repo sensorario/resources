@@ -1,3 +1,7 @@
+# Release 1.1
+
+* [closed #8] property type definition improvements
+
 # Release 1.0
 
 * [closed #6] Added conditional mandatory properties

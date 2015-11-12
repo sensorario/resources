@@ -20,10 +20,10 @@ final class RightType implements Validator
                     );
                 }
 
-                if (get_class($valueObject->get($key)) != $type) {
+                if (get_class($valueObject->get($key)) != current($type)) {
                     throw new RuntimeException(
                         'Attribute `' . $key
-                        . '` must be an object of type ' . $type
+                        . '` must be an object of type ' . current($type)
                     );
                 }
             }
