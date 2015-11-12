@@ -16,7 +16,8 @@ final class RightType implements Validator
                 if (gettype($valueObject->get($key)) !== key($type)) {
                     throw new RuntimeException(
                         'Attribute `' . $key
-                        . '` must be of type `' . key($type)
+                        . '` must be of type `'
+                        . (key($type) == 'scalar' ? current($type) : 'object')
                         . '`'
                     );
                 }
