@@ -22,6 +22,13 @@ final class SomeApiRequest extends ValueObject
         ];
     }
 
+    public static function allowed()
+    {
+        return [
+            'fields',
+        ];
+    }
+
     public static function allowedValues()
     {
         return [
@@ -29,6 +36,15 @@ final class SomeApiRequest extends ValueObject
                 'hello',
                 'world'
             ],
+        ];
+    }
+
+    public static function types()
+    {
+        return [
+            'fields' => [
+                'scalar' => 'array'
+            ]
         ];
     }
 }

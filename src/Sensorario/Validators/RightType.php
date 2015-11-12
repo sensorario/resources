@@ -13,10 +13,11 @@ final class RightType implements Validator
             if (isset($valueObject->types()[$key])) {
                 $type = $valueObject->types()[$key];
 
-                if (!is_object($valueObject->get($key))) {
+                if (gettype($valueObject->get($key)) !== key($type)) {
                     throw new RuntimeException(
                         'Attribute `' . $key
-                        . '` must be an object'
+                        . '` must be of type `' . key($type)
+                        . '`'
                     );
                 }
 
