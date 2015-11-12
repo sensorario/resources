@@ -153,7 +153,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException              RuntimeException
-     * @expectedExceptionMessageRegExp #Attribute `.*` must be of type `scalar`#
+     * @expectedExceptionMessageRegExp #Attribute `.*` must be of type `array`#
      */
     public function testPropertyCouldBeAScalar()
     {
