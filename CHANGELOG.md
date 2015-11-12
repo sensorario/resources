@@ -1,4 +1,4 @@
-# Release 1.1
+# Release 1.1.0
 
 * [closed #8] property could be defined as scalars or as objects
 * [closed #9] right property type must appear in exception message
