@@ -153,7 +153,18 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException              RuntimeException
-     * @expectedExceptionMessageRegExp #Attribute `.*` must be an object#
+     * @expectedExceptionMessageRegExp #Attribute `.*` must be of type `array`#
+     */
+    public function testPropertyCouldBeAScalar()
+    {
+        $birthday = SomeApiRequest::box([
+            'fields' => 'not a scalar',
+        ]);
+    }
+
+    /**
+     * @expectedException              RuntimeException
+     * @expectedExceptionMessageRegExp #Attribute `.*` must be of type `object`#
      */
     public function testPropertyCouldBeAnObject()
     {

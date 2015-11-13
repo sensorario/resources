@@ -27,7 +27,9 @@ final class BirthDay extends ValueObject
     public static function types()
     {
         return [
-            'date' => 'DateTime',
+            'date' => [
+                'object' => 'DateTime',
+            ]
         ];
     }
 }
