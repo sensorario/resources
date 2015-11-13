@@ -1,3 +1,7 @@
+# Release 1.2.0
+
+* [closed #10] fixed copyright dockblocks
+
 # Release 1.1.0
 
 * [closed #8] property could be defined as scalars or as objects
