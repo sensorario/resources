@@ -1,6 +1,6 @@
 # Release 1.2.0
 
-* [closed #10] fixed copyright dockblocks
+* [closed #10] completed copyright dockblocks
 
 # Release 1.1.0
 
