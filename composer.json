@@ -2,7 +2,7 @@
     "name": "sensorario/value-object",
     "minimum-stability": "dev",
     "description": "A Value Object Implementation in PHP?",
-    "version": "1.2-dev",
+    "version": "1.2.0",
     "authors": [
         {
             "name": "Simone Gentili",
