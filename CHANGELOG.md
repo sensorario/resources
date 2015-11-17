@@ -1,7 +1,11 @@
-# Release 1.2.0
+# Release 2.0.0
 
  * [closed #10] completed copyright dockblocks
  * [enhancement] all test are now inside src\Sensorario\Test folder
+
+## Braking changes
+
+ * Moved all services inside Sensorario\Helpers namespace
 
 # Release 1.1.0
 
