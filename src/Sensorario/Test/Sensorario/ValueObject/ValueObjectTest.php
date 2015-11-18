@@ -44,7 +44,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testNotAllowedFieldThroghRuntimeException()
     {
-        $foo = Foo::box([
+        Foo::box([
             'name'    => 'Simone',
             'surname' => 'Gentili',
             'not'     => 'allowed',
@@ -57,12 +57,12 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
     {
-        $foo = Foo::box([]);
+        Foo::box([]);
     }
 
     public function testMandatoryFieldsAreAuthomaticallyAllowed()
     {
-        $foo = Foo::box([
+        Foo::box([
             'name'    => 'Simone',
             'surname' => 'Gentili',
         ]);
@@ -157,7 +157,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testPropertyCouldBeAScalar()
     {
-        $birthday = SomeApiRequest::box([
+        SomeApiRequest::box([
             'fields' => 'not a scalar',
         ]);
     }
@@ -168,7 +168,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testPropertyCouldBeAnObject()
     {
-        $birthday = BirthDay::box([
+        BirthDay::box([
             'date' => 'not a date',
         ]);
     }
@@ -179,7 +179,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testPropertyCouldBeTheRightnObject()
     {
-        $birthday = BirthDay::box([
+        BirthDay::box([
             'date' => new DateInterval('P1D'),
         ]);
     }
