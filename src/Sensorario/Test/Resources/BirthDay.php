@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\Resources;
+namespace Sensorario\Test\Resources;
 
 use DateTime;
 use PHPUnit_Framework_TestCase;

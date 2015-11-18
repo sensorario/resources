@@ -2,10 +2,12 @@
 
  * [closed #10] completed copyright dockblocks
  * [enhancement] all test are now inside src\Sensorario\Test folder
+ * [enhancement] added README file
 
 ## Braking changes
 
  * Moved all services inside Sensorario\Helpers namespace
+ * Moved all test resources inside Sensorario\Test namespace
 
 # Release 1.1.0
 

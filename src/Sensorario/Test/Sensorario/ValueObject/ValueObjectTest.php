@@ -16,11 +16,11 @@ use DateTime;
 use PHPUnit_Framework_TestCase;
 use Sensorario\Helpers\ExportJSON;
 use Sensorario\Helpers\PropertyType;
-use Sensorario\Resources\Bar;
-use Sensorario\Resources\BirthDay;
-use Sensorario\Resources\Foo;
 use Sensorario\Resources\MandatoryDependency;
 use Sensorario\Resources\SomeApiRequest;
+use Sensorario\Test\Resources\Bar;
+use Sensorario\Test\Resources\BirthDay;
+use Sensorario\Test\Resources\Foo;
 
 final class ValueObjectTest extends PHPUnit_Framework_TestCase
 {

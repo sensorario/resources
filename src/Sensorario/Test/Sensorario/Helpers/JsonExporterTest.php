@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\Test\Helpers;
+namespace Sensorario\Test\Sensorario\Helpers;
 
 use DateTime;
 use PHPUnit_Framework_TestCase;
 use Sensorario\Helpers\JsonExporter;
-use Sensorario\Resources\BirthDay;
+use Sensorario\Test\Resources\BirthDay;
 use Sensorario\ValueObject\ValueObject;
 
 final class JsonExporterTest extends PHPUnit_Framework_TestCase

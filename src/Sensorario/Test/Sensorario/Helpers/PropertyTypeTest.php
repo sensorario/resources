@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\Test\Helpers;
+namespace Sensorario\Test\Sensorario\Helpers;
 
 use DateTime;
 use PHPUnit_Framework_TestCase;
 use Sensorario\Helpers\PropertyType;
-use Sensorario\Resources\BirthDay;
-use Sensorario\Resources\Foo;
+use Sensorario\Test\Resources\BirthDay;
+use Sensorario\Test\Resources\Foo;
 use Sensorario\ValueObject\ValueObject;
 
 final class PropertyTypeTest extends PHPUnit_Framework_TestCase
