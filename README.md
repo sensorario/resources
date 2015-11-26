@@ -11,7 +11,7 @@ final class YouValue extends ValueObject
 }
 ```
 
-## define mandatory properties
+## Define mandatory properties
 
 You must define all mandatory properties. In the example above, we can see that hello fields is mandatory, but only when world parameter is present.
 
@@ -27,7 +27,7 @@ public static function mandatory()
 }
 ```
 
-## define allowed properties
+## Define allowed properties
 
 You must define all allowed properties
 
