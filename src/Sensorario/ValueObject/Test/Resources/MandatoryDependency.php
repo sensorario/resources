@@ -9,26 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\Test\Resources;
+namespace Sensorario\ValueObject\Resources;
 
-use DateTime;
-use PHPUnit_Framework_TestCase;
 use Sensorario\ValueObject\ValueObject;
 
-final class Foo extends ValueObject
+final class MandatoryDependency extends ValueObject
 {
     public static function mandatory()
     {
         return [
-            'name',
+            'foo',
+            'hello' => [
+                'if_present' => 'world',
+            ]
         ];
     }
 
     public static function allowed()
     {
         return [
-            'name',
-            'surname',
+            'hello',
+            'world',
         ];
     }
 }

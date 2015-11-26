@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\Validators;
+namespace Sensorario\ValueObject\Validators;
 
 use RuntimeException;
 use Sensorario\ValueObject\ValueObject;

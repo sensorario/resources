@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\Helpers;
+namespace Sensorario\ValueObject\Helpers;
 
 use Sensorario\ValueObject\ValueObject;
 
@@ -25,7 +25,7 @@ final class ValueObjectValidator
         ];
 
         foreach ($validators as $name) {
-            $validator = 'Sensorario\\Validators\\' . $name;
+            $validator = 'Sensorario\\ValueObject\\Validators\\' . $name;
             $validator::check($valueObject);
         }
     }

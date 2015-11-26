@@ -12,7 +12,7 @@
 namespace Sensorario\ValueObject;
 
 use RuntimeException;
-use Sensorario\Helpers\ValueObjectValidator;
+use Sensorario\ValueObject\Helpers\ValueObjectValidator;
 
 abstract class ValueObject
 {

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\Helpers;
+namespace Sensorario\ValueObject\Helpers;
 
 use Sensorario\ValueObject\ValueObject;
 
