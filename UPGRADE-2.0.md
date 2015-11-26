@@ -1,6 +1,7 @@
-# Upgrade from 1.0 to 1.2
+# Upgrade from 1.x to 2.0
 
-## Folders
+Introduced new namespaces:
 
-All tests were moved from test folder to src\Sensorario\Test
-All services in src\Sensorario\Services were moved in src\Sensorario\Helpers
+    - src\Sensorario\ValueObject\Interfaces
+    - src\Sensorario\ValueObject\Helpers
+    - src\Sensorario\ValueObject\Test
