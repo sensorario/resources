@@ -1,8 +1,12 @@
 <?php
 
-namespace Sensorario/ValueObject/Interfaces;
+namespace Sensorario\ValueObject\Interfaces;
+
+use Sensorario\ValueObject\ValueObject;
 
 interface Service
 {
-    public function exectute();
+    public function __construct(ValueObject $valueObject);
+
+    public function execute();
 }

@@ -11,28 +11,32 @@
 
 namespace Sensorario\ValueObject\Helpers;
 
-use Sensorario\ValueObject\ValueObject;
 use Sensorario\ValueObject\Interfaces\Service;
+use Sensorario\ValueObject\ValueObject;
 
-final class JsonExporter implements Service
+final class PropertyTypeExtractor implements Service
 {
     private $valueObject;
 
-    private $jsonResult = [];
+    private $propertyName;
 
     public function __construct(ValueObject $valueObject)
     {
         $this->valueObject = $valueObject;
     }
 
+    public function setPropertyName($propertyName)
+    {
+        $this->propertyName = $propertyName;
+    }
+
     public function execute()
     {
-        foreach ($this->valueObject->properties() as $key => $value) {
-            $this->jsonResult[$key] = $value;
-        }
+        $property = $this->valueObject->get($this->propertyName);
 
-        return json_encode(
-            $this->jsonResult
-        );
+        return is_object($property)
+            ? get_class($property)
+            : gettype($property)
+        ;
     }
 }

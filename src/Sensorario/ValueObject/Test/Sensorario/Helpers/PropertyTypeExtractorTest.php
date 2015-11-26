@@ -13,12 +13,12 @@ namespace Sensorario\ValueObject\Test\Sensorario\Helpers;
 
 use DateTime;
 use PHPUnit_Framework_TestCase;
-use Sensorario\ValueObject\Helpers\PropertyType;
+use Sensorario\ValueObject\Helpers\PropertyTypeExtractor;
 use Sensorario\ValueObject\Test\Resources\BirthDay;
 use Sensorario\ValueObject\Test\Resources\Foo;
 use Sensorario\ValueObject\ValueObject;
 
-final class PropertyTypeTest extends PHPUnit_Framework_TestCase
+final class PropertyTypeExtractorTest extends PHPUnit_Framework_TestCase
 {
     public function testClassNameWhenTypeIsAnObject()
     {
@@ -26,12 +26,12 @@ final class PropertyTypeTest extends PHPUnit_Framework_TestCase
             'date' => new DateTime('2015'),
         ]);
 
+        $propertyTypeExtractor = new PropertyTypeExtractor($birthday);
+        $propertyTypeExtractor->setPropertyName('date');
+
         $this->assertEquals(
             'DateTime',
-            PropertyType::asString(
-                $birthday,
-                'date'
-            )
+            $propertyTypeExtractor->execute()
         );
     }
 
@@ -41,12 +41,12 @@ final class PropertyTypeTest extends PHPUnit_Framework_TestCase
             'name' => 'Simone'
         ]);
 
+        $propertyTypeExtractor = new PropertyTypeExtractor($foo);
+        $propertyTypeExtractor->setPropertyName('name');
+
         $this->assertEquals(
             'string',
-            PropertyType::asString(
-                $foo,
-                'name'
-            )
+            $propertyTypeExtractor->execute()
         );
     }
 }

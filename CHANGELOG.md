@@ -3,6 +3,7 @@
  * [closed #10] completed copyright dockblocks
  * [enhancement] all test are now inside src\Sensorario\Test folder
  * [enhancement] added README file
+ * [enhancement] introduced Sensorario\ValueObject\Interfaces\Service interface
 
 ## Braking changes
 

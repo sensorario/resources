@@ -25,13 +25,15 @@ final class JsonExporterTest extends PHPUnit_Framework_TestCase
             'date' => (new DateTime('10 september 1982'))
         ]);
 
+        $jsonResult = new JsonExporter(
+            BirthDay::box([
+                'date' => new DateTime('10 september 1982')
+            ])
+        );
+
         $this->assertEquals(
             $expectedJsonFormat,
-            JsonExporter::fromValueObject(
-                BirthDay::box([
-                    'date' => new DateTime('10 september 1982')
-                ])
-            )
+            $jsonResult->execute()
         );
     }
 }
