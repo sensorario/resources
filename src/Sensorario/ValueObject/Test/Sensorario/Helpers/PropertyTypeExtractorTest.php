@@ -20,7 +20,7 @@ use Sensorario\ValueObject\ValueObject;
 
 final class PropertyTypeExtractorTest extends PHPUnit_Framework_TestCase
 {
-    public function testClassNameWhenTypeIsAnObject()
+    public function testIsClassName()
     {
         $birthday = BirthDay::box([
             'date' => new DateTime('2015'),
@@ -35,7 +35,7 @@ final class PropertyTypeExtractorTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testScalarTypeWhenTypeIsAString()
+    public function testIsString()
     {
         $foo = Foo::box([
             'name' => 'Simone'
@@ -46,6 +46,21 @@ final class PropertyTypeExtractorTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             'string',
+            $propertyTypeExtractor->execute()
+        );
+    }
+
+    public function testIsInteger()
+    {
+        $foo = Foo::box([
+            'name' => 42
+        ]);
+
+        $propertyTypeExtractor = new PropertyTypeExtractor($foo);
+        $propertyTypeExtractor->setPropertyName('name');
+
+        $this->assertEquals(
+            'integer',
             $propertyTypeExtractor->execute()
         );
     }
