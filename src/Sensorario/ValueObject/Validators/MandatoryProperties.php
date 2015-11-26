@@ -12,6 +12,7 @@
 namespace Sensorario\ValueObject\Validators;
 
 use RuntimeException;
+use Sensorario\ValueObject\Interfaces\Validator;
 use Sensorario\ValueObject\ValueObject;
 
 final class MandatoryProperties implements Validator

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Validators;
+namespace Sensorario\ValueObject\Interfaces;
 
 use Sensorario\ValueObject\ValueObject;
 
