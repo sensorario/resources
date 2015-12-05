@@ -125,6 +125,16 @@ abstract class ValueObject
 
     final public function properties()
     {
-        return $this->properties;
+        $properties = $this->properties;
+
+        foreach ($properties as $k => $v) {
+            if ('object' === gettype($v)) {
+                if ($this->types()[$k]['object'] === '\\Sensorario\\ValueObject\\ValueObject') {
+                    $properties[$k] = $v->properties();
+                }
+            }
+        }
+
+        return $properties;
     }
 }

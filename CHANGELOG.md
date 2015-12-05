@@ -1,3 +1,7 @@
+# Release 2.1.0
+
+ * [closed #11] composition of value objects
+
 # Release 2.0.0
 
  * [closed #10] completed copyright dockblocks
@@ -5,7 +9,7 @@
  * [enhancement] added README file
  * [enhancement] introduced Sensorario\ValueObject\Interfaces\Service interface
 
-## Braking changes
+## Breaking changes
 
  * Moved all services inside Sensorario\Helpers namespace
  * Moved all test resources inside Sensorario\Test namespace

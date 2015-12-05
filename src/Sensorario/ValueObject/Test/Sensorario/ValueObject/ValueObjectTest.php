@@ -18,6 +18,7 @@ use Sensorario\ValueObject\Helpers\ExportJSON;
 use Sensorario\ValueObject\Helpers\PropertyType;
 use Sensorario\ValueObject\Resources\MandatoryDependency;
 use Sensorario\ValueObject\Resources\SomeApiRequest;
+use Sensorario\ValueObject\Test\Resources\ComposedValueObject;
 use Sensorario\ValueObject\Test\Resources\Bar;
 use Sensorario\ValueObject\Test\Resources\BirthDay;
 use Sensorario\ValueObject\Test\Resources\Foo;
@@ -207,5 +208,22 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             'foo' => 'bar',
             'world' => 'bar',
         ]);
+    }
+
+    public function testValueObjectComposition()
+    {
+        $composition = ComposedValueObject::box([
+            'credentials' => Foo::box([
+                'name' => 'Sam'
+            ]),
+        ]);
+
+        $this->assertEquals([
+                'credentials' => [
+                    'name' => 'Sam',
+                ]
+            ],
+            $composition->properties()
+        );
     }
 }

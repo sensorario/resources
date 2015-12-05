@@ -100,3 +100,25 @@ public static function allowedValues()
     ];
 }
 ```
+
+## Compose value objects
+
+Also could be defined all allowed type for a property
+
+```php
+$composition = ComposedValueObject::box([
+    'credentials' => Foo::box([
+        'name' => 'Sam'
+    ]),
+]);
+```
+
+And `$composition->properties();` will results:
+
+```php
+[
+    'credentials' => [
+        'name' => 'Sam',
+    ]
+];
+```
