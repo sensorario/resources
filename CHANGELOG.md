@@ -1,3 +1,7 @@
+# Release 2.2.0
+
+ * [closed #12] Improved error messages
+
 # Release 2.1.0
 
  * [closed #11] composition of value objects

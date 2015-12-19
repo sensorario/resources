@@ -23,11 +23,16 @@ final class RightType implements Validator
             if (isset($valueObject->types()[$key])) {
                 $type = $valueObject->types()[$key];
 
+                $expectedType = 'undefined';
+                if (isset($type['object'])) {
+                    $expectedType = $type['object'];
+                }
+
                 if (gettype($valueObject->get($key)) !== key($type)) {
                     throw new RuntimeException(
                         'Attribute `' . $key
                         . '` must be of type `'
-                        . (key($type) == 'scalar' ? current($type) : 'object')
+                        . (key($type) == 'scalar' ? current($type) : $expectedType)
                         . '`'
                     );
                 }

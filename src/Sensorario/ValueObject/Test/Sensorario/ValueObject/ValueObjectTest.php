@@ -165,7 +165,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException              RuntimeException
-     * @expectedExceptionMessageRegExp #Attribute `.*` must be of type `object`#
+     * @expectedExceptionMessageRegExp #Attribute `.*` must be of type `.*`#
      */
     public function testPropertyCouldBeAnObject()
     {
