@@ -1,3 +1,3 @@
 # Upgrades in version 2.2
 
-Improved error message in tests.
+Some error messages are now improved and help during the development.

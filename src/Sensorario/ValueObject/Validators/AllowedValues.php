@@ -21,10 +21,13 @@ final class AllowedValues implements Validator
     {
         foreach ($valueObject->properties() as $key => $value) {
             if (isset($valueObject->allowedValues()[$key])) {
-                if (!in_array($value, $valueObject->allowedValues()[$key])) {
+                $allowedValues = $valueObject->allowedValues()[$key];
+                if (!in_array($value, $allowedValues)) {
+                    /** @todo cover this message */
                     throw new RuntimeException(
                         'Value `' . $value . '` is not allowed '
-                        . 'for key `' . $key . '`'
+                        . 'for key `' . $key . '`. '
+                        . 'Allowed values are: ' . var_export($allowedValues, true)
                     );
                 }
             }
