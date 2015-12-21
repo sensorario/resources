@@ -1,5 +1,6 @@
 # Release 2.2.0
 
+ * [closed #16] All values that make a property mandatory can be defined as array
  * [closed #15] A Property is allowe also when mandatory depending other values
  * [closed #14] Added new syntax for mandatory values
  * [closed #13] Improved error messages when value is not allowed

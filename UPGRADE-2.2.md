@@ -53,3 +53,25 @@ final class CreatedUserEvent
     }
 }
 ```
+
+If more than one values makes username mandatory, all can be listed as an array.
+
+```php
+final class CreatedUserEvent
+{
+    public static function mandatory()
+    {
+        return [
+            'username' => [
+                'when' => [
+                    'property' => 'user_type',
+                    'value' => [
+                        'human',
+                        'guest',
+                    ]
+                ],
+            ]
+        ];
+    }
+}
+```
