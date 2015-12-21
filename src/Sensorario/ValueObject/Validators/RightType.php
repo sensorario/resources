@@ -40,7 +40,7 @@ final class RightType implements Validator
                 if (
                     !($valueObject->get($key) instanceof \Sensorario\ValueObject\ValueObject) &&
                     get_class($valueObject->get($key)) != current($type)
-                )  {
+                ) {
                     throw new RuntimeException(
                         'Attribute `' . $key
                         . '` must be an object of type ' . current($type)
