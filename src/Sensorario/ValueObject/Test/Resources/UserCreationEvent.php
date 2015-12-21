@@ -28,6 +28,14 @@ final class UserCreationEvent extends ValueObject
         ];
     }
 
+    /** @todo improve allowed fields: if is mandatory, with condition, must be automatically allowed */
+    public static function allowed()
+    {
+        return [
+            'username',
+        ];
+    }
+
     public static function allowedValues()
     {
         return [

@@ -24,11 +24,13 @@ final class MandatoryProperties implements Validator
                 $propertyName = $value['when']['property'];
                 $propertyValue = $value['when']['value'];
                 if ($valueObject->get($propertyName) === $propertyValue) {
-                    throw new RuntimeException(
-                        'When property `' . $propertyName . '` has value '
-                        . '`' . $propertyValue . '` also `' . $key . '` '
-                        . 'is mandatory'
-                    );
+                    if ($valueObject->hasNotProperty($key)) {
+                        throw new RuntimeException(
+                            'When property `' . $propertyName . '` has value '
+                            . '`' . $propertyValue . '` also `' . $key . '` '
+                            . 'is mandatory'
+                        );
+                    }
                 }
             }
 

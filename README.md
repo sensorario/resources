@@ -33,6 +33,8 @@ public static function mandatory()
 }
 ```
 
+Remeber to allow 'foo' property.
+
 ## Define allowed properties
 
 You must define all allowed properties

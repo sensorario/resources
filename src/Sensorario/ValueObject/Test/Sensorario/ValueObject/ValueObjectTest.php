@@ -238,4 +238,12 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             'type' => 'human',
         ]);
     }
+
+    public function test()
+    {
+        UserCreationEvent::box([
+            'type' => 'human',
+            'username' => 'Sensorario',
+        ]);
+    }
 }
