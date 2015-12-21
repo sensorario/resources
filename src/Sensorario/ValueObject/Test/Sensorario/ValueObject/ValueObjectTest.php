@@ -14,8 +14,6 @@ namespace Sensorario\ValueObject\Test\ValueObject;
 use DateInterval;
 use DateTime;
 use PHPUnit_Framework_TestCase;
-use Sensorario\ValueObject\Helpers\ExportJSON;
-use Sensorario\ValueObject\Helpers\PropertyType;
 use Sensorario\ValueObject\Resources\MandatoryDependency;
 use Sensorario\ValueObject\Resources\SomeApiRequest;
 use Sensorario\ValueObject\Resources\UserCreationEvent;
