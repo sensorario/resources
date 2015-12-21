@@ -17,6 +17,16 @@ use Sensorario\ValueObject\ValueObject;
 
 final class MandatoryProperties implements Validator
 {
+    private static function ensureHasPropery(
+        ValueObject $valueObject,
+        $propertyName,
+        $errorMessage
+    ) {
+        if ($valueObject->hasNotProperty($propertyName)) {
+            throw new RuntimeException($errorMessage);
+        }
+    }
+
     public static function check(ValueObject $valueObject)
     {
         foreach ($valueObject->mandatory() as $key => $value) {
@@ -24,14 +34,22 @@ final class MandatoryProperties implements Validator
                 $propertyName = $value['when']['property'];
                 $propertyValue = $value['when']['value'];
                 if ($valueObject->get($propertyName) === $propertyValue) {
-                    if ($valueObject->hasNotProperty($key)) {
-                        throw new RuntimeException(
-                            'When property `' . $propertyName . '` has value '
-                            . '`' . $propertyValue . '` also `' . $key . '` '
-                            . 'is mandatory'
-                        );
-                    }
+                    self::ensureHasPropery($valueObject, $key,
+                        $message = 'When property `' . $propertyName . '` has value '
+                            . '`' . $propertyValue . '` also `' . $key . '` is mandatory'
+                    );
                 }
+            }
+
+            /** @todo use only one kind ('when', 'if', ...)  instead of two */
+            $mandatoryIfPresentAnotherValue = isset($value['if_present'])
+                ? $valueObject->hasProperty($value['if_present'])
+                : false;
+            if (!is_numeric($key) && $mandatoryIfPresentAnotherValue) {
+                self::ensureHasPropery($valueObject, $key,
+                    $message = "Property `" . get_class($valueObject)
+                    . "::\${$key}` is mandatory but not set"
+                );
             }
 
             if (is_numeric($key) && $valueObject->hasNotProperty($value)) {
@@ -39,20 +57,6 @@ final class MandatoryProperties implements Validator
                     throw new RuntimeException(
                         "Property `" . get_class($valueObject)
                         . "::\$$value` is mandatory but not set"
-                    );
-                }
-            }
-
-            $mandatoryIfPresentAnotherValue = false;
-            if (isset($value['if_present'])) {
-                $mandatoryIfPresentAnotherValue = $valueObject->hasProperty($value['if_present']);
-            }
-
-            if (!is_numeric($key) && $mandatoryIfPresentAnotherValue) {
-                if ($valueObject->hasNotProperty($key)) {
-                    throw new RuntimeException(
-                        "Property `" . get_class($valueObject)
-                        . "::\${$key}` is mandatory but not set"
                     );
                 }
             }
