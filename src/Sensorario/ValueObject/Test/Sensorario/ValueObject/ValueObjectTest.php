@@ -18,6 +18,7 @@ use Sensorario\ValueObject\Helpers\ExportJSON;
 use Sensorario\ValueObject\Helpers\PropertyType;
 use Sensorario\ValueObject\Resources\MandatoryDependency;
 use Sensorario\ValueObject\Resources\SomeApiRequest;
+use Sensorario\ValueObject\Resources\UserCreationEvent;
 use Sensorario\ValueObject\Test\Resources\ComposedValueObject;
 use Sensorario\ValueObject\Test\Resources\Bar;
 use Sensorario\ValueObject\Test\Resources\BirthDay;
@@ -225,5 +226,16 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
             ],
             $composition->properties()
         );
+    }
+
+    /**
+     * @expectedException              RuntimeException
+     * @expectedExceptionMessageRegExp #When property `.*` has value `.*` also `.*` is mandatory#
+     */
+    public function testMandatoryValuesWhenPropertyAssumeAValue()
+    {
+        UserCreationEvent::box([
+            'type' => 'human',
+        ]);
     }
 }

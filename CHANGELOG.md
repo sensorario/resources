@@ -1,5 +1,6 @@
 # Release 2.2.0
 
+ * [closed #14] Added new syntax for mandatory values
  * [closed #13] Improved error messages when value is not allowed
  * [closed #12] Improved error messages
 
