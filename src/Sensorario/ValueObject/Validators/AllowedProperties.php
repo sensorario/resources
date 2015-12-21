@@ -28,10 +28,8 @@ final class AllowedProperties implements Validator
             if (!in_array($key, $allowed)) {
                 $isAllowedByDependency = false;
                 foreach ($allowed as $kk => $vv) {
-                    if (!is_numeric($kk)) {
-                        if ($valueObject->hasProperty($vv['when']['property'])) {
-                            $isAllowedByDependency = true;
-                        }
+                    if (!is_numeric($kk) && $valueObject->hasProperty($vv['when']['property'])) {
+                        $isAllowedByDependency = true;
                     }
                 }
 
