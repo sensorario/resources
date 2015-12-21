@@ -13,7 +13,7 @@ final class YouValue extends ValueObject
 
 ## Define mandatory properties
 
-You must define all mandatory properties. In the example above, we can see that hello fields is mandatory, but only when world parameter is present.
+You must define all mandatory properties. In the example above, we can see that hello fields is mandatory, but only when world parameter is present. And since version 2.2, is possibile to define a mandatory property when other property assume a particular value.
 
 ```php
 public static function mandatory()
@@ -22,6 +22,12 @@ public static function mandatory()
         'property_name',
         'hello' => [
             'if_present' => 'world',
+        ],
+        'foo' => [
+            'when' => [
+                'property' => 'property_name',
+                'value' => 'bar',
+            ]
         ]
     ];
 }
