@@ -26,10 +26,21 @@ final class AllowedProperties implements Validator
 
         foreach ($valueObject->properties() as $key => $property) {
             if (!in_array($key, $allowed)) {
-                throw new RuntimeException(
-                    "Key `" . get_class($valueObject)
-                    . "::\$$key` is not allowed"
-                );
+                $isAllowedByDependency = false;
+                foreach ($allowed as $kk => $vv) {
+                    if (!is_numeric($kk)) {
+                        if ($valueObject->hasProperty($vv['when']['property'])) {
+                            $isAllowedByDependency = true;
+                        }
+                    }
+                }
+
+                if (!$isAllowedByDependency) {
+                    throw new RuntimeException(
+                        "Key `" . get_class($valueObject)
+                        . "::\$$key` is not allowed"
+                    );
+                }
             }
         }
     }
