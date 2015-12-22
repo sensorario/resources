@@ -75,3 +75,22 @@ final class CreatedUserEvent
     }
 }
 ```
+
+Finally, a new syntax for mandatory values.
+
+```php
+final class CreatedUserEvent
+{
+    public static function mandatory()
+    {
+        return [
+            'username' => [
+                'when' => [
+                    'property' => 'user_type',
+                    'condition' => 'is_present'
+                ],
+            ]
+        ];
+    }
+}
+```

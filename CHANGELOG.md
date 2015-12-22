@@ -1,5 +1,6 @@
 # Release 2.2.0
 
+ * [closed #17] Improved 'when' syntax to set mandatory properties
  * [closed #16] All values that make a property mandatory can be defined as array
  * [closed #15] A Property is allowe also when mandatory depending other values
  * [closed #14] Added new syntax for mandatory values

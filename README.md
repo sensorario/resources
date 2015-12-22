@@ -26,7 +26,30 @@ public static function mandatory()
         'foo' => [
             'when' => [
                 'property' => 'property_name',
-                'value' => 'bar',
+                'has_value' => 'bar',
+            ]
+        ]
+    ];
+}
+```
+
+Since version 2.2, were added new syntax
+
+```php
+public static function mandatory()
+{
+    return [
+        'property_name',
+        'hello' => [
+            'when' => [
+                'property' => 'world',
+                'condition' => 'is_present',
+            ]
+        ],
+        'foo' => [
+            'when' => [
+                'property' => 'property_name',
+                'has_value' => 'bar',
             ]
         ]
     ];

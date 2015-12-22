@@ -22,15 +22,15 @@ final class MandatoryProperties implements Validator
         foreach ($valueObject->mandatory() as $key => $value) {
             if (isset($value['when'])) {
                 $propertyName = $value['when']['property'];
-                $propertyValue = $value['when']['has_value'];
 
-                if (!is_array($propertyValue)) {
-                    $propertyValue = [$propertyValue];
-                }
+                if (isset($value['when']['has_value'])) {
+                    $propertyValue = $value['when']['has_value'];
+                    if (!is_array($propertyValue)) {
+                        $propertyValue = [$propertyValue];
+                    }
 
-                foreach ($propertyValue as $value) {
-                    if ($valueObject->get($propertyName) === $value) {
-                        if ($valueObject->hasNotProperty($key)) {
+                    foreach ($propertyValue as $value) {
+                        if ($valueObject->get($propertyName) === $value && $valueObject->hasNotProperty($key)) {
                             throw new RuntimeException(
                                 'When property `' . $key . '` has value '
                                 . '`' . $value . '` also `' . $key . '` is mandatory'
@@ -38,8 +38,21 @@ final class MandatoryProperties implements Validator
                         }
                     }
                 }
+
+                if (
+                    isset($value['when']['condition']) &&
+                    $value['when']['condition'] === 'is_present' &&
+                    $valueObject->hasProperty($propertyName) &&
+                    $valueObject->hasNotProperty($key)
+                ) {
+                    throw new RuntimeException(
+                        "Property `" . get_class($valueObject)
+                        . "::\${$key}` is mandatory but not set"
+                    );
+                }
             }
 
+            /** @deprecate will be removed in version 3.0 */
             if (isset($value['if_present']) && !is_numeric($key) && $valueObject->hasProperty($value['if_present'])) {
                 if ($valueObject->hasNotProperty($key)) {
                     throw new RuntimeException(

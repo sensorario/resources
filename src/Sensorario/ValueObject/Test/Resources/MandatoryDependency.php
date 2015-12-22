@@ -19,6 +19,12 @@ final class MandatoryDependency extends ValueObject
     {
         return [
             'foo',
+            'mello' => [
+                'when' => [
+                    'property' => 'mandatory_mello',
+                    'condition' => 'is_present',
+                ]
+            ],
             'hello' => [
                 'if_present' => 'world',
             ]
@@ -30,6 +36,7 @@ final class MandatoryDependency extends ValueObject
         return [
             'hello',
             'world',
+            'mandatory_mello',
         ];
     }
 }
