@@ -22,7 +22,7 @@ final class UserCreationEvent extends ValueObject
             'username' => [
                 'when' => [
                     'property' => 'type',
-                    'value' => [
+                    'has_value' => [
                         'human',
                         'guest',
                     ]

@@ -22,7 +22,7 @@ final class MandatoryProperties implements Validator
         foreach ($valueObject->mandatory() as $key => $value) {
             if (isset($value['when'])) {
                 $propertyName = $value['when']['property'];
-                $propertyValue = $value['when']['value'];
+                $propertyValue = $value['when']['has_value'];
 
                 if (!is_array($propertyValue)) {
                     $propertyValue = [$propertyValue];

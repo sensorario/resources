@@ -233,7 +233,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     public function testMandatoryValuesWhenPropertyAssumeAValue()
     {
         UserCreationEvent::box([
-            'type' => 'human',
+            'type' => 'guest',
         ]);
     }
 
