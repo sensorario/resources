@@ -40,7 +40,7 @@ final class MandatoryProperties implements Validator
                 }
             }
 
-            if (isset($value['if_present'])) {
+            if (isset($value['if_present']) && !is_numeric($key) && $valueObject->hasProperty($value['if_present'])) {
                 if ($valueObject->hasNotProperty($key)) {
                     throw new RuntimeException(
                         "Property `" . get_class($valueObject)

@@ -209,6 +209,13 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
+    public function testShouldNotFail()
+    {
+        MandatoryDependency::box([
+            'foo' => 'bar',
+        ]);
+    }
+
     public function testValueObjectComposition()
     {
         $composition = ComposedValueObject::box([
