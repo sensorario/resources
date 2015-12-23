@@ -1,11 +1,11 @@
 # Value Obejct
 
-To create a new value object, just
+To create a new value object, extends Sensorario\ValueObject\ValueObject abstract class.
 
 ```php
 use Sensorario\ValueObject\ValueObject;
 
-final class YouValue extends ValueObject
+final class MyValue extends ValueObject
 {
 
 }
@@ -13,7 +13,7 @@ final class YouValue extends ValueObject
 
 ## Define mandatory properties
 
-You must define all mandatory properties. In the example above, we can see that hello fields is mandatory, but only when world parameter is present. And since version 2.2, is possibile to define a mandatory property when other property assume a particular value.
+You can define mandatory properties. Mandatory properties are allowed by default. In the example above, we can see that hello field is mandatory, but only when world property is present (defined). And since version 2.2, is possibile to define a mandatory property when other property assume a particular value.
 
 ```php
 public static function mandatory()
@@ -33,7 +33,7 @@ public static function mandatory()
 }
 ```
 
-Since version 2.2, were added new syntax
+Since version 2.2, were added new syntax to define mandatory property. In version 2.2, `if_present` clause will be removed. Only `when` clause will remain.
 
 ```php
 public static function mandatory()
@@ -145,9 +145,9 @@ $composition = ComposedValueObject::box([
 And `$composition->properties();` will results:
 
 ```php
-[
-    'credentials' => [
+array(
+    'credentials' => array(
         'name' => 'Sam',
-    ]
-];
+    )
+);
 ```
