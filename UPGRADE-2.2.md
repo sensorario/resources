@@ -46,7 +46,7 @@ final class CreatedUserEvent
             'username' => [
                 'when' => [
                     'property' => 'user_type',
-                    'value' => 'human'
+                    'has_value' => 'human'
                 ],
             ]
         ];
@@ -65,7 +65,7 @@ final class CreatedUserEvent
             'username' => [
                 'when' => [
                     'property' => 'user_type',
-                    'value' => [
+                    'has_value' => [
                         'human',
                         'guest',
                     ]
