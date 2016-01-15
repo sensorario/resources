@@ -17,9 +17,9 @@ use PHPUnit_Framework_TestCase;
 use Sensorario\ValueObject\Resources\MandatoryDependency;
 use Sensorario\ValueObject\Resources\SomeApiRequest;
 use Sensorario\ValueObject\Resources\UserCreationEvent;
-use Sensorario\ValueObject\Test\Resources\ComposedValueObject;
 use Sensorario\ValueObject\Test\Resources\Bar;
 use Sensorario\ValueObject\Test\Resources\BirthDay;
+use Sensorario\ValueObject\Test\Resources\ComposedValueObject;
 use Sensorario\ValueObject\Test\Resources\Foo;
 
 final class ValueObjectTest extends PHPUnit_Framework_TestCase
