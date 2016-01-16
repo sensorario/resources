@@ -5,7 +5,9 @@
     "authors": [
         {
             "name": "Simone Gentili",
-            "email": "sensorario@gmail.com"
+            "email": "sensorario@gmail.com",
+            "homepage": "http://sensorario.github.io",
+            "role": "Developer"
         }
     ],
     "license": "MIT",
