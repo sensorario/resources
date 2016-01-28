@@ -49,13 +49,15 @@ final class MandatoryProperties implements Validator
                 }
             }
 
-            if (is_numeric($key) && $valueObject->hasNotProperty($value)) {
-                if (!isset($valueObject->defaults()[$value])) {
-                    throw new RuntimeException(
-                        "Property `" . get_class($valueObject)
-                        . "::\$$value` is mandatory but not set"
-                    );
-                }
+            if (
+                is_numeric($key) &&
+                $valueObject->hasNotProperty($value) &&
+                !isset($valueObject->defaults()[$value])
+            ) {
+                throw new RuntimeException(
+                    "Property `" . get_class($valueObject)
+                    . "::\$$value` is mandatory but not set"
+                );
             }
         }
     }
