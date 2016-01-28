@@ -35,7 +35,7 @@ final class PropertyTypeExtractorTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testIsString()
+    public function testStringTypeIsReturnedWhenStringIsTheValue()
     {
         $foo = Foo::box([
             'name' => 'Simone'
@@ -50,7 +50,7 @@ final class PropertyTypeExtractorTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testIsInteger()
+    public function testIntegerTypeIsReturnedWhenIntegerIsTheValue()
     {
         $foo = Foo::box([
             'name' => 42
