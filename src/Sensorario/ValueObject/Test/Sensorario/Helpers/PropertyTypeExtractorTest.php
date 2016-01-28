@@ -35,34 +35,31 @@ final class PropertyTypeExtractorTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testStringTypeIsReturnedWhenStringIsTheValue()
+    /** @dataProvider properties */
+    public function testStringTypeIsReturnedWhenStringIsTheValue(
+        $propertyValue,
+        $propertyType
+    )
     {
         $foo = Foo::box([
-            'name' => 'Simone'
+            'name' => $propertyValue
         ]);
 
         $propertyTypeExtractor = new PropertyTypeExtractor($foo);
         $propertyTypeExtractor->setPropertyName('name');
 
         $this->assertEquals(
-            'string',
+            $propertyType,
             $propertyTypeExtractor->execute()
         );
     }
 
-    public function testIntegerTypeIsReturnedWhenIntegerIsTheValue()
+    public function properties()
     {
-        $foo = Foo::box([
-            'name' => 42
-        ]);
-
-        $propertyTypeExtractor = new PropertyTypeExtractor($foo);
-        $propertyTypeExtractor->setPropertyName('name');
-
-        $this->assertEquals(
-            'integer',
-            $propertyTypeExtractor->execute()
-        );
+        return [
+            ['Simone', 'string'],
+            [42,       'integer'],
+        ];
     }
 }
 
