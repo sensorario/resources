@@ -52,16 +52,6 @@ final class MandatoryProperties implements Validator
                 }
             }
 
-            /** @deprecate will be removed in version 3.0 */
-            if (isset($value['if_present']) && !is_numeric($key) && $valueObject->hasProperty($value['if_present'])) {
-                if ($valueObject->hasNotProperty($key)) {
-                    throw new RuntimeException(
-                        "Property `" . get_class($valueObject)
-                        . "::\${$key}` is mandatory but not set"
-                    );
-                }
-            }
-
             if (is_numeric($key) && $valueObject->hasNotProperty($value)) {
                 if (!isset($valueObject->defaults()[$value])) {
                     throw new RuntimeException(

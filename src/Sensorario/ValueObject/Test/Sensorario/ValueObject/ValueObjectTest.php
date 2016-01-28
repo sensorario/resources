@@ -209,18 +209,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    /**
-     * @expectedException              RuntimeException
-     * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
-     */
-    public function testFieldBecomeMandatoryOnlyIfAnotherOneIsPresent()
-    {
-        MandatoryDependency::box([
-            'foo' => 'bar',
-            'world' => 'bar',
-        ]);
-    }
-
     public function testShouldNotFail()
     {
         MandatoryDependency::box([
