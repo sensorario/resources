@@ -17,17 +17,19 @@ use Sensorario\ValueObject\ValueObject;
 
 final class BirthDay extends ValueObject
 {
+    const DATE = 'date';
+
     public static function allowed()
     {
         return [
-            'date',
+            BirthDay::DATE,
         ];
     }
 
     public static function types()
     {
         return [
-            'date' => [
+            BirthDay::DATE => [
                 'object' => 'DateTime',
             ]
         ];

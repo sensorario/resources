@@ -15,24 +15,27 @@ use Sensorario\ValueObject\ValueObject;
 
 final class SomeApiRequest extends ValueObject
 {
+    const SOME_API_PARAMETER = 'someApiParameter';
+    const FIELDS             = 'fields';
+
     public static function mandatory()
     {
         return [
-            'someApiParameter',
+            SomeApiRequest::SOME_API_PARAMETER,
         ];
     }
 
     public static function allowed()
     {
         return [
-            'fields',
+            SomeApiRequest::FIELDS,
         ];
     }
 
     public static function allowedValues()
     {
         return [
-            'someApiParameter' => [
+            SomeApiRequest::SOME_API_PARAMETER => [
                 'hello',
                 'world'
             ],
@@ -42,7 +45,7 @@ final class SomeApiRequest extends ValueObject
     public static function types()
     {
         return [
-            'fields' => [
+            SomeApiRequest::FIELDS => [
                 'scalar' => 'array'
             ]
         ];

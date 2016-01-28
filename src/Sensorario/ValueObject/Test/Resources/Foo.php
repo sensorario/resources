@@ -17,18 +17,21 @@ use Sensorario\ValueObject\ValueObject;
 
 final class Foo extends ValueObject
 {
+    const NAME    = 'name';
+    const SURNAME = 'surname';
+
     public static function mandatory()
     {
         return [
-            'name',
+            Foo::NAME,
         ];
     }
 
     public static function allowed()
     {
         return [
-            'name',
-            'surname',
+            Foo::NAME,
+            Foo::SURNAME,
         ];
     }
 }
