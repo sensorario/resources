@@ -25,9 +25,6 @@ final class MandatoryDependency extends ValueObject
                     'condition' => 'is_present',
                 ]
             ],
-            'hello' => [
-                'if_present' => 'world',
-            ]
         ];
     }
 
