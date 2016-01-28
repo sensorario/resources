@@ -42,7 +42,7 @@ final class SomeApiRequest extends ValueObject
         ];
     }
 
-    public static function types()
+    public static function rules()
     {
         return [
             SomeApiRequest::FIELDS => [

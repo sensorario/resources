@@ -20,30 +20,29 @@ final class RightType implements Validator
     public static function check(ValueObject $valueObject)
     {
         foreach ($valueObject->properties() as $key => $value) {
-            if (isset($valueObject->types()[$key])) {
-                $type = $valueObject->types()[$key];
+            if (isset($valueObject->rules()[$key])) {
+                $rule = $valueObject->rules()[$key];
 
-                $expectedType = 'undefined';
-                if (isset($type['object'])) {
-                    $expectedType = $type['object'];
-                }
+                if (gettype($valueObject->get($key)) !== key($rule)) {
+                    $expectedType = isset($rule['object'])
+                        ? $rule['object']
+                        : 'undefined';
 
-                if (gettype($valueObject->get($key)) !== key($type)) {
                     throw new RuntimeException(
                         'Attribute `' . $key
                         . '` must be of type `'
-                        . (key($type) == 'scalar' ? current($type) : $expectedType)
+                        . (key($rule) == 'scalar' ? current($rule) : $expectedType)
                         . '`'
                     );
                 }
                 
                 if (
                     !($valueObject->get($key) instanceof \Sensorario\ValueObject\ValueObject) &&
-                    get_class($valueObject->get($key)) != current($type)
+                    get_class($valueObject->get($key)) != current($rule)
                 ) {
                     throw new RuntimeException(
                         'Attribute `' . $key
-                        . '` must be an object of type ' . current($type)
+                        . '` must be an object of type ' . current($rule)
                     );
                 }
             }
