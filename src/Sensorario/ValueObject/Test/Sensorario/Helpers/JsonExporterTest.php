@@ -21,14 +21,14 @@ final class JsonExporterTest extends PHPUnit_Framework_TestCase
 {
     public function testCouldExportInJsonFormat()
     {
-        $expectedJsonFormat = json_encode([
+        $params = [
             'date' => (new DateTime('10 september 1982'))
-        ]);
+        ];
+
+        $expectedJsonFormat = json_encode($params);
 
         $jsonResult = new JsonExporter(
-            BirthDay::box([
-                'date' => new DateTime('10 september 1982')
-            ])
+            BirthDay::box($params)
         );
 
         $this->assertEquals(
