@@ -24,7 +24,7 @@ final class ComposedValueObject extends ValueObject
         ];
     }
 
-    public static function types()
+    public static function rules()
     {
         return [
             'credentials' => [

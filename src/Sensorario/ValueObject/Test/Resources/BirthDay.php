@@ -24,7 +24,7 @@ final class BirthDay extends ValueObject
         ];
     }
 
-    public static function types()
+    public static function rules()
     {
         return [
             'date' => [

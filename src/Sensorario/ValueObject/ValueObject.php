@@ -83,7 +83,7 @@ abstract class ValueObject
         return [];
     }
 
-    public static function types()
+    public static function rules()
     {
         return [];
     }
@@ -128,7 +128,7 @@ abstract class ValueObject
 
         foreach ($properties as $k => $v) {
             if ('object' === gettype($v)) {
-                if ($this->types()[$k]['object'] === '\\Sensorario\\ValueObject\\ValueObject') {
+                if ($this->rules()[$k]['object'] === '\\Sensorario\\ValueObject\\ValueObject') {
                     $properties[$k] = $v->properties();
                 }
             }

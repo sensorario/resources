@@ -93,7 +93,7 @@ public static function defaults()
 A property could be configured to be a scalar or an object
 
 ```php
-public static function types()
+public static function rules()
 {
     return [
         'date' => [
@@ -104,7 +104,7 @@ public static function types()
 ```
 
 ```php
-public static function types()
+public static function rules()
 {
     return [
         'fields' => [
