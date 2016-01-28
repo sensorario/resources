@@ -15,17 +15,19 @@ use Sensorario\ValueObject\ValueObject;
 
 final class Bar extends ValueObject
 {
+    const NAME = 'name';
+
     public static function allowed()
     {
         return [
-            'name',
+            Bar::NAME,
         ];
     }
 
     public static function defaults()
     {
         return [
-            'name' => 'Firefox',
+            Bar::NAME => 'Firefox',
         ];
     }
 }

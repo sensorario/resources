@@ -17,17 +17,19 @@ use Sensorario\ValueObject\ValueObject;
 
 final class ComposedValueObject extends ValueObject
 {
+    const CREDENTIALS = 'credentials';
+
     public static function mandatory()
     {
         return [
-            'credentials',
+            ComposedValueObject::CREDENTIALS,
         ];
     }
 
     public static function types()
     {
         return [
-            'credentials' => [
+            ComposedValueObject::CREDENTIALS => [
                 'object' => '\Sensorario\ValueObject\ValueObject',
             ]
         ];

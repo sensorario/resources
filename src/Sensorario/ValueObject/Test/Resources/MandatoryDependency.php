@@ -15,11 +15,15 @@ use Sensorario\ValueObject\ValueObject;
 
 final class MandatoryDependency extends ValueObject
 {
+    const FOO             = 'foo';
+    const MELLO           = 'mello';
+    const MANDATORY_MELLO = 'mandatory_mello';
+
     public static function mandatory()
     {
         return [
-            'foo',
-            'mello' => [
+            MandatoryDependency::FOO,
+            MandatoryDependency::MELLO => [
                 'when' => [
                     'property' => 'mandatory_mello',
                     'condition' => 'is_present',
@@ -31,9 +35,9 @@ final class MandatoryDependency extends ValueObject
     public static function allowed()
     {
         return [
-            'hello',
-            'world',
-            'mandatory_mello',
+            MandatoryDependency::FOO,
+            MandatoryDependency::MELLO,
+            MandatoryDependency::MANDATORY_MELLO,
         ];
     }
 }

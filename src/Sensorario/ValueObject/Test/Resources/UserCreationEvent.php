@@ -15,11 +15,14 @@ use Sensorario\ValueObject\ValueObject;
 
 final class UserCreationEvent extends ValueObject
 {
+    const TYPE     = 'type';
+    const USERNAME = 'username';
+
     public static function mandatory()
     {
         return [
-            'type',
-            'username' => [
+            UserCreationEvent::TYPE,
+            UserCreationEvent::USERNAME => [
                 'when' => [
                     'property' => 'type',
                     'has_value' => [
@@ -34,7 +37,7 @@ final class UserCreationEvent extends ValueObject
     public static function allowedValues()
     {
         return [
-            'type' => [
+            UserCreationEvent::TYPE => [
                 'guest',
                 'human',
                 'bot'
