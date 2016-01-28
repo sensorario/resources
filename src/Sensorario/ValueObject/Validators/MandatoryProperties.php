@@ -25,9 +25,6 @@ final class MandatoryProperties implements Validator
 
                 if (isset($value['when']['has_value'])) {
                     $propertyValue = $value['when']['has_value'];
-                    if (!is_array($propertyValue)) {
-                        $propertyValue = [$propertyValue];
-                    }
 
                     foreach ($propertyValue as $value) {
                         if ($valueObject->get($propertyName) === $value && $valueObject->hasNotProperty($key)) {
