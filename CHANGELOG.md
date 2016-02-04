@@ -1,5 +1,6 @@
 # Release 3.0.0
 
+ * [closed #33] - added usages references
  * [closed #34] - added configuration check
  * [closed #27] - fixed metadata
  * [closed #18] - removed if_present condition

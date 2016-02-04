@@ -151,3 +151,7 @@ array(
     )
 );
 ```
+
+## Usages
+
+This library is used in sensorario/value-objects repository. A repository made to keep separated a real usage from this library.
