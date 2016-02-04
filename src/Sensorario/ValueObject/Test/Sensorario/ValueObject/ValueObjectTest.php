@@ -17,6 +17,7 @@ use PHPUnit_Framework_TestCase;
 use Sensorario\ValueObject\Resources\MandatoryDependency;
 use Sensorario\ValueObject\Resources\SomeApiRequest;
 use Sensorario\ValueObject\Resources\UserCreationEvent;
+use Sensorario\ValueObject\Resources\ValueObjectWithoutRules;
 use Sensorario\ValueObject\Test\Resources\Bar;
 use Sensorario\ValueObject\Test\Resources\BirthDay;
 use Sensorario\ValueObject\Test\Resources\ComposedValueObject;
@@ -249,6 +250,17 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         UserCreationEvent::box([
             'type' => 'human',
             'username' => 'Sensorario',
+        ]);
+    }
+
+    /**
+     * @expectedException              RuntimeException
+     * @expectedExceptionMessageRegExp #When property `.*` is an object class, must be defined in ValueObject::rules()#
+     */
+    public function testAnExceptionIsThrownIfAPropertyIsAnObjectButClassInNotDefinedInRuleMethod()
+    {
+        ValueObjectWithoutRules::box([
+            'datetime' => new DateTime(),
         ]);
     }
 }
