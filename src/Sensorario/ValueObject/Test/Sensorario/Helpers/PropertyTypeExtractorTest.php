@@ -58,7 +58,7 @@ final class PropertyTypeExtractorTest extends PHPUnit_Framework_TestCase
     {
         return [
             ['Simone', 'string'],
-            [42,       'integer'],
+            [42, 'integer'],
         ];
     }
 }
