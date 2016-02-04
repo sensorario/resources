@@ -40,6 +40,16 @@ abstract class ValueObject
     {
         $this->properties = $properties;
 
+        foreach ($properties as $k => $v) {
+            if ('object' === gettype($v)) {
+                if (!isset($this->rules()[$k])) {
+                    throw new RuntimeException(
+                        'When property `' . $k . '` is an object class, must be defined in ValueObject::rules()'
+                    );
+                }
+            }
+        }
+
         Validators\ValueObjectValidator::validate($this);
     }
 
@@ -128,12 +138,6 @@ abstract class ValueObject
 
         foreach ($properties as $k => $v) {
             if ('object' === gettype($v)) {
-                if (!isset($this->rules()[$k])) {
-                    throw new RuntimeException(
-                        'When property `' . $k . '` is an object class, must be defined in ValueObject::rules()'
-                    );
-                }
-
                 if ($this->rules()[$k]['object'] === '\\Sensorario\\ValueObject\\ValueObject') {
                     $properties[$k] = $v->properties();
                 }
