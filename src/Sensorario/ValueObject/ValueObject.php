@@ -41,12 +41,10 @@ abstract class ValueObject
         $this->properties = $properties;
 
         foreach ($properties as $k => $v) {
-            if ('object' === gettype($v)) {
-                if (!isset($this->rules()[$k])) {
-                    throw new RuntimeException(
-                        'When property `' . $k . '` is an object class, must be defined in ValueObject::rules()'
-                    );
-                }
+            if ('object' === gettype($v) && !isset($this->rules()[$k])) {
+                throw new RuntimeException(
+                    'When property `' . $k . '` is an object class, must be defined in ValueObject::rules()'
+                );
             }
         }
 
