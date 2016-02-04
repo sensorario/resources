@@ -7,4 +7,6 @@
 
 ## Commit message
 
+Always, when a new feature or new fix were added, also CHANGELOG should be updated. Commit message should be the same added in changelog.
+
 Commit message must be `[closed #42] - message`
