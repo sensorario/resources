@@ -12,9 +12,9 @@
 namespace Sensorario\ValueObject\Helpers;
 
 use Sensorario\ValueObject\ValueObject;
-use Sensorario\ValueObject\Interfaces\Service;
+use Sensorario\ValueObject\Interfaces\Helper;
 
-final class JsonExporter implements Service
+final class JsonExporter implements Helper
 {
     private $valueObject;
 

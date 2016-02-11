@@ -13,7 +13,7 @@ namespace Sensorario\ValueObject\Interfaces;
 
 use Sensorario\ValueObject\ValueObject;
 
-interface Service
+interface Helper
 {
     public function __construct(ValueObject $valueObject);
 

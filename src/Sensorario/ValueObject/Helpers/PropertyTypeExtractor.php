@@ -11,10 +11,10 @@
 
 namespace Sensorario\ValueObject\Helpers;
 
-use Sensorario\ValueObject\Interfaces\Service;
+use Sensorario\ValueObject\Interfaces\Helper;
 use Sensorario\ValueObject\ValueObject;
 
-final class PropertyTypeExtractor implements Service
+final class PropertyTypeExtractor implements Helper
 {
     private $valueObject;
 
