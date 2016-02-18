@@ -110,7 +110,8 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testHasPropertiesReturnFalseWhenInvalidProperty()
+    /** @dataProvider propertiesProvider */
+    public function testHasProperties($result, $properties)
     {
         $foo = UserCreationEvent::box([
             'type' => 'human',
@@ -118,27 +119,17 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertSame(
-            false,
-            $foo->hasProperties([
-                'buppa',
-            ])
+            $result,
+            $foo->hasProperties($properties)
         );
     }
 
-    public function testThatHasPropertiesCheckMorePropertiesExistance()
+    public function propertiesProvider()
     {
-        $foo = UserCreationEvent::box([
-            'type' => 'human',
-            'username' => 'Sensorario',
-        ]);
-
-        $this->assertSame(
-            true,
-            $foo->hasProperties([
-                'type',
-                'username',
-            ])
-        );
+        return [
+            [false, ['buppa']],
+            [true,  ['type','username']],
+        ];
     }
 
     public function testAllowAccessToProperties()
