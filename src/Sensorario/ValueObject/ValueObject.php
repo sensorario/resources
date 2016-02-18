@@ -108,6 +108,17 @@ abstract class ValueObject
         );
     }
 
+    final public function hasProperties(array $properties)
+    {
+        foreach ($properties as $property) {
+            if ($this->hasNotProperty($property)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     final public function hasNotProperty($propertyName)
     {
         return !$this->hasProperty($propertyName);
