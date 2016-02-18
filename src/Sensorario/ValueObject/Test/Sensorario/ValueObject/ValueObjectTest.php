@@ -110,6 +110,37 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testHasPropertiesReturnFalseWhenInvalidProperty()
+    {
+        $foo = UserCreationEvent::box([
+            'type' => 'human',
+            'username' => 'Sensorario',
+        ]);
+
+        $this->assertSame(
+            false,
+            $foo->hasProperties([
+                'buppa',
+            ])
+        );
+    }
+
+    public function testThatHasPropertiesCheckMorePropertiesExistance()
+    {
+        $foo = UserCreationEvent::box([
+            'type' => 'human',
+            'username' => 'Sensorario',
+        ]);
+
+        $this->assertSame(
+            true,
+            $foo->hasProperties([
+                'type',
+                'username',
+            ])
+        );
+    }
+
     public function testAllowAccessToProperties()
     {
         $foo = Bar::box([
