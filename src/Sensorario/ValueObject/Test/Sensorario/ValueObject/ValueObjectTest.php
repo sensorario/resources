@@ -128,7 +128,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     {
         return [
             [false, ['buppa']],
-            [true, ['type','username']],
+            [true, ['type', 'username']],
         ];
     }
 
