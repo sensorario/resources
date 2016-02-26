@@ -69,7 +69,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    public function testGetters()
+    public function testValueObjectHasMagicMethod()
     {
         $foo = Foo::box([
             'name'    => 'Simone',
