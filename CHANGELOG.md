@@ -1,3 +1,7 @@
+# Release 2.2.1
+
+ * getter throw an exception when property name is an empty string
+
 # Release 2.2.0
 
  * [closed #17] Improved 'when' syntax to set mandatory properties
