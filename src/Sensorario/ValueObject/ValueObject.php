@@ -108,6 +108,12 @@ abstract class ValueObject
 
     final public function get($propertyName)
     {
+        if ('' == $propertyName) {
+            throw new RuntimeException(
+                'Oops! Property name requested is empty string!!'
+            );
+        }
+
         if ($this->hasNotProperty($propertyName)) {
             if (isset($this->defaults()[$propertyName])) {
                 return $this->defaults()[$propertyName];

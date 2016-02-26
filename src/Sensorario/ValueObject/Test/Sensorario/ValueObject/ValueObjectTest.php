@@ -82,6 +82,23 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException        RuntimeException
+     * @expectedExceptionMessage Oops! Property name requested is empty string!!
+     */
+    public function testExceptionMessageInCaseOfEmptyPropertyName()
+    {
+        $foo = Foo::box([
+            'name'    => 'Simone',
+            'surname' => 'Gentili',
+        ]);
+
+        $this->assertEquals(
+            'Simone',
+            $foo->get('')
+        );
+    }
+
+    /**
      * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Invalid factory method#
      */
