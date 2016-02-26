@@ -69,7 +69,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    public function testValueObjectHasMagicMethod()
+    public function testGetters()
     {
         $foo = Foo::box([
             'name'    => 'Simone',
@@ -79,23 +79,6 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             'Simone',
             $foo->name()
-        );
-    }
-
-    /**
-     * @expectedException        RuntimeException
-     * @expectedExceptionMessage Oops! Property name requested is empty string!!
-     */
-    public function testExceptionMessageInCaseOfEmptyPropertyName()
-    {
-        $foo = Foo::box([
-            'name'    => 'Simone',
-            'surname' => 'Gentili',
-        ]);
-
-        $this->assertEquals(
-            'Simone',
-            $foo->get('')
         );
     }
 
