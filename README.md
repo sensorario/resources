@@ -1,5 +1,7 @@
 # Value Obejct
 
+[![Latest Stable Version](https://poser.pugx.org/sensorario/value-object/v/stable)](https://packagist.org/packages/sensorario/value-object) [![Total Downloads](https://poser.pugx.org/sensorario/value-object/downloads)](https://packagist.org/packages/sensorario/value-object) [![Latest Unstable Version](https://poser.pugx.org/sensorario/value-object/v/unstable)](https://packagist.org/packages/sensorario/value-object) [![License](https://poser.pugx.org/sensorario/value-object/license)](https://packagist.org/packages/sensorario/value-object)
+
 To create a new value object, extends Sensorario\ValueObject\ValueObject abstract class.
 
 ```php
