@@ -2,7 +2,7 @@
 
 [![Issue Count](https://codeclimate.com/github/sensorario/resources/badges/issue_count.svg)](https://codeclimate.com/github/sensorario/resources) [![Code Climate](https://codeclimate.com/github/sensorario/resources/badges/gpa.svg)](https://codeclimate.com/github/sensorario/resources) [![Latest Stable Version](https://poser.pugx.org/sensorario/resources/v/stable)](https://packagist.org/packages/sensorario/resources) [![Total Downloads](https://poser.pugx.org/sensorario/resources/downloads)](https://packagist.org/packages/sensorario/resources) [![Latest Unstable Version](https://poser.pugx.org/sensorario/resources/v/unstable)](https://packagist.org/packages/sensorario/resources) [![License](https://poser.pugx.org/sensorario/resources/license)](https://packagist.org/packages/sensorario/resources)
 
-To create a new value object, extends Sensorario\Resources\Resource abstract class.
+To create a new resource, extends Sensorario\Resources\Resource abstract class.
 
 ```php
 use Sensorario\Resources\Resource;
