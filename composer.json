@@ -1,5 +1,5 @@
 {
-    "name": "sensorario/value-object",
+    "name": "sensorario/resources",
     "minimum-stability": "dev",
     "description": "A tool for api resources management",
     "authors": [
