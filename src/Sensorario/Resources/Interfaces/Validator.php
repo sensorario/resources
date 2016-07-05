@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of sensorario/value-object repository
+ * This file is part of sensorario/resources repository
  *
  * (c) Simone Gentili <sensorario@gmail.com>
  *
@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Interfaces;
+namespace Sensorario\Resources\Interfaces;
 
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Resource;
 
 interface Validator
 {
-    public static function check(ValueObject $valueObject);
+    public static function check(Resource $resources);
 }

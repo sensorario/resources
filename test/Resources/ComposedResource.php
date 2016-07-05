@@ -9,29 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Test\Resources;
+namespace Resources;
 
 use DateTime;
 use PHPUnit_Framework_TestCase;
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Resource;
 
-final class BirthDay extends ValueObject
+final class ComposedResource extends Resource
 {
-    const DATE = 'date';
+    const CREDENTIALS = 'credentials';
 
-    public static function allowed()
+    public static function mandatory()
     {
         return [
-            BirthDay::DATE,
+            ComposedResource::CREDENTIALS,
         ];
     }
 
     public static function rules()
     {
         return [
-            BirthDay::DATE => [
-                'object' => 'DateTime',
+            ComposedResource::CREDENTIALS => [
+                'object' => '\Sensorario\Resources\Resource',
             ]
         ];
     }
 }
+

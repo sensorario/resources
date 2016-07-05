@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of sensorario/value-object repository
+ * This file is part of sensorario/resources repository
  *
  * (c) Simone Gentili <sensorario@gmail.com>
  *
@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject;
+namespace Sensorario\Resources;
 
 use RuntimeException;
 
-abstract class ValueObject
+abstract class Resource
 {
     private $properties = [];
 
@@ -43,12 +43,12 @@ abstract class ValueObject
         foreach ($properties as $k => $v) {
             if ('object' === gettype($v) && !isset($this->rules()[$k])) {
                 throw new RuntimeException(
-                    'When property `' . $k . '` is an object class, must be defined in ValueObject::rules()'
+                    'When property `' . $k . '` is an object class, must be defined in Resources::rules()'
                 );
             }
         }
 
-        Validators\ValueObjectValidator::validate($this);
+        Validators\ResourcesValidator::validate($this);
     }
 
     public static function __callStatic($methodName, array $args)
@@ -140,7 +140,7 @@ abstract class ValueObject
             throw new RuntimeException(
                 'No value nor method `'
                 . $propertyName
-                . '` found in this Value Object'
+                . '` found in this resource'
             );
         }
 
@@ -153,7 +153,7 @@ abstract class ValueObject
 
         foreach ($properties as $k => $v) {
             if ('object' === gettype($v)) {
-                if ($this->rules()[$k]['object'] === '\\Sensorario\\ValueObject\\ValueObject') {
+                if ($this->rules()[$k]['object'] === '\\Sensorario\\Resources\\Resource') {
                     $properties[$k] = $v->properties();
                 }
             }

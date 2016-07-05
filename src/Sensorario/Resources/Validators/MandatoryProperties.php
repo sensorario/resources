@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of sensorario/value-object repository
+ * This file is part of sensorario/resources repository
  *
  * (c) Simone Gentili <sensorario@gmail.com>
  *
@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Validators;
+namespace Sensorario\Resources\Validators;
 
 use RuntimeException;
-use Sensorario\ValueObject\Interfaces\Validator;
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Interfaces\Validator;
+use Sensorario\Resources\Resource;
 
 final class MandatoryProperties implements Validator
 {
-    public static function check(ValueObject $valueObject)
+    public static function check(Resource $resource)
     {
-        foreach ($valueObject->mandatory() as $key => $value) {
+        foreach ($resource->mandatory() as $key => $value) {
             if (isset($value['when'])) {
                 $propertyName = $value['when']['property'];
 
@@ -27,7 +27,7 @@ final class MandatoryProperties implements Validator
                     $propertyValue = $value['when']['has_value'];
 
                     foreach ($propertyValue as $value) {
-                        if ($valueObject->get($propertyName) === $value && $valueObject->hasNotProperty($key)) {
+                        if ($resource->get($propertyName) === $value && $resource->hasNotProperty($key)) {
                             throw new RuntimeException(
                                 'When property `' . $key . '` has value '
                                 . '`' . $value . '` also `' . $key . '` is mandatory'
@@ -39,11 +39,11 @@ final class MandatoryProperties implements Validator
                 if (
                     isset($value['when']['condition']) &&
                     $value['when']['condition'] === 'is_present' &&
-                    $valueObject->hasProperty($propertyName) &&
-                    $valueObject->hasNotProperty($key)
+                    $resource->hasProperty($propertyName) &&
+                    $resource->hasNotProperty($key)
                 ) {
                     throw new RuntimeException(
-                        "Property `" . get_class($valueObject)
+                        "Property `" . get_class($resource)
                         . "::\${$key}` is mandatory but not set"
                     );
                 }
@@ -51,11 +51,11 @@ final class MandatoryProperties implements Validator
 
             if (
                 is_numeric($key) &&
-                $valueObject->hasNotProperty($value) &&
-                !isset($valueObject->defaults()[$value])
+                $resource->hasNotProperty($value) &&
+                !isset($resource->defaults()[$value])
             ) {
                 throw new RuntimeException(
-                    "Property `" . get_class($valueObject)
+                    "Property `" . get_class($resource)
                     . "::\$$value` is mandatory but not set"
                 );
             }

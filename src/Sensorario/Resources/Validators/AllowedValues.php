@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of sensorario/value-object repository
+ * This file is part of sensorario/resources repository
  *
  * (c) Simone Gentili <sensorario@gmail.com>
  *
@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Validators;
+namespace Sensorario\Resources\Validators;
 
 use RuntimeException;
-use Sensorario\ValueObject\Interfaces\Validator;
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Interfaces\Validator;
+use Sensorario\Resources\Resource;
 
 final class AllowedValues implements Validator
 {
-    public static function check(ValueObject $valueObject)
+    public static function check(Resource $resource)
     {
-        foreach ($valueObject->properties() as $key => $value) {
-            if (isset($valueObject->allowedValues()[$key])) {
-                $allowedValues = $valueObject->allowedValues()[$key];
+        foreach ($resource->properties() as $key => $value) {
+            if (isset($resource->allowedValues()[$key])) {
+                $allowedValues = $resource->allowedValues()[$key];
                 if (!in_array($value, $allowedValues)) {
-                    /** @todo cover this message */
                     throw new RuntimeException(
                         'Value `' . $value . '` is not allowed '
                         . 'for key `' . $key . '`. '

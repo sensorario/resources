@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of sensorario/value-object repository
+ * This file is part of sensorario/resources repository
  *
  * (c) Simone Gentili <sensorario@gmail.com>
  *
@@ -9,20 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Helpers;
+namespace Sensorario\Resources\Helpers;
 
-use Sensorario\ValueObject\Interfaces\Helper;
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Interfaces\Helper;
+use Sensorario\Resources\Resource;
 
 final class PropertyTypeExtractor implements Helper
 {
-    private $valueObject;
+    private $resource;
 
     private $propertyName;
 
-    public function __construct(ValueObject $valueObject)
+    public function __construct(Resource $resource)
     {
-        $this->valueObject = $valueObject;
+        $this->resource = $resource;
     }
 
     public function setPropertyName($propertyName)
@@ -32,7 +32,7 @@ final class PropertyTypeExtractor implements Helper
 
     public function execute()
     {
-        $property = $this->valueObject->get($this->propertyName);
+        $property = $this->resource->get($this->propertyName);
 
         return is_object($property)
             ? get_class($property)

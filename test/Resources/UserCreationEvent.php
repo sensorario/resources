@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Resources;
+namespace Resources;
 
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Resource;
 
-final class UserCreationEvent extends ValueObject
+final class UserCreationEvent extends Resource
 {
     const TYPE     = 'type';
     const USERNAME = 'username';

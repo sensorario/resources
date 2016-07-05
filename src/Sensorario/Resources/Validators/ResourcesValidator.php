@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of sensorario/value-object repository
+ * This file is part of sensorario/resources repository
  *
  * (c) Simone Gentili <sensorario@gmail.com>
  *
@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Validators;
+namespace Sensorario\Resources\Validators;
 
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Resource;
 
-final class ValueObjectValidator
+final class ResourcesValidator
 {
-    public static function validate(ValueObject $valueObject)
+    public static function validate(Resource $resource)
     {
         $validators = [
             'RightType',
@@ -25,8 +25,8 @@ final class ValueObjectValidator
         ];
 
         foreach ($validators as $name) {
-            $validator = 'Sensorario\\ValueObject\\Validators\\' . $name;
-            $validator::check($valueObject);
+            $validator = 'Sensorario\\Resources\\Validators\\' . $name;
+            $validator::check($resource);
         }
     }
 }

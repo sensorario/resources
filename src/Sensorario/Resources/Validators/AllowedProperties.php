@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of sensorario/value-object repository
+ * This file is part of sensorario/resources repository
  *
  * (c) Simone Gentili <sensorario@gmail.com>
  *
@@ -9,33 +9,33 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Validators;
+namespace Sensorario\Resources\Validators;
 
 use RuntimeException;
-use Sensorario\ValueObject\Interfaces\Validator;
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Interfaces\Validator;
+use Sensorario\Resources\Resource;
 
 final class AllowedProperties implements Validator
 {
-    public static function check(ValueObject $valueObject)
+    public static function check(Resource $resource)
     {
         $allowed = array_merge(
-            $valueObject->allowed(),
-            $valueObject->mandatory()
+            $resource->allowed(),
+            $resource->mandatory()
         );
 
-        foreach ($valueObject->properties() as $key => $property) {
+        foreach ($resource->properties() as $key => $property) {
             if (!in_array($key, $allowed)) {
                 $isAllowedByDependency = false;
                 foreach ($allowed as $kk => $vv) {
-                    if (!is_numeric($kk) && $valueObject->hasProperty($vv['when']['property'])) {
+                    if (!is_numeric($kk) && $resource->hasProperty($vv['when']['property'])) {
                         $isAllowedByDependency = true;
                     }
                 }
 
                 if (!$isAllowedByDependency) {
                     throw new RuntimeException(
-                        "Key `" . get_class($valueObject)
+                        "Key `" . get_class($resource)
                         . "::\$$key` is not allowed"
                     );
                 }

@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Test\Resources;
+namespace Resources;
 
 use DateTime;
 use PHPUnit_Framework_TestCase;
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Resource;
 
-final class Foo extends ValueObject
+final class Foo extends Resource
 {
     const NAME    = 'name';
     const SURNAME = 'surname';

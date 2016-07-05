@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of sensorario/value-object repository
+ * This file is part of sensorario/resources repository
  *
  * (c) Simone Gentili <sensorario@gmail.com>
  *
@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Validators;
+namespace Sensorario\Resources\Validators;
 
 use RuntimeException;
-use Sensorario\ValueObject\Interfaces\Validator;
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Interfaces\Validator;
+use Sensorario\Resources\Resource;
 
 final class RightType implements Validator
 {
-    public static function check(ValueObject $valueObject)
+    public static function check(Resource $resource)
     {
-        foreach ($valueObject->properties() as $key => $value) {
-            if (isset($valueObject->rules()[$key])) {
-                $rule = $valueObject->rules()[$key];
+        foreach ($resource->properties() as $key => $value) {
+            if (isset($resource->rules()[$key])) {
+                $rule = $resource->rules()[$key];
 
-                if (gettype($valueObject->get($key)) !== key($rule)) {
+                if (gettype($resource->get($key)) !== key($rule)) {
                     $expectedType = isset($rule['object'])
                         ? $rule['object']
                         : 'undefined';
@@ -37,8 +37,8 @@ final class RightType implements Validator
                 }
                 
                 if (
-                    !($valueObject->get($key) instanceof \Sensorario\ValueObject\ValueObject) &&
-                    get_class($valueObject->get($key)) != current($rule)
+                    !($resource->get($key) instanceof \Sensorario\Resources\Resource) &&
+                    get_class($resource->get($key)) != current($rule)
                 ) {
                     throw new RuntimeException(
                         'Attribute `' . $key

@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Test\ValueObject;
+namespace Sensorario\Resources\Test\Resources;
 
 use DateInterval;
 use DateTime;
 use PHPUnit_Framework_TestCase;
-use Sensorario\ValueObject\Resources\MandatoryDependency;
-use Sensorario\ValueObject\Resources\SomeApiRequest;
-use Sensorario\ValueObject\Resources\UserCreationEvent;
-use Sensorario\ValueObject\Resources\ValueObjectWithoutRules;
-use Sensorario\ValueObject\Test\Resources\Bar;
-use Sensorario\ValueObject\Test\Resources\BirthDay;
-use Sensorario\ValueObject\Test\Resources\ComposedValueObject;
-use Sensorario\ValueObject\Test\Resources\Foo;
+use Resources\MandatoryDependency;
+use Resources\SomeApiRequest;
+use Resources\UserCreationEvent;
+use Resources\ResourceWithoutRules;
+use Resources\Bar;
+use Resources\BirthDay;
+use Resources\ComposedResource;
+use Resources\Foo;
 
-final class ValueObjectTest extends PHPUnit_Framework_TestCase
+final class ResourceTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException              RuntimeException
@@ -69,7 +69,7 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    public function testValueObjectHasMagicMethod()
+    public function testResourcesHasMagicMethod()
     {
         $foo = Foo::box([
             'name'    => 'Simone',
@@ -256,9 +256,9 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    public function testValueObjectComposition()
+    public function testResourcesComposition()
     {
-        $composition = ComposedValueObject::box([
+        $composition = ComposedResource::box([
             'credentials' => Foo::box([
                 'name' => 'Sam'
             ]),
@@ -294,11 +294,11 @@ final class ValueObjectTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException              RuntimeException
-     * @expectedExceptionMessageRegExp #When property `.*` is an object class, must be defined in ValueObject::rules()#
+     * @expectedExceptionMessageRegExp #When property `.*` is an object class, must be defined in Resources::rules()#
      */
     public function testAnExceptionIsThrownIfAPropertyIsAnObjectButClassInNotDefinedInRuleMethod()
     {
-        ValueObjectWithoutRules::box([
+        ResourceWithoutRules::box([
             'datetime' => new DateTime(),
         ]);
     }

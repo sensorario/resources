@@ -1,3 +1,7 @@
+# Release 4.0.0
+
+ * sensorario/value-object is now sensorario/resources
+
 # Release 3.0.0
 
  * [closed #39] - added hasProperties method

@@ -1,7 +1,7 @@
 {
     "name": "sensorario/value-object",
     "minimum-stability": "dev",
-    "description": "A Value Object Implementation in PHP?",
+    "description": "A tool for api resources management",
     "authors": [
         {
             "name": "Simone Gentili",
@@ -13,7 +13,8 @@
     "license": "MIT",
     "autoload": {
         "classmap": [
-            "src/"
+            "src/",
+            "test/"
         ]
     },
     "require-dev": {
@@ -21,7 +22,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.1-dev"
+            "dev-master": "4.0-dev"
         }
     }
 }

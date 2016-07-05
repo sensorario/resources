@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Resources;
+namespace Resources;
 
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Resource;
 
-final class MandatoryDependency extends ValueObject
+final class MandatoryDependency extends Resource
 {
     const FOO             = 'foo';
     const MELLO           = 'mello';

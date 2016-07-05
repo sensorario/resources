@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Test\Resources;
+namespace Resources;
 
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Resource;
 
-final class Bar extends ValueObject
+final class Bar extends Resource
 {
     const NAME = 'name';
 

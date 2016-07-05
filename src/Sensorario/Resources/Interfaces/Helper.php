@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of sensorario/value-object repository
+ * This file is part of sensorario/resources epository
  *
  * (c) Simone Gentili <sensorario@gmail.com>
  *
@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\ValueObject\Interfaces;
+namespace Sensorario\Resources\Interfaces;
 
-use Sensorario\ValueObject\ValueObject;
+use Sensorario\Resources\Resource;
 
 interface Helper
 {
-    public function __construct(ValueObject $valueObject);
+    public function __construct(Resource $resource);
 
     public function execute();
 }
