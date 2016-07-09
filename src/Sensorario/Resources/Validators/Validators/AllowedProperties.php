@@ -26,14 +26,15 @@ final class AllowedProperties implements Validator
 
         foreach ($resource->properties() as $key => $property) {
             if (!in_array($key, $allowed)) {
-                $isAllowedByDependency = false;
+                $isAllowed = false;
+
                 foreach ($allowed as $kk => $vv) {
                     if (!is_numeric($kk) && $resource->hasProperty($vv['when']['property'])) {
-                        $isAllowedByDependency = true;
+                        $isAllowed = true;
                     }
                 }
 
-                if (!$isAllowedByDependency) {
+                if (!$isAllowed) {
                     throw new RuntimeException(
                         "Key `" . get_class($resource)
                         . "::\$$key` is not allowed"
