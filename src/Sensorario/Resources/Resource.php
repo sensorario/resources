@@ -48,6 +48,14 @@ abstract class Resource
             }
         }
 
+        foreach ($properties as $name => $value) {
+            if ('object' !== gettype($value)) {
+                $properties[$name] = utf8_encode(
+                    $value
+                );
+            }
+        }
+
         Validators\ResourcesValidator::validate($this);
     }
 
