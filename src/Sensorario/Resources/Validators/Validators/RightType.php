@@ -32,7 +32,7 @@ final class RightType implements Validator
                         'Attribute `' . $key
                         . '` must be of type `'
                         . (key($rule) == 'scalar' ? current($rule) : $expectedType)
-                        . '`'
+                        . '` with value `' . $value . '`'
                     );
                 }
                 
