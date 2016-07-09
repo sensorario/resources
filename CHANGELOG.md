@@ -1,6 +1,7 @@
 # Release 4.0.0
 
  * sensorario/value-object is now sensorario/resources
+ * forced properties to utf-8 encoding
  * removed code complexity
 
 # Release 3.0.0
