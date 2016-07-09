@@ -12,6 +12,7 @@
 namespace Sensorario\Resources;
 
 use RuntimeException;
+use Sensorario\Resources\Validators\ResourcesValidator;
 
 abstract class Resource
 {
@@ -36,8 +37,10 @@ abstract class Resource
         );
     }
 
-    protected function __construct(array $properties)
-    {
+    protected function __construct(
+        array $properties,
+        ResourcesValidator $validator
+    ) {
         $this->properties = $properties;
 
         foreach ($properties as $k => $v) {
@@ -56,7 +59,7 @@ abstract class Resource
             }
         }
 
-        Validators\ResourcesValidator::validate($this);
+        $validator->validate($this);
     }
 
     public static function __callStatic($methodName, array $args)
@@ -75,7 +78,8 @@ abstract class Resource
             return new static(
                 isset($args[0])
                 ? $args[0]
-                : []
+                : [],
+                new ResourcesValidator()
             );
         }
 
