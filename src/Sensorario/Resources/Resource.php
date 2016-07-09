@@ -66,12 +66,12 @@ abstract class Resource
             'allowedValues'
         ];
 
-        $isMethodNameWhiteListed = in_array(
+        $isMethodAllowed = in_array(
             $methodName,
             $methodWhiteList
         );
 
-        if ($isMethodNameWhiteListed) {
+        if ($isMethodAllowed) {
             return new static(
                 isset($args[0])
                 ? $args[0]
