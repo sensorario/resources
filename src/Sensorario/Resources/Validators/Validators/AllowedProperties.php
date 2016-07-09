@@ -24,7 +24,7 @@ final class AllowedProperties implements Validator
             $resource->mandatory()
         );
 
-        foreach ($resource->properties() as $key => $property) {
+        foreach ($resource->properties() as $key => $value) {
             if (!in_array($key, $allowed)) {
                 $isAllowed = false;
 
@@ -37,7 +37,8 @@ final class AllowedProperties implements Validator
                 if (!$isAllowed) {
                     throw new RuntimeException(
                         "Key `" . get_class($resource)
-                        . "::\$$key` is not allowed"
+                        . "::\$$key` with value `" .  $value
+                        . "` is not allowed"
                     );
                 }
             }
