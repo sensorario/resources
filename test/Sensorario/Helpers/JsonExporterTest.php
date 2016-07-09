@@ -16,6 +16,7 @@ use PHPUnit_Framework_TestCase;
 use Resources\BirthDay;
 use Sensorario\Resources\Helpers\JsonExporter;
 use Sensorario\Resources\Resources\Resource;
+use Sensorario\Resources\Validators\ResourcesValidator;
 
 final class JsonExporterTest extends PHPUnit_Framework_TestCase
 {
@@ -28,7 +29,10 @@ final class JsonExporterTest extends PHPUnit_Framework_TestCase
         $expectedJsonFormat = json_encode($params);
 
         $jsonResult = new JsonExporter(
-            BirthDay::box($params)
+            BirthDay::box(
+                $params,
+                new ResourcesValidator()
+            )
         );
 
         $this->assertEquals(

@@ -15,7 +15,7 @@ use Sensorario\Resources\Resource;
 
 final class ResourcesValidator
 {
-    public static function validate(Resource $resource)
+    public function validate(Resource $resource)
     {
         $validators = [
             'RightType',
