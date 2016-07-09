@@ -20,33 +20,30 @@ final class MandatoryProperties implements Validator
     public static function check(Resource $resource)
     {
         foreach ($resource->mandatory() as $key => $value) {
-            if (isset($value['when'])) {
+            if (isset($value['when']['has_value'])) {
                 $propertyName = $value['when']['property'];
+                $propertyValue = $value['when']['has_value'];
 
-                if (isset($value['when']['has_value'])) {
-                    $propertyValue = $value['when']['has_value'];
-
-                    foreach ($propertyValue as $value) {
-                        if ($resource->get($propertyName) === $value && $resource->hasNotProperty($key)) {
-                            throw new RuntimeException(
-                                'When property `' . $key . '` has value '
-                                . '`' . $value . '` also `' . $key . '` is mandatory'
-                            );
-                        }
+                foreach ($propertyValue as $value) {
+                    if ($resource->get($propertyName) === $value && $resource->hasNotProperty($key)) {
+                        throw new RuntimeException(
+                            'When property `' . $key . '` has value '
+                            . '`' . $value . '` also `' . $key . '` is mandatory'
+                        );
                     }
                 }
+            }
 
-                if (
-                    isset($value['when']['condition']) &&
-                    $value['when']['condition'] === 'is_present' &&
-                    $resource->hasProperty($propertyName) &&
-                    $resource->hasNotProperty($key)
-                ) {
-                    throw new RuntimeException(
-                        "Property `" . get_class($resource)
-                        . "::\${$key}` is mandatory but not set"
-                    );
-                }
+            if (
+                isset($value['when']['condition']) &&
+                $value['when']['condition'] === 'is_present' &&
+                $resource->hasProperty($value['when']['property']) &&
+                $resource->hasNotProperty($key)
+            ) {
+                throw new RuntimeException(
+                    "Property `" . get_class($resource)
+                    . "::\${$key}` is mandatory but not set"
+                );
             }
 
             if (
