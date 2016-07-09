@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\Resources\Validators;
+namespace Sensorario\Resources\Validators\Validators;
 
 use RuntimeException;
-use Sensorario\Resources\Interfaces\Validator;
 use Sensorario\Resources\Resource;
+use Sensorario\Resources\Validators\Interfaces\Validator;
 
 final class AllowedProperties implements Validator
 {

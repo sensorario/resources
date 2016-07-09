@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\Resources\Interfaces;
+namespace Sensorario\Resources\Validators\Interfaces;
 
 use Sensorario\Resources\Resource;
 
