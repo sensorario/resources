@@ -48,10 +48,10 @@ abstract class Resource
             }
         }
 
-        foreach ($properties as $propertyName => $property) {
-            if ('object' !== gettype($property)) {
-                $properties[$propertyName] = utf8_encode(
-                    $property
+        foreach ($properties as $name => $value) {
+            if ('object' !== gettype($value)) {
+                $properties[$name] = utf8_encode(
+                    $value
                 );
             }
         }
