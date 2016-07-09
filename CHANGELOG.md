@@ -1,6 +1,7 @@
 # Release 4.0.0
 
  * sensorario/value-object is now sensorario/resources
+ * removed code complexity
 
 # Release 3.0.0
 
