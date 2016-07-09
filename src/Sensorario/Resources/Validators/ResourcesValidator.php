@@ -25,7 +25,12 @@ final class ResourcesValidator
         ];
 
         foreach ($validators as $name) {
-            $validator = 'Sensorario\\Resources\\Validators\\' . $name;
+            $validator = 'Sensorario'
+                .'\\Resources'
+                .'\\Validators'
+                .'\\Validators'
+                .'\\' . $name
+            ;
             $validator::check($resource);
         }
     }
