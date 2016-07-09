@@ -15,7 +15,7 @@ use RuntimeException;
 use Sensorario\Resources\Resource;
 use Sensorario\Resources\Validators\Interfaces\Validator;
 
-final class MandatoryProperties implements Validator
+final class MandatoryConditional implements Validator
 {
     public static function check(Resource $resource)
     {
@@ -32,29 +32,6 @@ final class MandatoryProperties implements Validator
                         );
                     }
                 }
-            }
-
-            if (
-                isset($value['when']['condition']) &&
-                $value['when']['condition'] === 'is_present' &&
-                $resource->hasProperty($value['when']['property']) &&
-                $resource->hasNotProperty($key)
-            ) {
-                throw new RuntimeException(
-                    "Property `" . get_class($resource)
-                    . "::\${$key}` is mandatory but not set"
-                );
-            }
-
-            if (
-                is_numeric($key) &&
-                $resource->hasNotProperty($value) &&
-                !isset($resource->defaults()[$value])
-            ) {
-                throw new RuntimeException(
-                    "Property `" . get_class($resource)
-                    . "::\$$value` is mandatory but not set"
-                );
             }
         }
     }

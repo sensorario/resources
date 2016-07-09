@@ -19,7 +19,9 @@ final class ResourcesValidator
     {
         $validators = [
             'RightType',
-            'MandatoryProperties',
+            'MandatoryConditional',
+            'MandatoryProperty',
+            'MandatoryWithoutDefault',
             'AllowedProperties',
             'AllowedValues',
         ];
