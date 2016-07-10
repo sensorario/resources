@@ -133,3 +133,21 @@ array(
     )
 );
 ```
+
+## Define resources via array
+
+```php
+new ArrayResources([
+  'resources' => [
+    'resource_name' => [
+      'mandatory' => [],
+      'allowed' => [],
+      'allowedValues' => [],
+      'defaults' => [],
+      'rules' => [],
+    ],
+    …
+  ],
+  …
+]);
+```

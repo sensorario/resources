@@ -70,4 +70,50 @@ final class ArrayResourcesTest
             ],
         ]);
     }
+
+    /**
+     * @expectedException              \RuntimeException
+     * @expectedExceptionMessageRegExp /Not allowed `foo` constraint/
+     */
+    public function testCannotCreateResourceWithoutAllowedConstraints()
+    {
+        $resources = new ArrayResources([
+            'resources' => [
+                'foo' => [
+                    'constraints' => [
+                    ],
+                ],
+            ],
+        ]);
+
+        $resources->create(
+            'foo', [
+                'foo' => 'bar',
+            ]
+        );
+    }
+
+    /**
+     * @expectedException              \RuntimeException
+     * @expectedExceptionMessageRegExp /Not allowed `foo` constraint/
+     */
+    public function test()
+    {
+        $resources = new ArrayResources([
+            'resources' => [
+                'foo' => [
+                    'constraints' => [
+                        'allowed' => [
+                        ]
+                    ],
+                ],
+            ],
+        ]);
+
+        $resources->create(
+            'foo', [
+                'foo' => 'bar',
+            ]
+        );
+    }
 }

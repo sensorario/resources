@@ -302,4 +302,6 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
             'datetime' => new DateTime(),
         ]);
     }
+
+    /** @todo build resource via ArrayResources configurator bla bla */
 }

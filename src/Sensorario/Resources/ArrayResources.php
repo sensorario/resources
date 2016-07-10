@@ -19,7 +19,11 @@ final class ArrayResources
         foreach ($resources['resources'] as $item) {
             if (isset($item['constraints'])) {
                 foreach ($item['constraints'] as $name => $value) {
-                    if (!in_array($name, [])) {
+                    $allowed = [
+                        'allowed',
+                    ];
+
+                    if (!in_array($name, $allowed)) {
                         throw new RuntimeException(
                             'Invalid constraint'
                         );
@@ -36,5 +40,22 @@ final class ArrayResources
         return count(
             $this->resources['resources']
         );
+    }
+
+    public function create($resource, array $constraints)
+    {
+        foreach ($constraints as $name => $value) {
+            if (!isset($this->resources['resources'][$resource]['constraints']['allowed'])) {
+                throw new RuntimeException(
+                    'Not allowed `' . $name . '` constraint'
+                );
+            }
+
+            if (!in_array($name, $this->resources['resources'][$resource]['constraints']['allowed'])) {
+                throw new RuntimeException(
+                    'Not allowed `' . $name . '` constraint'
+                );
+            }
+        }
     }
 }

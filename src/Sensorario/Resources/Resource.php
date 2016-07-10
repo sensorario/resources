@@ -15,6 +15,7 @@ use RuntimeException;
 
 abstract class Resource
     extends MagicResource
+    implements Interfaces\ResourceInterface
 {
     public static function mandatory()
     {
