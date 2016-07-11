@@ -41,7 +41,7 @@ class Resource
 
     public function applyConfiguration(
         $resourceName,
-        ArrayResources $config
+        Container $config
     ) {
         static::$allowed = $config->allowed($resourceName);
     }

@@ -12,9 +12,9 @@
 namespace Sensorario\Resources\Test\Resources;
 
 use PHPUnit_Framework_TestCase;
-use Sensorario\Resources\ArrayResources;
+use Sensorario\Resources\Container;
 
-final class ArrayResourcesTest
+final class ContainerTest
     extends PHPUnit_Framework_TestCase
 {
     /**
@@ -22,12 +22,12 @@ final class ArrayResourcesTest
      */
     public function testConfigurationCannotBeEmpty()
     {
-        $resources = new ArrayResources([]);
+        $resources = new Container([]);
     }
 
     public function testNeedsResourcesAsRootElement()
     {
-        $resources = new ArrayResources([
+        $resources = new Container([
             'resources' => [],
         ]);
 
@@ -39,7 +39,7 @@ final class ArrayResourcesTest
 
     public function testResourcesAreResourcesChild()
     {
-        $resources = new ArrayResources([
+        $resources = new Container([
             'resources' => [
                 'foo' => [],
                 'bar' => [
@@ -60,7 +60,7 @@ final class ArrayResourcesTest
      */
     public function testResourceDefinesConstraints()
     {
-        $resources = new ArrayResources([
+        $resources = new Container([
             'resources' => [
                 'foo' => [
                     'constraints' => [
@@ -77,7 +77,7 @@ final class ArrayResourcesTest
      */
     public function testCannotCreateResourceWithoutAllowedConstraints()
     {
-        $resources = new ArrayResources([
+        $resources = new Container([
             'resources' => [
                 'foo' => [
                     'constraints' => [
@@ -99,7 +99,7 @@ final class ArrayResourcesTest
      */
     public function test()
     {
-        $resources = new ArrayResources([
+        $resources = new Container([
             'resources' => [
                 'foo' => [
                     'constraints' => [
@@ -118,7 +118,7 @@ final class ArrayResourcesTest
     }
     public function testCon()
     {
-        $resources = new ArrayResources([
+        $resources = new Container([
             'resources' => [
                 'foo' => [
                     'constraints' => [

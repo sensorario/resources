@@ -4,7 +4,7 @@ namespace Sensorario\Resources;
 
 use \RuntimeException;
 
-class ArrayResources
+class Container
 {
     private $resources;
 

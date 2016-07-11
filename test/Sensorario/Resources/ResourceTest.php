@@ -22,7 +22,7 @@ use Resources\MandatoryDependency;
 use Resources\ResourceWithoutRules;
 use Resources\SomeApiRequest;
 use Resources\UserCreationEvent;
-use Sensorario\Resources\ArrayResources;
+use Sensorario\Resources\Container;
 
 final class ResourceTest extends PHPUnit_Framework_TestCase
 {
@@ -306,7 +306,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
     public function testAllowedFieldsCouldBeDefinedLazy()
     {
-        $this->getMockBuilder('\\Sensorario\\Resources\\ArrayResources')
+        $this->getMockBuilder('\\Sensorario\\Resources\\Container')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -322,11 +322,16 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
         $resource->applyConfiguration(
             'foo',
-            new ArrayResources([
+            new Container([
                 'resources' => [
                     'foo' => [
                         'constraints' => [
-                            'allowed' => [ 'foo' ],
+                            'allowed' => [ 'allowed_property_name' ],
+                        ]
+                    ],
+                    'unused_resource' => [
+                        'constraints' => [
+                            'allowed' => [ 'bar' ],
                         ]
                     ],
                 ],
@@ -334,7 +339,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            [ 'foo' ],
+            [ 'allowed_property_name' ],
             $resource->allowed('foo')
         );
     }
