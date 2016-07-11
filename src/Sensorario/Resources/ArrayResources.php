@@ -4,7 +4,7 @@ namespace Sensorario\Resources;
 
 use \RuntimeException;
 
-final class ArrayResources
+class ArrayResources
 {
     private $resources;
 
@@ -57,5 +57,10 @@ final class ArrayResources
                 );
             }
         }
+    }
+
+    public function allowed($resource)
+    {
+        return $this->resources['resources'][$resource]['constraints']['allowed'];
     }
 }

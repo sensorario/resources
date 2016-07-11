@@ -13,10 +13,12 @@ namespace Sensorario\Resources;
 
 use RuntimeException;
 
-abstract class Resource
+class Resource
     extends MagicResource
     implements Interfaces\ResourceInterface
 {
+    protected static $allowed = [];
+
     public static function mandatory()
     {
         return [];
@@ -24,7 +26,7 @@ abstract class Resource
 
     public static function allowed()
     {
-        return [];
+        return static::$allowed;
     }
 
     public static function allowedValues()
@@ -35,5 +37,12 @@ abstract class Resource
     public static function rules()
     {
         return [];
+    }
+
+    public function applyConfiguration(
+        $resourceName,
+        ArrayResources $config
+    ) {
+        static::$allowed = $config->allowed($resourceName);
     }
 }

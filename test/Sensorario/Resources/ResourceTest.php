@@ -14,14 +14,15 @@ namespace Sensorario\Resources\Test\Resources;
 use DateInterval;
 use DateTime;
 use PHPUnit_Framework_TestCase;
-use Resources\MandatoryDependency;
-use Resources\SomeApiRequest;
-use Resources\UserCreationEvent;
-use Resources\ResourceWithoutRules;
 use Resources\Bar;
 use Resources\BirthDay;
 use Resources\ComposedResource;
 use Resources\Foo;
+use Resources\MandatoryDependency;
+use Resources\ResourceWithoutRules;
+use Resources\SomeApiRequest;
+use Resources\UserCreationEvent;
+use Sensorario\Resources\ArrayResources;
 
 final class ResourceTest extends PHPUnit_Framework_TestCase
 {
@@ -303,5 +304,38 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    /** @todo build resource via ArrayResources configurator bla bla */
+    public function testAllowedFieldsCouldBeDefinedLazy()
+    {
+        $this->getMockBuilder('\\Sensorario\\Resources\\ArrayResources')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $resource = new \Sensorario\Resources\Resource(
+            [],
+            new \Sensorario\Resources\Validators\ResourcesValidator()
+        );
+
+        $this->assertEquals(
+            [],
+            $resource->allowed()
+        );
+
+        $resource->applyConfiguration(
+            'foo',
+            new ArrayResources([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [ 'foo' ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $this->assertEquals(
+            [ 'foo' ],
+            $resource->allowed('foo')
+        );
+    }
 }

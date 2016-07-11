@@ -116,4 +116,26 @@ final class ArrayResourcesTest
             ]
         );
     }
+    public function testCon()
+    {
+        $resources = new ArrayResources([
+            'resources' => [
+                'foo' => [
+                    'constraints' => [
+                        'allowed' => [
+                            'foo',
+                            'bar',
+                        ]
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertEquals( [
+                'foo',
+                'bar',
+            ],
+            $resources->allowed('foo')
+        );
+    }
 }

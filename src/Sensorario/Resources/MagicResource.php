@@ -37,7 +37,7 @@ abstract class MagicResource
         );
     }
 
-    protected function __construct(
+    public function __construct(
         array $properties,
         ResourcesValidator $validator
     ) {
@@ -51,6 +51,7 @@ abstract class MagicResource
             }
         }
 
+        /** @warning this convert utf8 in utf8 */
         foreach ($properties as $name => $value) {
             if ('object' !== gettype($value)) {
                 $properties[$name] = utf8_encode(
