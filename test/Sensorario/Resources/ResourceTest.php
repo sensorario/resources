@@ -375,4 +375,29 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
             $resource->allowed('foo')
         );
     }
+
+    public function testMandatoryConstraintsAreAutomaticallyAllowed()
+    {
+        $this->getMockBuilder('\\Sensorario\\Resources\\Container')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'mandatory' => [ 'allowed_property_name' ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $this->assertEquals(
+            [ 'allowed_property_name' ],
+            $resource->allowed('foo')
+        );
+    }
 }

@@ -8,6 +8,11 @@ class Container
 {
     private $resources;
 
+    private $allowed = [
+        'allowed',
+        'mandatory',
+    ];
+
     public function __construct(array $resources)
     {
         if (!isset($resources['resources'])) {
@@ -19,11 +24,7 @@ class Container
         foreach ($resources['resources'] as $item) {
             if (isset($item['constraints'])) {
                 foreach ($item['constraints'] as $name => $value) {
-                    $allowed = [
-                        'allowed',
-                    ];
-
-                    if (!in_array($name, $allowed)) {
+                    if (!in_array($name, $this->allowed)) {
                         throw new RuntimeException(
                             'Invalid constraint'
                         );
@@ -61,6 +62,17 @@ class Container
 
     public function allowed($resource)
     {
-        return $this->resources['resources'][$resource]['constraints']['allowed'];
+        $allowed = [];
+
+        foreach ($this->allowed as $item) {
+            if (isset($this->resources['resources'][$resource]['constraints'][$item])) {
+                $allowed = array_merge(
+                    $allowed,
+                    $this->resources['resources'][$resource]['constraints'][$item]
+                );
+            }
+        }
+
+        return $allowed;
     }
 }
