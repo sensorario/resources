@@ -137,14 +137,16 @@ array(
 ## Define resources via array
 
 ```php
-new ArrayResources([
+new Container([
   'resources' => [
     'resource_name' => [
-      'mandatory' => [],
-      'allowed' => [],
-      'allowedValues' => [],
-      'defaults' => [],
-      'rules' => [],
+      'constraints' => [
+        'mandatory' => [],
+        'allowed' => [],
+        'allowedValues' => [],
+        'defaults' => [],
+        'rules' => [],
+      ],
     ],
     …
   ],
