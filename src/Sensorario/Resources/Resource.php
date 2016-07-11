@@ -12,6 +12,7 @@
 namespace Sensorario\Resources;
 
 use RuntimeException;
+use Sensorario\Resources\Validators\ResourcesValidator;
 
 class Resource
     extends MagicResource
@@ -44,5 +45,22 @@ class Resource
         Container $config
     ) {
         static::$allowed = $config->allowed($resourceName);
+    }
+
+    public static function fromConfiguration(
+        $resourceName,
+        Container $container
+    ) {
+        $resource = new self(
+            [],
+            new ResourcesValidator()
+        );
+
+        $resource->applyConfiguration(
+            $resourceName,
+            $container
+        );
+
+        return $resource;
     }
 }

@@ -23,6 +23,8 @@ use Resources\ResourceWithoutRules;
 use Resources\SomeApiRequest;
 use Resources\UserCreationEvent;
 use Sensorario\Resources\Container;
+use Sensorario\Resources\Resource;
+use Sensorario\Resources\Validators\ResourcesValidator;
 
 final class ResourceTest extends PHPUnit_Framework_TestCase
 {
@@ -310,9 +312,9 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $resource = new \Sensorario\Resources\Resource(
+        $resource = new Resource(
             [],
-            new \Sensorario\Resources\Validators\ResourcesValidator()
+            new ResourcesValidator()
         );
 
         $this->assertEquals(
@@ -321,6 +323,36 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         );
 
         $resource->applyConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [ 'allowed_property_name' ],
+                        ]
+                    ],
+                    'unused_resource' => [
+                        'constraints' => [
+                            'allowed' => [ 'bar' ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $this->assertEquals(
+            [ 'allowed_property_name' ],
+            $resource->allowed('foo')
+        );
+    }
+
+    public function testResourceShouldBeCreatedViaContainer()
+    {
+        $this->getMockBuilder('\\Sensorario\\Resources\\Container')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $resource = Resource::fromConfiguration(
             'foo',
             new Container([
                 'resources' => [
