@@ -22,24 +22,24 @@ final class ContainerTest
      */
     public function testConfigurationCannotBeEmpty()
     {
-        $resources = new Container([]);
+        $container = new Container([]);
     }
 
     public function testNeedsResourcesAsRootElement()
     {
-        $resources = new Container([
+        $container = new Container([
             'resources' => [],
         ]);
 
         $this->assertSame(
             0,
-            $resources->countResources()
+            $container->countResources()
         );
     }
 
     public function testResourcesAreResourcesChild()
     {
-        $resources = new Container([
+        $container = new Container([
             'resources' => [
                 'foo' => [],
                 'bar' => [
@@ -50,7 +50,7 @@ final class ContainerTest
 
         $this->assertSame(
             2,
-            $resources->countResources()
+            $container->countResources()
         );
     }
 
@@ -60,7 +60,7 @@ final class ContainerTest
      */
     public function testResourceDefinesConstraints()
     {
-        $resources = new Container([
+        $container = new Container([
             'resources' => [
                 'foo' => [
                     'constraints' => [
@@ -77,7 +77,7 @@ final class ContainerTest
      */
     public function testCannotCreateResourceWithoutAllowedConstraints()
     {
-        $resources = new Container([
+        $container = new Container([
             'resources' => [
                 'foo' => [
                     'constraints' => [
@@ -86,7 +86,7 @@ final class ContainerTest
             ],
         ]);
 
-        $resources->create(
+        $container->create(
             'foo', [
                 'foo' => 'bar',
             ]
@@ -99,7 +99,7 @@ final class ContainerTest
      */
     public function test()
     {
-        $resources = new Container([
+        $container = new Container([
             'resources' => [
                 'foo' => [
                     'constraints' => [
@@ -110,15 +110,16 @@ final class ContainerTest
             ],
         ]);
 
-        $resources->create(
+        $container->create(
             'foo', [
                 'foo' => 'bar',
             ]
         );
     }
+
     public function testCon()
     {
-        $resources = new Container([
+        $container = new Container([
             'resources' => [
                 'foo' => [
                     'constraints' => [
@@ -135,7 +136,7 @@ final class ContainerTest
                 'foo',
                 'bar',
             ],
-            $resources->allowed('foo')
+            $container->allowed('foo')
         );
     }
 }
