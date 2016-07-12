@@ -400,4 +400,24 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
             $resource->allowed('foo')
         );
     }
+
+    public function testDependentMandatoryProperties()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testDefaultValues()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testPropertyType()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testAllowedValues()
+    {
+        $this->markTestIncomplete();
+    }
 }
