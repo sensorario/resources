@@ -3,6 +3,7 @@
  * sensorario/value-object is now sensorario/resources
  * forced properties to utf-8 encoding
  * removed code complexity
+ * introduced resources Container class configuration
 
 # Release 3.0.0
 

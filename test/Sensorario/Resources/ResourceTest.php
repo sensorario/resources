@@ -14,14 +14,17 @@ namespace Sensorario\Resources\Test\Resources;
 use DateInterval;
 use DateTime;
 use PHPUnit_Framework_TestCase;
-use Resources\MandatoryDependency;
-use Resources\SomeApiRequest;
-use Resources\UserCreationEvent;
-use Resources\ResourceWithoutRules;
 use Resources\Bar;
 use Resources\BirthDay;
 use Resources\ComposedResource;
 use Resources\Foo;
+use Resources\MandatoryDependency;
+use Resources\ResourceWithoutRules;
+use Resources\SomeApiRequest;
+use Resources\UserCreationEvent;
+use Sensorario\Resources\Container;
+use Sensorario\Resources\Resource;
+use Sensorario\Resources\Validators\ResourcesValidator;
 
 final class ResourceTest extends PHPUnit_Framework_TestCase
 {
@@ -300,6 +303,199 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     {
         ResourceWithoutRules::box([
             'datetime' => new DateTime(),
+        ]);
+    }
+
+    public function testDefaultValuesTwo()
+    {
+        $resource = new Resource(
+            [],
+            new ResourcesValidator()
+        );
+
+        $this->assertEquals(
+            [],
+            $resource->allowed()
+        );
+
+        $resource->applyConfiguration(
+            'bar',
+            new Container([
+                'resources' => [
+                    'bar' => [
+                        'constraints' => [
+                            'allowed' => [ 'allowed_property_name' ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $this->assertEquals(
+            [ 'allowed_property_name' ],
+            $resource->allowed('bar')
+        );
+    }
+
+    public function testDefaultValues()
+    {
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'ciambella',
+                            ],
+                            'defaults' => [
+                                'ciambella' => '42',
+                            ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $resource = $resource::box([
+        ]);
+
+        $this->assertEquals(
+            '42',
+            $resource->get('ciambella')
+        );
+    }
+
+    public function testResourceShouldBeCreatedViaContainer()
+    {
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [ 'allowed_property_name' ],
+                        ]
+                    ],
+                    'unused_resource' => [
+                        'constraints' => [
+                            'allowed' => [ 'bar' ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $this->assertEquals(
+            [ 'allowed_property_name' ],
+            $resource->allowed('foo')
+        );
+    }
+
+    /**
+     * @expectedException              RuntimeException
+     * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
+     */
+    public function testDependentMandatoryProperties()
+    {
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [
+                                'bar',
+                            ],
+                            'mandatory' => [
+                                'mandatory_property_name',
+                                'foo' => [
+                                    'when' => [
+                                        'property' => 'bar',
+                                        'condition' => 'is_present',
+                                    ]
+                                ],
+                            ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $resource::box([
+            'mandatory_property_name' => '42',
+            'bar' => 'beer',
+        ]);
+    }
+
+    public function testMandatoryConstraintsAreAutomaticallyAllowed()
+    {
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'mandatory' => [ 'mandatory_property' ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $this->assertEquals(
+            [ 'mandatory_property' ],
+            $resource->allowed('foo')
+        );
+    }
+
+    public function testPropertyType()
+    {
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'mandatory' => [ 'date' ],
+                            'rules' => [ 'date' => [ 'object' => 'DateTime' ] ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $resource::box([
+            'date' => new DateTime(),
+        ]);
+    }
+
+    /**
+     * @expectedException              RuntimeException
+     */
+    public function testAllowedValues()
+    {
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [ 'user_type' ],
+                            'allowedValues' => [
+                                'user_type' => [
+                                    4, 
+                                    7,
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ])
+        );
+
+        $resource::box([
+            'user_type' => 3
         ]);
     }
 }

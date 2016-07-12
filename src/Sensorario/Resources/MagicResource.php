@@ -37,9 +37,10 @@ abstract class MagicResource
         );
     }
 
-    protected function __construct(
+    public function __construct(
         array $properties,
-        ResourcesValidator $validator
+        ResourcesValidator $validator,
+        $validationRequired = true
     ) {
         $this->properties = $properties;
 
@@ -51,6 +52,7 @@ abstract class MagicResource
             }
         }
 
+        /** @warning this convert utf8 in utf8 */
         foreach ($properties as $name => $value) {
             if ('object' !== gettype($value)) {
                 $properties[$name] = utf8_encode(
@@ -59,7 +61,9 @@ abstract class MagicResource
             }
         }
 
-        $validator->validate($this);
+        if ($validationRequired) {
+            $validator->validate($this);
+        }
     }
 
     public static function __callStatic($methodName, array $args)
@@ -116,11 +120,6 @@ abstract class MagicResource
         }
 
         return $this->properties[$propertyName];
-    }
-
-    public static function defaults()
-    {
-        return [];
     }
 
     final public function hasNotProperty($propertyName)
