@@ -373,10 +373,6 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
     public function testResourceShouldBeCreatedViaContainer()
     {
-        $this->getMockBuilder('\\Sensorario\\Resources\\Container')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $resource = Resource::fromConfiguration(
             'foo',
             new Container([
@@ -403,10 +399,6 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
     public function testMandatoryConstraintsAreAutomaticallyAllowed()
     {
-        $this->getMockBuilder('\\Sensorario\\Resources\\Container')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $resource = Resource::fromConfiguration(
             'foo',
             new Container([
@@ -432,10 +424,6 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
      */
     public function testDependentMandatoryProperties()
     {
-        $this->getMockBuilder('\\Sensorario\\Resources\\Container')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $resource = Resource::fromConfiguration(
             'foo',
             new Container([
