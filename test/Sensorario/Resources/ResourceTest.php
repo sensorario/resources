@@ -470,8 +470,32 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
+    /**
+     * @expectedException              RuntimeException
+     */
     public function testAllowedValues()
     {
-        $this->markTestIncomplete();
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [ 'user_type' ],
+                            'allowedValues' => [
+                                'user_type' => [
+                                    4, 
+                                    7,
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ])
+        );
+
+        $resource::box([
+            'user_type' => 3
+        ]);
     }
 }

@@ -20,6 +20,8 @@ class Resource
 {
     protected static $allowed = [];
 
+    protected static $allowedValues = [];
+
     protected static $mandatory = [];
 
     protected static $defaults = [];
@@ -38,7 +40,7 @@ class Resource
 
     public static function allowedValues()
     {
-        return [];
+        return static::$allowedValues;
     }
 
     public static function rules()
@@ -55,10 +57,11 @@ class Resource
         $resourceName,
         Container $config
     ) {
-        static::$allowed   = $config->allowed($resourceName);
-        static::$mandatory = $config->mandatory($resourceName);
-        static::$defaults  = $config->defaults($resourceName);
-        static::$rules     = $config->rules($resourceName);
+        static::$allowed       = $config->allowed($resourceName);
+        static::$mandatory     = $config->mandatory($resourceName);
+        static::$defaults      = $config->defaults($resourceName);
+        static::$rules         = $config->rules($resourceName);
+        static::$allowedValues = $config->allowedValues($resourceName);
     }
 
     public static function fromConfiguration(
