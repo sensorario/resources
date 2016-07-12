@@ -60,11 +60,13 @@ class Resource
 
     public static function fromConfiguration(
         $resourceName,
-        Container $container
+        Container $container,
+        $validationRequired = true
     ) {
         $resource = new self(
             [],
-            new ResourcesValidator()
+            new ResourcesValidator(),
+            $validationRequired
         );
 
         $resource->applyConfiguration(

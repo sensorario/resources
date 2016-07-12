@@ -397,27 +397,6 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testMandatoryConstraintsAreAutomaticallyAllowed()
-    {
-        $resource = Resource::fromConfiguration(
-            'foo',
-            new Container([
-                'resources' => [
-                    'foo' => [
-                        'constraints' => [
-                            'mandatory' => [ 'allowed_property_name' ],
-                        ]
-                    ],
-                ],
-            ])
-        );
-
-        $this->assertEquals(
-            [ 'allowed_property_name' ],
-            $resource->allowed('foo')
-        );
-    }
-
     /**
      * @expectedException              RuntimeException
      * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
@@ -434,7 +413,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
                                 'bar',
                             ],
                             'mandatory' => [
-                                'allowed_property_name',
+                                'mandatory_property_name',
                                 'foo' => [
                                     'when' => [
                                         'property' => 'bar',
@@ -449,9 +428,31 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         );
 
         $resource::box([
-            'allowed_property_name' => '42',
+            'mandatory_property_name' => '42',
             'bar' => 'beer',
         ]);
+    }
+
+    public function testMandatoryConstraintsAreAutomaticallyAllowed()
+    {
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'mandatory' => [ 'mandatory_property' ],
+                        ]
+                    ],
+                ],
+                ]),
+            $validationRequired = false
+        );
+
+        $this->assertEquals(
+            [ 'mandatory_property' ],
+            $resource->allowed('foo')
+        );
     }
 
     public function testPropertyType()
