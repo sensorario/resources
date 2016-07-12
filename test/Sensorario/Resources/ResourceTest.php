@@ -306,12 +306,8 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    public function testAllowedFieldsCouldBeDefinedLazy()
+    public function testDefaultValuesTwo()
     {
-        $this->getMockBuilder('\\Sensorario\\Resources\\Container')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $resource = new Resource(
             [],
             new ResourcesValidator()
@@ -323,10 +319,10 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         );
 
         $resource->applyConfiguration(
-            'foo',
+            'bar',
             new Container([
                 'resources' => [
-                    'foo' => [
+                    'bar' => [
                         'constraints' => [
                             'allowed' => [ 'allowed_property_name' ],
                         ]
@@ -342,7 +338,36 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             [ 'allowed_property_name' ],
-            $resource->allowed('foo')
+            $resource->allowed('bar')
+        );
+    }
+
+    public function testDefaultValues()
+    {
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'ciambella',
+                            ],
+                            'defaults' => [
+                                'ciambella' => '42',
+                            ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $resource = $resource::box([
+        ]);
+
+        $this->assertEquals(
+            '42',
+            $resource->get('ciambella')
         );
     }
 
@@ -439,11 +464,6 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
             'allowed_property_name' => '42',
             'bar' => 'beer',
         ]);
-    }
-
-    public function testDefaultValues()
-    {
-        $this->markTestIncomplete();
     }
 
     public function testPropertyType()

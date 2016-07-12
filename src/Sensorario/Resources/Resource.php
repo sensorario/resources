@@ -22,6 +22,8 @@ class Resource
 
     protected static $mandatory = [];
 
+    protected static $defaults = [];
+
     public static function mandatory()
     {
         return static::$mandatory;
@@ -42,12 +44,18 @@ class Resource
         return [];
     }
 
+    public static function defaults()
+    {
+        return static::$defaults;
+    }
+
     public function applyConfiguration(
         $resourceName,
         Container $config
     ) {
-        static::$allowed = $config->allowed($resourceName);
+        static::$allowed   = $config->allowed($resourceName);
         static::$mandatory = $config->mandatory($resourceName);
+        static::$defaults  = $config->defaults($resourceName);
     }
 
     public static function fromConfiguration(
