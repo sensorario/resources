@@ -401,9 +401,44 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @expectedException              RuntimeException
+     * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
+     */
     public function testDependentMandatoryProperties()
     {
-        $this->markTestIncomplete();
+        $this->getMockBuilder('\\Sensorario\\Resources\\Container')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [
+                                'bar',
+                            ],
+                            'mandatory' => [
+                                'allowed_property_name',
+                                'foo' => [
+                                    'when' => [
+                                        'property' => 'bar',
+                                        'condition' => 'is_present',
+                                    ]
+                                ],
+                            ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $resource::box([
+            'allowed_property_name' => '42',
+            'bar' => 'beer',
+        ]);
     }
 
     public function testDefaultValues()

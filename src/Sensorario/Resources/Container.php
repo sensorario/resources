@@ -75,4 +75,13 @@ class Container
 
         return $allowed;
     }
+
+    public function mandatory($resource)
+    {
+        if (isset($this->resources['resources'][$resource]['constraints']['mandatory'])) {
+            return $this->resources['resources'][$resource]['constraints']['mandatory'];
+        }
+
+        return [];
+    }
 }

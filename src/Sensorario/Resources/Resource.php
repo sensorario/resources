@@ -20,9 +20,11 @@ class Resource
 {
     protected static $allowed = [];
 
+    protected static $mandatory = [];
+
     public static function mandatory()
     {
-        return [];
+        return static::$mandatory;
     }
 
     public static function allowed()
@@ -45,6 +47,7 @@ class Resource
         Container $config
     ) {
         static::$allowed = $config->allowed($resourceName);
+        static::$mandatory = $config->mandatory($resourceName);
     }
 
     public static function fromConfiguration(
