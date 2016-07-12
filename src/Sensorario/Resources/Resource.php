@@ -24,6 +24,8 @@ class Resource
 
     protected static $defaults = [];
 
+    protected static $rules = [];
+
     public static function mandatory()
     {
         return static::$mandatory;
@@ -41,7 +43,7 @@ class Resource
 
     public static function rules()
     {
-        return [];
+        return static::$rules;
     }
 
     public static function defaults()
@@ -56,17 +58,17 @@ class Resource
         static::$allowed   = $config->allowed($resourceName);
         static::$mandatory = $config->mandatory($resourceName);
         static::$defaults  = $config->defaults($resourceName);
+        static::$rules     = $config->rules($resourceName);
     }
 
     public static function fromConfiguration(
         $resourceName,
-        Container $container,
-        $validationRequired = true
+        Container $container
     ) {
         $resource = new self(
             [],
             new ResourcesValidator(),
-            $validationRequired
+            $validationRequired = false
         );
 
         $resource->applyConfiguration(

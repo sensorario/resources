@@ -122,11 +122,6 @@ abstract class MagicResource
         return $this->properties[$propertyName];
     }
 
-    public static function defaults()
-    {
-        return [];
-    }
-
     final public function hasNotProperty($propertyName)
     {
         return !$this->hasProperty($propertyName);

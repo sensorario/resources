@@ -327,11 +327,6 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
                             'allowed' => [ 'allowed_property_name' ],
                         ]
                     ],
-                    'unused_resource' => [
-                        'constraints' => [
-                            'allowed' => [ 'bar' ],
-                        ]
-                    ],
                 ],
             ])
         );
@@ -445,8 +440,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
                         ]
                     ],
                 ],
-                ]),
-            $validationRequired = false
+            ])
         );
 
         $this->assertEquals(
@@ -457,7 +451,23 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
     public function testPropertyType()
     {
-        $this->markTestIncomplete();
+        $resource = Resource::fromConfiguration(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'mandatory' => [ 'date' ],
+                            'rules' => [ 'date' => [ 'object' => 'DateTime' ] ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $resource::box([
+            'date' => new DateTime(),
+        ]);
     }
 
     public function testAllowedValues()

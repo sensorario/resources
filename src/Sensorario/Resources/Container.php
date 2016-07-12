@@ -10,8 +10,9 @@ class Container
 
     private $allowed = [
         'allowed',
-        'mandatory',
         'defaults',
+        'mandatory',
+        'rules',
     ];
 
     public function __construct(array $resources)
@@ -90,6 +91,15 @@ class Container
     {
         if (isset($this->resources['resources'][$resource]['constraints']['defaults'])) {
             return $this->resources['resources'][$resource]['constraints']['defaults'];
+        }
+
+        return [];
+    }
+
+    public function rules($resource)
+    {
+        if (isset($this->resources['resources'][$resource]['constraints']['rules'])) {
+            return $this->resources['resources'][$resource]['constraints']['rules'];
         }
 
         return [];

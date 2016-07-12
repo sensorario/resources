@@ -1,2 +1,2 @@
 #!/bin/bash
-php vendor/bin/phpunit --stop-on-failure
+php vendor/bin/phpunit -v --stop-on-failure
