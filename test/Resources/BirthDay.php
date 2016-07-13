@@ -19,14 +19,14 @@ final class BirthDay extends Resource
 {
     const DATE = 'date';
 
-    public static function allowed()
+    public function allowed()
     {
         return [
             BirthDay::DATE,
         ];
     }
 
-    public static function rules()
+    public function rules()
     {
         return [
             BirthDay::DATE => [

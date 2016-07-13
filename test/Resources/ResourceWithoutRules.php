@@ -17,7 +17,7 @@ final class ResourceWithoutRules extends Resource
 {
     const DATETIME = 'datetime';
 
-    public static function mandatory()
+    public function mandatory()
     {
         return [
             ResourceWithoutRules::DATETIME,

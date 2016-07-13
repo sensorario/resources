@@ -19,14 +19,14 @@ final class ComposedResource extends Resource
 {
     const CREDENTIALS = 'credentials';
 
-    public static function mandatory()
+    public function mandatory()
     {
         return [
             ComposedResource::CREDENTIALS,
         ];
     }
 
-    public static function rules()
+    public function rules()
     {
         return [
             ComposedResource::CREDENTIALS => [

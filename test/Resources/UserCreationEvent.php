@@ -18,7 +18,7 @@ final class UserCreationEvent extends Resource
     const TYPE     = 'type';
     const USERNAME = 'username';
 
-    public static function mandatory()
+    public function mandatory()
     {
         return [
             UserCreationEvent::TYPE,
@@ -34,7 +34,7 @@ final class UserCreationEvent extends Resource
         ];
     }
 
-    public static function allowedValues()
+    public function allowedValues()
     {
         return [
             UserCreationEvent::TYPE => [

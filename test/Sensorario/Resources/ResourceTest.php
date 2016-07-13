@@ -339,26 +339,26 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
     public function testDefaultValues()
     {
-        $resource = Resource::fromConfiguration(
-            'foo',
-            new Container([
-                'resources' => [
-                    'foo' => [
-                        'constraints' => [
-                            'mandatory' => [
-                                'ciambella',
-                            ],
-                            'defaults' => [
-                                'ciambella' => '42',
-                            ],
-                        ]
-                    ],
+        $container = new Container([
+            'resources' => [
+                'foo' => [
+                    'constraints' => [
+                        'mandatory' => [
+                            'ciambella',
+                        ],
+                        'defaults' => [
+                            'ciambella' => '42',
+                        ],
+                    ]
                 ],
-            ])
-        );
-
-        $resource = $resource::box([
+            ],
         ]);
+
+        $resource = Resource::box(
+            [],
+            $container,
+            'foo'
+        );
 
         $this->assertEquals(
             '42',
@@ -368,27 +368,24 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
     public function testResourceShouldBeCreatedViaContainer()
     {
-        $resource = Resource::fromConfiguration(
-            'foo',
-            new Container([
-                'resources' => [
-                    'foo' => [
-                        'constraints' => [
-                            'allowed' => [ 'allowed_property_name' ],
-                        ]
-                    ],
-                    'unused_resource' => [
-                        'constraints' => [
-                            'allowed' => [ 'bar' ],
-                        ]
-                    ],
+        $container = new Container([
+            'resources' => [
+                'foo' => [
+                    'constraints' => [
+                        'allowed' => [ 'allowed_property_name' ],
+                    ]
                 ],
-            ])
-        );
+                'unused_resource' => [
+                    'constraints' => [
+                        'allowed' => [ 'bar' ],
+                    ]
+                ],
+            ],
+        ]);
 
         $this->assertEquals(
             [ 'allowed_property_name' ],
-            $resource->allowed('foo')
+            $container->allowed('foo')
         );
     }
 
@@ -398,104 +395,104 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
      */
     public function testDependentMandatoryProperties()
     {
-        $resource = Resource::fromConfiguration(
-            'foo',
-            new Container([
-                'resources' => [
-                    'foo' => [
-                        'constraints' => [
-                            'allowed' => [
-                                'bar',
+        $container = new Container([
+            'resources' => [
+                'foo' => [
+                    'constraints' => [
+                        'allowed' => [
+                            'bar',
+                        ],
+                        'mandatory' => [
+                            'mandatory_property_name',
+                            'foo' => [
+                                'when' => [
+                                    'property' => 'bar',
+                                    'condition' => 'is_present',
+                                ]
                             ],
-                            'mandatory' => [
-                                'mandatory_property_name',
-                                'foo' => [
-                                    'when' => [
-                                        'property' => 'bar',
-                                        'condition' => 'is_present',
-                                    ]
-                                ],
-                            ],
-                        ]
-                    ],
+                        ],
+                    ]
                 ],
-            ])
-        );
+            ],
+        ]);
 
-        $resource::box([
+        $properties = [
             'mandatory_property_name' => '42',
             'bar' => 'beer',
-        ]);
+        ];
+
+        Resource::box(
+            $properties,
+            $container,
+            'foo'
+        );
     }
 
     public function testMandatoryConstraintsAreAutomaticallyAllowed()
     {
-        $resource = Resource::fromConfiguration(
-            'foo',
-            new Container([
-                'resources' => [
-                    'foo' => [
-                        'constraints' => [
-                            'mandatory' => [ 'mandatory_property' ],
-                        ]
-                    ],
+        $container = new Container([
+            'resources' => [
+                'foo' => [
+                    'constraints' => [
+                        'mandatory' => [ 'mandatory_property' ],
+                    ]
                 ],
-            ])
-        );
+            ],
+        ]);
 
         $this->assertEquals(
             [ 'mandatory_property' ],
-            $resource->allowed('foo')
+            $container->allowed('foo')
         );
     }
 
-    public function testPropertyType()
-    {
-        $resource = Resource::fromConfiguration(
-            'foo',
-            new Container([
-                'resources' => [
-                    'foo' => [
-                        'constraints' => [
-                            'mandatory' => [ 'date' ],
-                            'rules' => [ 'date' => [ 'object' => 'DateTime' ] ],
-                        ]
-                    ],
-                ],
-            ])
-        );
+   public function testPropertyType()
+   {
+       $container = new Container([
+           'resources' => [
+               'foo' => [
+                   'constraints' => [
+                       'mandatory' => [ 'date' ],
+                       'rules' => [ 'date' => [ 'object' => 'DateTime' ] ],
+                   ]
+               ],
+           ],
+       ]);
 
-        $resource::box([
-            'date' => new DateTime(),
-        ]);
-    }
+       $properties = [
+           'date' => new \DateTime(),
+       ];
 
-    /**
-     * @expectedException              RuntimeException
-     */
-    public function testAllowedValues()
-    {
-        $resource = Resource::fromConfiguration(
-            'foo',
-            new Container([
-                'resources' => [
-                    'foo' => [
-                        'constraints' => [
-                            'allowed' => [ 'user_type' ],
-                            'allowedValues' => [
-                                'user_type' => [
-                                    4, 
-                                    7,
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ])
-        );
+       Resource::box($properties, $container, 'foo');
+   }
 
-        $resource::box([
-            'user_type' => 3
-        ]);
-    }
+   /**
+    * @expectedException              RuntimeException
+    */
+   public function testAllowedValues()
+   {
+       $container = new Container([
+           'resources' => [
+               'foo' => [
+                   'constraints' => [
+                       'allowed' => [ 'user_type' ],
+                       'allowedValues' => [
+                           'user_type' => [
+                               4, 
+                               7,
+                           ],
+                       ],
+                   ],
+               ],
+           ],
+       ]);
+
+       $properties = [ 'user_type' => 3 ];
+
+       Resource::box(
+           $properties,
+           $container,
+           'foo'
+       );
+   }
 }

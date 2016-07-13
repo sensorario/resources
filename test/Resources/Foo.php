@@ -20,14 +20,14 @@ final class Foo extends Resource
     const NAME    = 'name';
     const SURNAME = 'surname';
 
-    public static function mandatory()
+    public function mandatory()
     {
         return [
             Foo::NAME,
         ];
     }
 
-    public static function allowed()
+    public function allowed()
     {
         return [
             Foo::NAME,

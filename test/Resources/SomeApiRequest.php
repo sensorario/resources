@@ -18,21 +18,21 @@ final class SomeApiRequest extends Resource
     const SOME_API_PARAMETER = 'someApiParameter';
     const FIELDS             = 'fields';
 
-    public static function mandatory()
+    public function mandatory()
     {
         return [
             SomeApiRequest::SOME_API_PARAMETER,
         ];
     }
 
-    public static function allowed()
+    public function allowed()
     {
         return [
             SomeApiRequest::FIELDS,
         ];
     }
 
-    public static function allowedValues()
+    public function allowedValues()
     {
         return [
             SomeApiRequest::SOME_API_PARAMETER => [
@@ -42,7 +42,7 @@ final class SomeApiRequest extends Resource
         ];
     }
 
-    public static function rules()
+    public function rules()
     {
         return [
             SomeApiRequest::FIELDS => [

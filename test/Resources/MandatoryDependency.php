@@ -19,7 +19,7 @@ final class MandatoryDependency extends Resource
     const MELLO           = 'mello';
     const MANDATORY_MELLO = 'mandatory_mello';
 
-    public static function mandatory()
+    public function mandatory()
     {
         return [
             MandatoryDependency::FOO,
@@ -32,7 +32,7 @@ final class MandatoryDependency extends Resource
         ];
     }
 
-    public static function allowed()
+    public function allowed()
     {
         return [
             MandatoryDependency::FOO,

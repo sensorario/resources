@@ -18,50 +18,50 @@ class Resource
     extends MagicResource
     implements Interfaces\ResourceInterface
 {
-    protected static $allowed = [];
+    protected $allowed = [];
 
-    protected static $allowedValues = [];
+    protected $allowedValues = [];
 
-    protected static $mandatory = [];
+    protected $mandatory = [];
 
-    protected static $defaults = [];
+    protected $defaults = [];
 
-    protected static $rules = [];
+    protected $rules = [];
 
-    public static function mandatory()
+    public function mandatory()
     {
-        return static::$mandatory;
+        return $this->mandatory;
     }
 
-    public static function allowed()
+    public function allowed()
     {
-        return static::$allowed;
+        return $this->allowed;
     }
 
-    public static function allowedValues()
+    public function allowedValues()
     {
-        return static::$allowedValues;
+        return $this->allowedValues;
     }
 
-    public static function rules()
+    public function rules()
     {
-        return static::$rules;
+        return $this->rules;
     }
 
-    public static function defaults()
+    public function defaults()
     {
-        return static::$defaults;
+        return $this->defaults;
     }
 
     public function applyConfiguration(
         $resourceName,
-        Container $config
+        Container $container
     ) {
-        static::$allowed       = $config->allowed($resourceName);
-        static::$mandatory     = $config->mandatory($resourceName);
-        static::$defaults      = $config->defaults($resourceName);
-        static::$rules         = $config->rules($resourceName);
-        static::$allowedValues = $config->allowedValues($resourceName);
+        $this->allowed       = $container->allowed($resourceName);
+        $this->mandatory     = $container->mandatory($resourceName);
+        $this->defaults      = $container->defaults($resourceName);
+        $this->rules         = $container->rules($resourceName);
+        $this->allowedValues = $container->allowedValues($resourceName);
     }
 
     public static function fromConfiguration(

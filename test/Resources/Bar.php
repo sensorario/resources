@@ -17,14 +17,14 @@ final class Bar extends Resource
 {
     const NAME = 'name';
 
-    public static function allowed()
+    public function allowed()
     {
         return [
             Bar::NAME,
         ];
     }
 
-    public static function defaults()
+    public function defaults()
     {
         return [
             Bar::NAME => 'Firefox',

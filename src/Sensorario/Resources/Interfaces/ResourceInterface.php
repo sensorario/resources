@@ -13,11 +13,11 @@ namespace Sensorario\Resources\Interfaces;
 
 interface ResourceInterface
 {
-    public static function allowed();
+    public function allowed();
 
-    public static function allowedValues();
+    public function allowedValues();
 
-    public static function mandatory();
+    public function mandatory();
 
-    public static function rules();
+    public function rules();
 }

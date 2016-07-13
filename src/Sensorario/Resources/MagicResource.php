@@ -13,6 +13,7 @@ namespace Sensorario\Resources;
 
 use RuntimeException;
 use Sensorario\Resources\Validators\ResourcesValidator;
+use Sensorario\Resources\Container;
 
 abstract class MagicResource
 {
@@ -40,23 +41,25 @@ abstract class MagicResource
     public function __construct(
         array $properties,
         ResourcesValidator $validator,
-        $validationRequired = true
+        $validationRequired = true,
+        Container $container = null,
+        $resourceName = null
     ) {
         $this->properties = $properties;
+
+        if ($container) {
+            $this->applyConfiguration(
+                $resourceName,
+                $container
+            );
+        }
 
         foreach ($properties as $k => $v) {
             if ('object' === gettype($v) && !isset($this->rules()[$k])) {
                 throw new RuntimeException(
-                    'When property `' . $k . '` is an object class, must be defined in Resources::rules()'
-                );
-            }
-        }
-
-        /** @warning this convert utf8 in utf8 */
-        foreach ($properties as $name => $value) {
-            if ('object' !== gettype($value)) {
-                $properties[$name] = utf8_encode(
-                    $value
+                    'When property `' . $k . '` is an object class, must be defined in Resources::rules()'.
+                    ' but rules here are equals to ' . var_export($this->rules(), true)
+                    . ' And properties are ' . var_export($this->properties, true)
                 );
             }
         }
@@ -78,12 +81,25 @@ abstract class MagicResource
             $methodWhiteList
         );
 
+        $properties = isset($args[0]) ? $args[0] : [];
+        $container = null;
+        $resourceName = null;
+
+        if (
+            isset($args[1])
+            && 'Sensorario\Resources\Container' == get_class($args[1])
+        ) {
+            $container = $args[1];
+            $resourceName = $args[2];
+        }
+
         if ($isMethodAllowed) {
             return new static(
-                isset($args[0])
-                ? $args[0]
-                : [],
-                new ResourcesValidator()
+                $properties,
+                new ResourcesValidator(),
+                $validationRequired = true,
+                $container,
+                $resourceName
             );
         }
 
