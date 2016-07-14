@@ -22,6 +22,7 @@ use Resources\MandatoryDependency;
 use Resources\ResourceWithoutRules;
 use Resources\SomeApiRequest;
 use Resources\UserCreationEvent;
+use Sensorario\Resources\Configurator;
 use Sensorario\Resources\Container;
 use Sensorario\Resources\Resource;
 use Sensorario\Resources\Validators\ResourcesValidator;
@@ -319,16 +320,18 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         );
 
         $resource->applyConfiguration(
-            'bar',
-            new Container([
-                'resources' => [
-                    'bar' => [
-                        'constraints' => [
-                            'allowed' => [ 'allowed_property_name' ],
-                        ]
+            new Configurator(
+                'bar',
+                new Container([
+                    'resources' => [
+                        'bar' => [
+                            'constraints' => [
+                                'allowed' => [ 'allowed_property_name' ],
+                            ]
+                        ],
                     ],
-                ],
-            ])
+                ])
+            )
         );
 
         $this->assertEquals(
@@ -339,25 +342,27 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
     public function testDefaultValues()
     {
-        $container = new Container([
-            'resources' => [
-                'foo' => [
-                    'constraints' => [
-                        'mandatory' => [
-                            'ciambella',
-                        ],
-                        'defaults' => [
-                            'ciambella' => '42',
-                        ],
-                    ]
+        $configurator = new Configurator(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'ciambella',
+                            ],
+                            'defaults' => [
+                                'ciambella' => '42',
+                            ],
+                        ]
+                    ],
                 ],
-            ],
-        ]);
+            ])
+        );
 
         $resource = Resource::box(
             [],
-            $container,
-            'foo'
+            $configurator
         );
 
         $this->assertEquals(

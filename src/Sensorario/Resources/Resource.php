@@ -54,14 +54,13 @@ class Resource
     }
 
     public function applyConfiguration(
-        $resourceName,
-        Container $container
+        Configurator $configurator
     ) {
-        $this->allowed       = $container->allowed($resourceName);
-        $this->mandatory     = $container->mandatory($resourceName);
-        $this->defaults      = $container->defaults($resourceName);
-        $this->rules         = $container->rules($resourceName);
-        $this->allowedValues = $container->allowedValues($resourceName);
+        $this->allowed       = $configurator->allowed();
+        $this->mandatory     = $configurator->mandatory();
+        $this->defaults      = $configurator->defaults();
+        $this->rules         = $configurator->rules();
+        $this->allowedValues = $configurator->allowedValues();
     }
 
     public static function fromConfiguration(

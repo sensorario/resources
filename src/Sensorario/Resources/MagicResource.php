@@ -13,7 +13,7 @@ namespace Sensorario\Resources;
 
 use RuntimeException;
 use Sensorario\Resources\Validators\ResourcesValidator;
-use Sensorario\Resources\Container;
+use Sensorario\Resources\Configurator;
 
 abstract class MagicResource
 {
@@ -41,15 +41,13 @@ abstract class MagicResource
     public function __construct(
         array $properties,
         ResourcesValidator $validator,
-        Container $container = null,
-        $resourceName = null
+        Configurator $configuration = null
     ) {
         $this->properties = $properties;
 
-        if ($container) {
+        if ($configuration) {
             $this->applyConfiguration(
-                $resourceName,
-                $container
+                $configuration
             );
         }
 
@@ -79,23 +77,23 @@ abstract class MagicResource
         );
 
         $properties = isset($args[0]) ? $args[0] : [];
-        $container = null;
+        $configuration = null;
         $resourceName = null;
 
         if (
             isset($args[1])
-            && 'Sensorario\Resources\Container' == get_class($args[1])
+            && 'Sensorario\Resources\Configurator' == get_class($args[1])
         ) {
-            $container = $args[1];
-            $resourceName = $args[2];
+            $configuration = new Configurator(
+                $container = $args[1]
+            );
         }
 
         if ($isMethodAllowed) {
             return new static(
                 $properties,
                 new ResourcesValidator(),
-                $container,
-                $resourceName
+                $configuration
             );
         }
 
