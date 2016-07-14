@@ -1,3 +1,7 @@
+# Release 4.0.3
+
+ * fixed exception message
+
 # Release 4.0.2
 
  * introduced configurator

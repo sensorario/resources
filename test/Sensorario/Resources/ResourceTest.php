@@ -478,31 +478,34 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
    /**
     * @expectedException              RuntimeException
+    * @expectedExceptionMessageRegExp #Value `.*` is not allowed for key `.*`. Allowed values are:#
     */
    public function testAllowedValues()
    {
-       $container = new Container([
-           'resources' => [
-               'foo' => [
-                   'constraints' => [
-                       'allowed' => [ 'user_type' ],
-                       'allowedValues' => [
-                           'user_type' => [
-                               4, 
-                               7,
+       $configurator = new Configurator(
+           'foo',
+           new Container([
+               'resources' => [
+                   'foo' => [
+                       'constraints' => [
+                           'allowed' => [ 'user_type' ],
+                           'allowedValues' => [
+                               'user_type' => [
+                                   4, 
+                                   7,
+                               ],
                            ],
                        ],
                    ],
                ],
-           ],
-       ]);
+           ])
+        );
 
        $properties = [ 'user_type' => 3 ];
 
        Resource::box(
            $properties,
-           $container,
-           'foo'
+           $configurator
        );
    }
 }
