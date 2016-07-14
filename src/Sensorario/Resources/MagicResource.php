@@ -85,7 +85,8 @@ abstract class MagicResource
             && 'Sensorario\Resources\Configurator' == get_class($args[1])
         ) {
             $configuration = new Configurator(
-                $container = $args[1]
+                $args[1]->resourceName(),
+                $args[1]->container()
             );
         }
 

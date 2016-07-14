@@ -55,4 +55,9 @@ final class Configurator
     {
         return $this->resourceName;
     }
+
+    public function container()
+    {
+        return $this->container;
+    }
 }

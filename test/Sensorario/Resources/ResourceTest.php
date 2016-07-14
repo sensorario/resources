@@ -400,26 +400,29 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
      */
     public function testDependentMandatoryProperties()
     {
-        $container = new Container([
-            'resources' => [
-                'foo' => [
-                    'constraints' => [
-                        'allowed' => [
-                            'bar',
-                        ],
-                        'mandatory' => [
-                            'mandatory_property_name',
-                            'foo' => [
-                                'when' => [
-                                    'property' => 'bar',
-                                    'condition' => 'is_present',
-                                ]
+        $configurator = new Configurator(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [
+                                'bar',
                             ],
-                        ],
-                    ]
+                            'mandatory' => [
+                                'mandatory_property_name',
+                                'foo' => [
+                                    'when' => [
+                                        'property' => 'bar',
+                                        'condition' => 'is_present',
+                                    ]
+                                ],
+                            ],
+                        ]
+                    ],
                 ],
-            ],
-        ]);
+            ])
+        );
 
         $properties = [
             'mandatory_property_name' => '42',
@@ -428,8 +431,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
         Resource::box(
             $properties,
-            $container,
-            'foo'
+            $configurator
         );
     }
 
@@ -453,22 +455,25 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
    public function testPropertyType()
    {
-       $container = new Container([
-           'resources' => [
-               'foo' => [
-                   'constraints' => [
-                       'mandatory' => [ 'date' ],
-                       'rules' => [ 'date' => [ 'object' => 'DateTime' ] ],
-                   ]
+       $configurator = new Configurator(
+           'foo',
+           new Container([
+               'resources' => [
+                   'foo' => [
+                       'constraints' => [
+                           'mandatory' => [ 'date' ],
+                           'rules' => [ 'date' => [ 'object' => 'DateTime' ] ],
+                       ]
+                   ],
                ],
-           ],
-       ]);
+           ])
+        );
 
        $properties = [
            'date' => new \DateTime(),
        ];
 
-       Resource::box($properties, $container, 'foo');
+       Resource::box($properties, $configurator);
    }
 
    /**
