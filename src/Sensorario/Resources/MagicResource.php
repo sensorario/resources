@@ -41,7 +41,6 @@ abstract class MagicResource
     public function __construct(
         array $properties,
         ResourcesValidator $validator,
-        $validationRequired = true,
         Container $container = null,
         $resourceName = null
     ) {
@@ -64,9 +63,7 @@ abstract class MagicResource
             }
         }
 
-        if ($validationRequired) {
-            $validator->validate($this);
-        }
+        $validator->validate($this);
     }
 
     public static function __callStatic($methodName, array $args)
@@ -97,7 +94,6 @@ abstract class MagicResource
             return new static(
                 $properties,
                 new ResourcesValidator(),
-                $validationRequired = true,
                 $container,
                 $resourceName
             );
