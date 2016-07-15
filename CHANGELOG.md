@@ -1,3 +1,7 @@
+# Release 4.0.4
+
+ * Introduced documentation for developers
+
 # Release 4.0.3
 
  * fixed exception message
