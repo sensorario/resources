@@ -20,7 +20,7 @@ class Container
     {
         if (!isset($resources['resources'])) {
             throw new RuntimeException(
-                ''
+                'resources element is not defined'
             );
         }
 
