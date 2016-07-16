@@ -1,6 +1,7 @@
 # Release 4.0.4
 
- * Introduced documentation for developers
+ * introduced documentation for developers
+ * removed public static method
 
 # Release 4.0.3
 

@@ -62,22 +62,4 @@ class Resource
         $this->rules         = $configurator->rules();
         $this->allowedValues = $configurator->allowedValues();
     }
-
-    public static function fromConfiguration(
-        $resourceName,
-        Container $container
-    ) {
-        $resource = new self(
-            [],
-            new ResourcesValidator(),
-            $validationRequired = false
-        );
-
-        $resource->applyConfiguration(
-            $resourceName,
-            $container
-        );
-
-        return $resource;
-    }
 }
