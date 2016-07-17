@@ -4,14 +4,14 @@
 
 ## Docs
 
- - [compose-resources.md][1]
- - [default-property-value.md][2]
- - [define-allowed-properties.md][3]
- - [define-allowed-values.md][4]
- - [define-mandatory-properties.md][5]
- - [define-property-type.md][6]
- - [define-resources-via-array.md][7]
- - [tests.md][8]
+ - [Create resources][1]
+ - [Default values][2]
+ - [Allowed properties][3]
+ - [Allowed values][4]
+ - [Mandatory properties][5]
+ - [Property type][6]
+ - [Configurator][7]
+ - [Tests][8]
 
 ## Example
 
