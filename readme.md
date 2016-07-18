@@ -4,18 +4,18 @@
 
 ## Docs
 
- - [Create resources][1]
- - [Default values][2]
  - [Allowed properties][3]
  - [Allowed values][4]
+ - [Compose resources][9]
+ - [Configurator][7]
+ - [Create resources][1]
+ - [Default values][2]
  - [Mandatory properties][5]
  - [Property type][6]
- - [Configurator][7]
  - [Tests][8]
- - [Compose resources][9]
 
 
- [1]: doc/create.md
+ [1]: doc/create-resources.md
  [2]: doc/default-property-value.md
  [3]: doc/define-allowed-properties.md
  [4]: doc/define-allowed-values.md
