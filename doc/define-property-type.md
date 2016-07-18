@@ -1,5 +1,7 @@
 ## Define the type of the property
 
+### Class definition
+
 A property could be configured to be a scalar or an object
 
 ```php
