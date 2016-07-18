@@ -78,7 +78,6 @@ abstract class MagicResource
 
         $properties = isset($args[0]) ? $args[0] : [];
         $configuration = null;
-        $resourceName = null;
 
         if (
             isset($args[1])
