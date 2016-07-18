@@ -29,7 +29,9 @@ class Container
                 foreach ($item['constraints'] as $name => $value) {
                     if (!in_array($name, $this->allowed)) {
                         throw new RuntimeException(
-                            'Invalid constraint'
+                            'Invalid constraint: '
+                            . 'name ' . $name
+                            . '; value ' . $value
                         );
                     }
                 }
@@ -51,13 +53,13 @@ class Container
         foreach ($constraints as $name => $value) {
             if (!isset($this->resources['resources'][$resource]['constraints']['allowed'])) {
                 throw new RuntimeException(
-                    'Not allowed `' . $name . '` constraint'
+                    'Not allowed `' . $name . '` constraint with value `' . $value . '`'
                 );
             }
 
             if (!in_array($name, $this->resources['resources'][$resource]['constraints']['allowed'])) {
                 throw new RuntimeException(
-                    'Not allowed `' . $name . '` constraint'
+                    'Not allowed `' . $name . '` constraint with value `' . $value . '`'
                 );
             }
         }
