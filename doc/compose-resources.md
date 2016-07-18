@@ -1,5 +1,7 @@
 ## Compose resource
 
+### Class definition
+
 Also could be defined all allowed type for a property
 
 ```php

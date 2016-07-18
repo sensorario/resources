@@ -1,5 +1,7 @@
 ## Allowed values
 
+### Class definition
+
 Also could be defined all allowed type for a property
 
 ```php
@@ -12,4 +14,33 @@ public static function allowedValues()
         ],
     ];
 }
+```
+
+### Configurator class
+
+```php
+$configurator = new Configurator(
+  'foo',
+  new Container(
+    'resources' => [
+      'foo' => [
+        'constraints' => [
+          'allowed' => [
+            'property_name',
+          ],
+          'allowedValues' => [
+            'property_name' => [
+              4,
+              7,
+            ],
+          ],
+        ],
+      ],
+    ]
+  )
+);
+
+Resource::box([
+  'property_name' => 7,
+], $configurator);
 ```

@@ -1,0 +1,76 @@
+## Create resources
+
+There are two different ways to create a resource:
+
+ - configuration class
+ - class definition
+
+### Class definition
+
+The following request is incomplete, because `/user` resource, needs vat_number, if user_type is equals to `company`.
+
+```php
+/user
+{
+  "name" : "Simone",
+  "surname" : "Gentili",
+  "user_type" : "company",
+}
+```
+
+With this library, a resource can be defined inside a container.
+
+```php
+new Container([
+  'resources' => [
+    'users' => [
+      'constraints' => [
+        'mandatory' => [
+          'name',
+          'surname',
+          'user_type',
+          'vat_number' => [
+            'when' => [
+              'property' => 'user_type',
+              'has_value' => 'company',
+          ]
+        ],
+      ],
+    ],
+  ],
+]);
+```
+
+```php
+$configurator = new Configurator('resource_name', new Container(…));
+
+Resource::box([
+  'name' => 'Simone',
+  'surname' => 'Gentili',
+  'user_type' => 'company',
+  'vat_number' => '34534534555',
+], $configurator);
+```
+
+### Configutator class
+
+Alternatively, a resource can be defined as class:
+
+```php
+final class User
+{
+  public function mandatory()
+  {
+    return [
+      'name',
+      'surname',
+      'user_type',
+      'vat_number' => [
+        'when' => [
+          'property' => 'user_type',
+          'has_value' => 'company',
+      ]
+    ];
+  }
+}
+```
