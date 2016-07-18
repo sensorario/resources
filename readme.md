@@ -15,7 +15,7 @@
  - [Compose resources][9]
 
 
- [1]: doc/create.md
+ [1]: doc/create-resources.md
  [2]: doc/default-property-value.md
  [3]: doc/define-allowed-properties.md
  [4]: doc/define-allowed-values.md
