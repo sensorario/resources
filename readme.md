@@ -10,6 +10,7 @@
  - [Configurator][7]
  - [Create resources][1]
  - [Default values][2]
+ - [Example][10]
  - [Mandatory properties][5]
  - [Property type][6]
  - [Tests][8]
@@ -24,3 +25,4 @@
  [7]: doc/define-resources-via-array.md
  [8]: doc/tests.md
  [9]: doc/compose-resources.md
+ [10]: doc/example.md
