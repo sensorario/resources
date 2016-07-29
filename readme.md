@@ -8,6 +8,7 @@
  - [Allowed values][4]
  - [Compose resources][9]
  - [Configurator][7]
+ - [Overridable values][11]
  - [Create resources][1]
  - [Default values][2]
  - [Example][10]
@@ -26,3 +27,4 @@
  [8]: doc/tests.md
  [9]: doc/compose-resources.md
  [10]: doc/example.md
+ [11]: doc/overridable.md

@@ -1,6 +1,6 @@
-## Define allowed properties
+# Define allowed properties
 
-### Class definition 
+## Class definition 
 
 You must define all allowed properties
 
@@ -21,7 +21,7 @@ YourValue::box([
 ]);
 ```
 
-### Configurator class
+## Configurator class
 
 ```php
 $configurator = new Configurator(

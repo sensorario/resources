@@ -1,6 +1,6 @@
-## Default value for a property
+# Default value for a property
 
-### Class definition
+## Class definition
 
 ```php
 class MyResource
@@ -14,7 +14,7 @@ class MyResource
 }
 ```
 
-### Configurator class
+## Configurator class
 
 ```php
 $configurator = new Configurator(

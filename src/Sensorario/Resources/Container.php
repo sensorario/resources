@@ -16,6 +16,8 @@ class Container
         'rules',
     ];
 
+    private $rewrite = [];
+
     public function __construct(array $resources)
     {
         if (!isset($resources['resources'])) {
@@ -23,6 +25,8 @@ class Container
                 'resources element is not defined'
             );
         }
+
+        $this->rewrites = [];
 
         foreach ($resources['resources'] as $item) {
             if (isset($item['constraints'])) {
@@ -34,6 +38,14 @@ class Container
                             . '; value ' . $value
                         );
                     }
+                }
+            }
+        }
+
+        foreach ($resources['resources'] as $item) {
+            if (isset($item['rewrite'])) {
+                foreach ($item['rewrite'] as $field => $rewriteRule) {
+                    $this->rewrites[$field] = $rewriteRule;
                 }
             }
         }
@@ -115,5 +127,10 @@ class Container
         }
 
         return [];
+    }
+
+    public function rewrites()
+    {
+        return $this->rewrites;
     }
 }

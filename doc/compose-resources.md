@@ -1,6 +1,6 @@
-## Compose resource
+# Compose resource
 
-### Class definition
+## Class definition
 
 Also could be defined all allowed type for a property
 

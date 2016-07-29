@@ -1,6 +1,6 @@
-## Define the type of the property
+# Define the type of the property
 
-### Class definition
+## Class definition
 
 A property could be configured to be a scalar or an object
 

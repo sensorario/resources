@@ -139,4 +139,43 @@ final class ContainerTest
             $container->allowed('foo')
         );
     }
+
+    public function testRewriteRules()
+    {
+        $container = new Container([
+            'resources' => [
+                'foo' => [
+                    'rewrite' => [
+                        'foo' => [
+                            'set' => [
+                                'equals_to' => 'bar',
+                            ],
+                            'when' => [
+                                'greater_than' => 'bar',
+                            ],
+                        ],
+                    ],
+                    'constraints' => [
+                        'allowed' => [
+                            'foo',
+                            'bar',
+                        ]
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertEquals( [
+                'foo' => [
+                    'set' => [
+                        'equals_to' => 'bar',
+                    ],
+                    'when' => [
+                        'greater_than' => 'bar',
+                    ],
+                ],
+            ],
+            $container->rewrites('foo')
+        );
+    }
 }

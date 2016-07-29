@@ -60,4 +60,9 @@ final class Configurator
     {
         return $this->container;
     }
+
+    public function rewrites()
+    {
+        return $this->container->rewrites();
+    }
 }

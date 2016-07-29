@@ -1,6 +1,6 @@
-## Define mandatory properties
+# Define mandatory properties
 
-### Class definition
+## Class definition
 
 Even if a property is allowed, thus could be mandatory. Mandatory properties are allowed by default. In the example above, we can see that hello field is mandatory, but only when world property is present (defined). And since version 2.2, is possibile to define a mandatory property when other property assume a particular value.
 
@@ -25,7 +25,7 @@ public static function mandatory()
 }
 ```
 
-### Configurator class
+## Configurator class
 
 ```php
 $configurator = new Configurator(
