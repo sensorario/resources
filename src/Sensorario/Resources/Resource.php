@@ -61,5 +61,15 @@ class Resource
         $this->defaults      = $configurator->defaults();
         $this->rules         = $configurator->rules();
         $this->allowedValues = $configurator->allowedValues();
+
+        if ($configurator->globals()) {
+            $globals = $configurator->globals();
+            if (isset($globals['allowed'])) {
+                $this->allowed = array_merge(
+                    $this->allowed,
+                    $globals['allowed']
+                );
+            }
+        }
     }
 }
