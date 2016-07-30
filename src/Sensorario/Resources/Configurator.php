@@ -8,6 +8,8 @@ final class Configurator
 
     private $resourceName;
 
+    private $ranges;
+
     public function __construct(
         $resourceName,
         Container $container
@@ -59,6 +61,13 @@ final class Configurator
     public function container()
     {
         return $this->container;
+    }
+
+    public function ranges()
+    {
+        return $this->container->ranges(
+            $this->resourceName
+        );
     }
 
     public function globals()

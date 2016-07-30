@@ -1,27 +1,19 @@
-# Release 4.0.4
+# Release 4.1
+
+ * [close #62] - enable range of values configuration
+
+# Release 4.0
 
  * introduced documentation for developers
  * removed public static method
-
-# Release 4.0.3
-
  * fixed exception message
-
-# Release 4.0.2
-
  * introduced configurator
-
-# Release 4.0.1
-
  * introduced resources Container class configuration
-
-# Release 4.0.0
-
  * sensorario/value-object is now sensorario/resources
  * forced properties to utf-8 encoding
  * removed code complexity
 
-# Release 3.0.0
+# Release 3.0
 
  * [closed #39] - added hasProperties method
  * [closed #35] - contribution must be present in CHANGELOG file
@@ -33,12 +25,9 @@
  * [closed #19] - added coverage script
  * [closed #25] - improved CONTRIBUTING file
 
-# Release 2.2.1
+# Release 2.2
 
  * getter throw an exception when property name is an empty string
-
-# Release 2.2.0
-
  * [closed #17] Improved 'when' syntax to set mandatory properties
  * [closed #16] All values that make a property mandatory can be defined as array
  * [closed #15] A Property is allowe also when mandatory depending other values
@@ -46,11 +35,11 @@
  * [closed #13] Improved error messages when value is not allowed
  * [closed #12] Improved error messages
 
-# Release 2.1.0
+# Release 2.1
 
  * [closed #11] composition of value objects
 
-# Release 2.0.0
+# Release 2.0
 
  * [closed #10] completed copyright dockblocks
  * All test are now inside src\Sensorario\Test folder

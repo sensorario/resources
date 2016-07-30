@@ -10,6 +10,7 @@ class Container
 
     private $allowed = [
         'allowed',
+        'allowedRanges',
         'allowedValues',
         'defaults',
         'mandatory',
@@ -118,6 +119,15 @@ class Container
     {
         if (isset($this->resources['resources'][$resource]['constraints']['allowedValues'])) {
             return $this->resources['resources'][$resource]['constraints']['allowedValues'];
+        }
+
+        return [];
+    }
+
+    public function ranges($resource)
+    {
+        if (isset($this->resources['resources'][$resource]['constraints']['allowedRanges'])) {
+            return $this->resources['resources'][$resource]['constraints']['allowedRanges'];
         }
 
         return [];
