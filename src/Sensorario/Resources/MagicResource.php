@@ -109,6 +109,11 @@ abstract class MagicResource
         );
     }
 
+    final public function set($propertyName, $propertValue) 
+    {
+        $this->properties[$propertyName] = $propertValue;
+    }
+
     final public function get($propertyName)
     {
         if ('' == $propertyName) {

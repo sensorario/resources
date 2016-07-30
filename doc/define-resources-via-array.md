@@ -1,4 +1,4 @@
-## Define resources via array
+# Define resources via array
 
 ```php
 new Container([

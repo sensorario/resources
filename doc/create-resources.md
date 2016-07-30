@@ -1,4 +1,4 @@
-## Create resources
+# Create resources
 
   Scenario: throw an exception when resource are not properly defined
     Given a resource with mandatory values
@@ -17,7 +17,7 @@ The following request is incomplete, because `/user` resource, needs vat_number,
 }
 ```
 
-### Class definition
+## Class definition
 
 Alternatively, a resource can be defined as class:
 
@@ -40,7 +40,7 @@ final class User
 }
 ```
 
-### Configurator class
+## Configurator class
 
 With this library, a resource can be defined inside a container.
 

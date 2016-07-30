@@ -24,6 +24,7 @@ final class ResourcesValidator
             'MandatoryWithoutDefault',
             'AllowedProperties',
             'AllowedValues',
+            'RewriteValues',
             'AllowedRanges',
         ];
 

@@ -1,6 +1,6 @@
-## Allowed values
+# Allowed values
 
-### Class definition
+## Class definition
 
 Also could be defined all allowed type for a property
 
@@ -16,7 +16,7 @@ public static function allowedValues()
 }
 ```
 
-### Configurator class
+## Configurator class
 
 ```php
 $configurator = new Configurator(

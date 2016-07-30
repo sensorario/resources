@@ -17,6 +17,8 @@ class Container
         'rules',
     ];
 
+    private $rewrite = [];
+
     public function __construct(array $resources)
     {
         if (!isset($resources['resources'])) {
@@ -25,6 +27,7 @@ class Container
             );
         }
 
+        $this->rewrites = [];
         $this->globals  = [];
 
         foreach ($resources['resources'] as $item) {
@@ -37,6 +40,14 @@ class Container
                             . '; value ' . $value
                         );
                     }
+                }
+            }
+        }
+
+        foreach ($resources['resources'] as $item) {
+            if (isset($item['rewrite'])) {
+                foreach ($item['rewrite'] as $field => $rewriteRule) {
+                    $this->rewrites[$field] = $rewriteRule;
                 }
             }
         }
@@ -122,6 +133,11 @@ class Container
         }
 
         return [];
+    }
+
+    public function rewrites()
+    {
+        return $this->rewrites;
     }
 
     public function ranges($resource)

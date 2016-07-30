@@ -509,6 +509,59 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
        );
    }
 
+   public function testRewriteRulesWithCondition()
+   {
+       $configurator = new Configurator(
+           'foo',
+           new Container([
+               'resources' => [
+                   'foo' => [
+                       'rewrite' => [
+                            'width' => [
+                                'set' => [
+                                    'equals_to' => 'height',
+                                ],
+                                'when' => [
+                                    'greater_than' => 'height',
+                                ],
+                            ],
+                       ],
+                       'constraints' => [
+                           'allowed' => [
+                               'width',
+                               'height',
+                           ],
+                       ],
+                   ], 
+               ],
+           ])
+       );
+       $properties = [
+           'width'  => 3000,
+           'height' => 400,
+       ];
+
+       $box = Resource::box(
+           $properties,
+           $configurator
+       );
+
+       $overwritternProperties = [
+           'width'  => 400,
+           'height' => 400,
+       ];
+
+       $overWrittenBox = Resource::box(
+           $overwritternProperties,
+           $configurator
+       );
+
+       $this->assertEquals(
+           $overWrittenBox,
+           $box
+       );
+   }
+
    /**
     * @expectedException              RuntimeException
     * @expectedExceptionMessageRegExp #Value `.*` is out of range: `.*`.#
