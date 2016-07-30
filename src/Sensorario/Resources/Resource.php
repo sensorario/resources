@@ -30,6 +30,8 @@ class Resource
 
     protected $rewrites = [];
 
+    protected $ranges = [];
+
     public function mandatory()
     {
         return $this->mandatory;
@@ -60,6 +62,11 @@ class Resource
         return $this->rewrites;
     }
 
+    public function ranges()
+    {
+        return $this->ranges;
+    }
+
     public function applyConfiguration(
         Configurator $configurator
     ) {
@@ -69,5 +76,16 @@ class Resource
         $this->rules         = $configurator->rules();
         $this->allowedValues = $configurator->allowedValues();
         $this->rewrites      = $configurator->rewrites();
+        $this->ranges        = $configurator->ranges();
+
+        if ($configurator->globals()) {
+            $globals = $configurator->globals();
+            if (isset($globals['allowed'])) {
+                $this->allowed = array_merge(
+                    $this->allowed,
+                    $globals['allowed']
+                );
+            }
+        }
     }
 }

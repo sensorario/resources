@@ -10,6 +10,7 @@ class Container
 
     private $allowed = [
         'allowed',
+        'allowedRanges',
         'allowedValues',
         'defaults',
         'mandatory',
@@ -27,6 +28,7 @@ class Container
         }
 
         $this->rewrites = [];
+        $this->globals  = [];
 
         foreach ($resources['resources'] as $item) {
             if (isset($item['constraints'])) {
@@ -48,6 +50,10 @@ class Container
                     $this->rewrites[$field] = $rewriteRule;
                 }
             }
+        }
+
+        if (isset($resources['globals'])) {
+            $this->globals = $resources['globals'];
         }
 
         $this->resources = $resources;
@@ -132,5 +138,19 @@ class Container
     public function rewrites()
     {
         return $this->rewrites;
+    }
+
+    public function ranges($resource)
+    {
+        if (isset($this->resources['resources'][$resource]['constraints']['allowedRanges'])) {
+            return $this->resources['resources'][$resource]['constraints']['allowedRanges'];
+        }
+
+        return [];
+    }
+
+    public function globals()
+    {
+        return $this->globals;
     }
 }

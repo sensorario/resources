@@ -1,6 +1,10 @@
 # Release 4.1
 
+<<<<<<< HEAD
  * Overridable values
+=======
+ * [close #62] - enable range of values configuration
+>>>>>>> 658cba3050630e8e278cf54a8a52bf9583c39d21
 
 # Release 4.0
 

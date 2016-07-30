@@ -25,6 +25,7 @@ final class ResourcesValidator
             'AllowedProperties',
             'AllowedValues',
             'RewriteValues',
+            'AllowedRanges',
         ];
 
         foreach ($validators as $name) {
