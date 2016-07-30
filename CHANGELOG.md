@@ -1,10 +1,8 @@
 # Release 4.1
 
-<<<<<<< HEAD
- * Overridable values
-=======
- * [close #62] - enable range of values configuration
->>>>>>> 658cba3050630e8e278cf54a8a52bf9583c39d21
+ * [close #61] - allow global configuration
+ * [close #62] - range of values configuration
+ * [close #63] - override values configuration
 
 # Release 4.0
 
