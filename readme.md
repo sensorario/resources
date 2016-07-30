@@ -8,11 +8,13 @@
  - [Allowed values][4]
  - [Compose resources][9]
  - [Configurator][7]
- - [Overridable values][11]
+ - [Allow range of values][13]
  - [Create resources][1]
  - [Default values][2]
  - [Example][10]
+ - [Global configuration][12]
  - [Mandatory properties][5]
+ - [Overridable values][11]
  - [Property type][6]
  - [Tests][8]
 
@@ -28,3 +30,5 @@
  [9]: doc/compose-resources.md
  [10]: doc/example.md
  [11]: doc/overridable.md
+ [12]: doc/globals.md
+ [13]: doc/ranges.md
