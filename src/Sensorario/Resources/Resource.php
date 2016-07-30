@@ -28,6 +28,8 @@ class Resource
 
     protected $rules = [];
 
+    protected $ranges = [];
+
     public function mandatory()
     {
         return $this->mandatory;
@@ -53,6 +55,11 @@ class Resource
         return $this->defaults;
     }
 
+    public function ranges()
+    {
+        return $this->ranges;
+    }
+
     public function applyConfiguration(
         Configurator $configurator
     ) {
@@ -61,5 +68,6 @@ class Resource
         $this->defaults      = $configurator->defaults();
         $this->rules         = $configurator->rules();
         $this->allowedValues = $configurator->allowedValues();
+        $this->ranges        = $configurator->ranges();
     }
 }

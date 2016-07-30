@@ -24,6 +24,7 @@ final class ResourcesValidator
             'MandatoryWithoutDefault',
             'AllowedProperties',
             'AllowedValues',
+            'AllowedRanges',
         ];
 
         foreach ($validators as $name) {

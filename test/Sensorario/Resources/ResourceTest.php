@@ -508,4 +508,37 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
            $configurator
        );
    }
+
+   /**
+    * @expectedException              RuntimeException
+    * @expectedExceptionMessageRegExp #Value `.*` is out of range: `.*`.#
+    */
+   public function testAcceptRangeOfValues()
+   {
+       $configurator = new Configurator(
+           'foo',
+           new Container([
+               'resources' => [
+                   'foo' => [
+                       'constraints' => [
+                           'allowedRanges' => [
+                               'age' => [
+                                    'more_than' => 3,
+                                    'less_than' => 42,
+                               ],
+                           ],
+                           'allowed' => [
+                               'age'
+                           ],
+                       ],
+                   ],
+               ],
+           ])
+       );
+
+       Resource::box(
+           [ 'age' => 2 ],
+           $configurator
+       );
+   }
 }
