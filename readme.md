@@ -4,11 +4,11 @@
 
 ## Docs
 
+ - [Allow range of values][13]
  - [Allowed properties][3]
  - [Allowed values][4]
  - [Compose resources][9]
  - [Configurator][7]
- - [Allow range of values][13]
  - [Create resources][1]
  - [Default values][2]
  - [Example][10]
