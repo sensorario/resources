@@ -25,6 +25,8 @@ class Container
             );
         }
 
+        $this->globals  = [];
+
         foreach ($resources['resources'] as $item) {
             if (isset($item['constraints'])) {
                 foreach ($item['constraints'] as $name => $value) {
@@ -37,6 +39,10 @@ class Container
                     }
                 }
             }
+        }
+
+        if (isset($resources['globals'])) {
+            $this->globals = $resources['globals'];
         }
 
         $this->resources = $resources;
@@ -118,7 +124,6 @@ class Container
         return [];
     }
 
-
     public function ranges($resource)
     {
         if (isset($this->resources['resources'][$resource]['constraints']['allowedRanges'])) {
@@ -126,5 +131,10 @@ class Container
         }
 
         return [];
+    }
+
+    public function globals()
+    {
+        return $this->globals;
     }
 }

@@ -541,4 +541,45 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
            $configurator
        );
    }
+
+   public function testAllResourcesInheritGlobalAllowingConfiguration()
+   {
+       $configurator = new Configurator(
+           'foo',
+           new Container([
+               'globals' => [
+                   'allowed' => [
+                       'width',
+                       'height',
+                   ],
+               ],
+               'resources' => [
+                   'foo' => [
+                       'constraints' => [
+                           'allowed' => [
+                               'foo_size',
+                           ],
+                       ],
+                   ], 
+                   'bar' => [
+                       'constraints' => [
+                           'allowed' => [
+                               'bar_size',
+                           ],
+                       ],
+                   ], 
+               ],
+           ])
+       );
+
+       $resource = Resource::box(
+           [],
+           $configurator
+       );
+
+       $this->assertEquals(
+           ['foo_size', 'width', 'height'],
+           $resource->allowed()
+       );
+   }
 }

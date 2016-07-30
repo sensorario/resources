@@ -69,4 +69,9 @@ final class Configurator
             $this->resourceName
         );
     }
+
+    public function globals()
+    {
+        return $this->container->globals();
+    }
 }
