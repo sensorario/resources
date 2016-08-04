@@ -17,6 +17,10 @@ class MyResource
 ## Configurator class
 
 ```php
+use Sensorario\Resources\Configurator;
+use Sensorario\Resources\Container;
+use Sensorario\Resources\Resource;
+
 $configurator = new Configurator(
   'foo',
   new Container(

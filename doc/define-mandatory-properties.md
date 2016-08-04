@@ -28,6 +28,9 @@ public static function mandatory()
 ## Configurator class
 
 ```php
+use Sensorario\Resources\Configurator;
+use Sensorario\Resources\Container;
+
 $configurator = new Configurator(
   'foo',
   new Container(
