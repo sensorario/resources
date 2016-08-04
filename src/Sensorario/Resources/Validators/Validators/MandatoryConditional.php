@@ -27,7 +27,7 @@ final class MandatoryConditional implements Validator
                 foreach ($propertyValue as $value) {
                     if ($resource->get($propertyName) === $value && $resource->hasNotProperty($key)) {
                         throw new RuntimeException(
-                            'When property `' . $key . '` has value '
+                            'When property `' . $propertyName . '` has value '
                             . '`' . $value . '` also `' . $key . '` is mandatory'
                         );
                     }
