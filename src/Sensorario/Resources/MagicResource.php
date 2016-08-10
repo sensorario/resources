@@ -168,6 +168,10 @@ abstract class MagicResource
                 if ($this->rules()[$k]['object'] === '\\Sensorario\\Resources\\Resource') {
                     $properties[$k] = $v->properties();
                 }
+
+                if ($this->rules()[$k]['object'] === 'array') {
+                    $properties[$k] = (array) $v;
+                }
             }
         }
 
