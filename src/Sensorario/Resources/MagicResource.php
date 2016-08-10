@@ -154,6 +154,12 @@ abstract class MagicResource
 
         foreach ($properties as $k => $v) {
             if ('object' === gettype($v)) {
+                if (!isset($this->rules()[$k]['object'])) {
+                    throw new RuntimeException(
+                        'Property ' . $k . ' is an object but is not defined in rules'
+                    );
+                }
+
                 if ($this->rules()[$k]['object'] === '\\Sensorario\\Resources\\Resource') {
                     $properties[$k] = $v->properties();
                 }
