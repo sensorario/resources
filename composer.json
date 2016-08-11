@@ -12,10 +12,7 @@
     ],
     "license": "MIT",
     "autoload": {
-        "classmap": [
-            "src/",
-            "test/"
-        ]
+        "psr-4": { "": ["src/", "test/"] }
     },
     "require": {
         "php": ">=5.6.0"

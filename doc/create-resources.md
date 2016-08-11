@@ -49,7 +49,7 @@ use Sensorario\Resources\Configurator;
 use Sensorario\Resources\Container;
 use Sensorario\Resources\Resource;
 
-new Container([
+$container = new Container([
   'resources' => [
     'users' => [
       'constraints' => [
@@ -68,7 +68,10 @@ new Container([
   ],
 ]);
 
-$configurator = new Configurator('resource_name', new Container(…));
+$configurator = new Configurator(
+  'resource_name',
+  $container
+);
 
 Resource::box([
   'name' => 'Simone',
