@@ -5,6 +5,7 @@ namespace Sensorario\Resources;
 use \RuntimeException;
 
 class Container
+    extends ContainerBase
 {
     private $resources;
 
@@ -99,37 +100,12 @@ class Container
         return $allowed;
     }
 
-    public function mandatory($resource)
-    {
-        if (isset($this->resources['resources'][$resource]['constraints']['mandatory'])) {
-            return $this->resources['resources'][$resource]['constraints']['mandatory'];
-        }
-
-        return [];
-    }
-
-    public function defaults($resource)
-    {
-        if (isset($this->resources['resources'][$resource]['constraints']['defaults'])) {
-            return $this->resources['resources'][$resource]['constraints']['defaults'];
-        }
-
-        return [];
-    }
-
-    public function rules($resource)
-    {
-        if (isset($this->resources['resources'][$resource]['constraints']['rules'])) {
-            return $this->resources['resources'][$resource]['constraints']['rules'];
-        }
-
-        return [];
-    }
-
-    public function allowedValues($resource)
-    {
-        if (isset($this->resources['resources'][$resource]['constraints']['allowedValues'])) {
-            return $this->resources['resources'][$resource]['constraints']['allowedValues'];
+    public function getConstraints(
+        $constraintName,
+        $resource
+    ) {
+        if (isset($this->resources['resources'][$resource]['constraints'][$constraintName])) {
+            return $this->resources['resources'][$resource]['constraints'][$constraintName];
         }
 
         return [];
@@ -138,15 +114,6 @@ class Container
     public function rewrites()
     {
         return $this->rewrites;
-    }
-
-    public function ranges($resource)
-    {
-        if (isset($this->resources['resources'][$resource]['constraints']['allowedRanges'])) {
-            return $this->resources['resources'][$resource]['constraints']['allowedRanges'];
-        }
-
-        return [];
     }
 
     public function globals()
