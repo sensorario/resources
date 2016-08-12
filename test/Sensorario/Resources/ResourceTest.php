@@ -635,4 +635,43 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
            $resource->allowed()
        );
    }
+
+    /**
+     * @expectedException RuntimeException
+     */
+    public function testHasMandatoryPropertiesWhenAnotherOneHasAParticularValue()
+    {
+        $configurator = new Configurator(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [
+                                'bar',
+                            ],
+                            'mandatory' => [
+                                'mandatory_property_name',
+                                'foo' => [
+                                    'when' => [
+                                        'property' => 'bar',
+                                        'has_value' => '42',
+                                    ]
+                                ],
+                            ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $properties = [
+            'bar' => '42',
+        ];
+
+        Resource::box(
+            $properties,
+            $configurator
+        );
+    }
 }

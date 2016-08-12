@@ -24,11 +24,20 @@ final class MandatoryConditional implements Validator
                 $propertyName = $value['when']['property'];
                 $propertyValue = $value['when']['has_value'];
 
-                foreach ($propertyValue as $value) {
-                    if ($resource->get($propertyName) === $value && $resource->hasNotProperty($key)) {
+                if (is_array($propertyValue)) {
+                    foreach ($propertyValue as $value) {
+                        if ($resource->get($propertyName) === $value && $resource->hasNotProperty($key)) {
+                            throw new RuntimeException(
+                                'When property `' . $key . '` has value '
+                                . '`' . $value . '` also `' . $key . '` is mandatory'
+                            );
+                        }
+                    }
+                } else {
+                    if ($resource->get($propertyName) === $propertyValue && $resource->hasNotProperty($key)) {
                         throw new RuntimeException(
                             'When property `' . $propertyName . '` has value '
-                            . '`' . $value . '` also `' . $key . '` is mandatory'
+                            . '`' . $propertyValue . '` also `' . $key . '` is mandatory'
                         );
                     }
                 }
