@@ -45,6 +45,10 @@ final class User
 With this library, a resource can be defined inside a container.
 
 ```php
+use Sensorario\Resources\Configurator;
+use Sensorario\Resources\Container;
+use Sensorario\Resources\Resource;
+
 new Container([
   'resources' => [
     'users' => [
@@ -63,9 +67,7 @@ new Container([
     ],
   ],
 ]);
-```
 
-```php
 $configurator = new Configurator('resource_name', new Container(…));
 
 Resource::box([

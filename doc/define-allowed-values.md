@@ -19,6 +19,10 @@ public static function allowedValues()
 ## Configurator class
 
 ```php
+use sensorario\resources\configurator;
+use sensorario\resources\container;
+use sensorario\resources\resource;
+
 $configurator = new Configurator(
   'foo',
   new Container(

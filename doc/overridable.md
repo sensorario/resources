@@ -5,6 +5,9 @@
 Since version 4.1, is possible to define some rules able to override some values in specific conditions
 
 ```php
+use Sensorario\Resources\Configurator;
+use Sensorario\Resources\Container;
+
 $configurator = new Configurator(
    'foo',
    new Container([
@@ -37,6 +40,8 @@ $configurator = new Configurator(
 This override rule, rewrite width when is greater than height. In this case, with must be equals to height. Here, we try to create a box with width and height defined. But the rule, override the Resource.
        …
 ```php
+use Sensorario\Resources\Resource;
+
 $properties = [
     'width'  => 3000,
     'height' => 400,
