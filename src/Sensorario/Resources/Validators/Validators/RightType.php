@@ -40,10 +40,12 @@ final class RightType implements Validator
                     !($resource->get($key) instanceof \Sensorario\Resources\Resource) &&
                     get_class($resource->get($key)) != current($rule)
                 ) {
-                    throw new RuntimeException(
-                        'Attribute `' . $key
-                        . '` must be an object of type ' . current($rule)
-                    );
+                    if ('array' !== current($rule)) {
+                        throw new RuntimeException(
+                            'Attribute `' . $key
+                            . '` must be an object of type ' . current($rule)
+                        );
+                    }
                 }
             }
         }
