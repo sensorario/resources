@@ -17,6 +17,9 @@
             "test/"
         ]
     },
+    "require": {
+        "php": ">=5.6.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "@dev"
     },
