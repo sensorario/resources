@@ -3,6 +3,7 @@
  * [close #69] - documentation improvements
  * [close #70] - property become mandatory when a value or array of value
  * [close #71] - remove duplication and set methods as deprecated
+ * [close #76] - add Schema to simplify definition of a resource
 
 # Release 4.1
 

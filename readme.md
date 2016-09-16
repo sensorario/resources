@@ -16,8 +16,8 @@
  - [Mandatory properties][5]
  - [Overridable values][11]
  - [Property type][6]
+ - [Schemas][14]
  - [Tests][8]
-
 
  [1]: doc/create-resources.md
  [2]: doc/default-property-value.md
@@ -32,3 +32,4 @@
  [11]: doc/overridable.md
  [12]: doc/globals.md
  [13]: doc/ranges.md
+ [14]: doc/schema.md
