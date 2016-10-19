@@ -9,6 +9,7 @@
  * [close #61] - allow global configuration
  * [close #62] - range of values configuration
  * [close #63] - override values configuration
+ * [close #80] - show all mandatory fields when one is missed
 
 # Release 4.0
 
