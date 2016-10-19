@@ -27,7 +27,10 @@ final class MandatoryWithoutDefault implements Validator
             ) {
                 throw new RuntimeException(
                     "Property `" . get_class($resource)
-                    . "::\$$value` is mandatory but not set"
+                    . "::\$$value` is mandatory but not set. "
+                    . "Mandatory fields are: "
+                    . join(',', $resource->mandatory())
+                    . "."
                 );
             }
         }
