@@ -12,6 +12,7 @@
  - [Create resources][1]
  - [Default values][2]
  - [Example][10]
+ - [Raw example][14]
  - [Global configuration][12]
  - [Mandatory properties][5]
  - [Overridable values][11]
@@ -29,7 +30,7 @@
  [8]: doc/tests.md
  [9]: doc/compose-resources.md
  [10]: doc/example.md
- [14]: doc/raw-example.md
  [11]: doc/overridable.md
  [12]: doc/globals.md
  [13]: doc/ranges.md
+ [14]: doc/raw-example.md
