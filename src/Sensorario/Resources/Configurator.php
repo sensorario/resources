@@ -8,8 +8,6 @@ final class Configurator
 
     private $resourceName;
 
-    private $ranges;
-
     public function __construct(
         $resourceName,
         Container $container
@@ -18,39 +16,11 @@ final class Configurator
         $this->container = $container;
     }
 
-    public function allowed()
+    public function __call($method, $bar)
     {
-        return $this->container->allowed(
-            $this->resourceName
-        );
-    }
-
-    public function mandatory()
-    {
-        return $this->container->mandatory(
-            $this->resourceName
-        );
-    }
-
-    public function defaults()
-    {
-        return $this->container->defaults(
-            $this->resourceName
-        );
-    }
-
-    public function rules()
-    {
-        return $this->container->rules(
-            $this->resourceName
-        );
-    }
-
-    public function allowedValues()
-    {
-        return $this->container->allowedValues(
-            $this->resourceName
-        );
+         return $this->container->$method(
+             $this->resourceName
+         );
     }
 
     public function resourceName()
@@ -66,13 +36,6 @@ final class Configurator
     public function rewrites()
     {
         return $this->container->rewrites();
-    }
-
-    public function ranges()
-    {
-        return $this->container->ranges(
-            $this->resourceName
-        );
     }
 
     public function globals()

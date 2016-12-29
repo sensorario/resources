@@ -21,27 +21,37 @@ final class MandatoryConditional implements Validator
     {
         foreach ($resource->mandatory() as $key => $value) {
             if (isset($value['when']['has_value'])) {
-                $propertyName = $value['when']['property'];
-                $propertyValue = $value['when']['has_value'];
+                $name = $value['when']['property'];
+                $value = $value['when']['has_value'];
 
-                if (is_array($propertyValue)) {
-                    foreach ($propertyValue as $value) {
-                        if ($resource->get($propertyName) === $value && $resource->hasNotProperty($key)) {
-                            throw new RuntimeException(
-                                'When property `' . $key . '` has value '
-                                . '`' . $value . '` also `' . $key . '` is mandatory'
-                            );
+                if (is_array($value)) {
+                    foreach ($value as $value) {
+                        if ($resource->get($name) === $value && $resource->hasNotProperty($key)) {
+                            self::buildException($value, $key);
                         }
                     }
-                } else {
-                    if ($resource->get($propertyName) === $propertyValue && $resource->hasNotProperty($key)) {
-                        throw new RuntimeException(
-                            'When property `' . $propertyName . '` has value '
-                            . '`' . $propertyValue . '` also `' . $key . '` is mandatory'
-                        );
+                }
+
+                if (!is_array($value)) {
+                    if ($resource->get($name) === $value && $resource->hasNotProperty($key)) {
+                        self::exceptionMessage($name, $value, $key);
                     }
                 }
             }
         }
+    }
+
+    private static function buildException($value, $key)
+    {
+        static::exceptionMessage($key, $value, $key);
+    }
+
+    private static function exceptionMessage($name, $value, $key)
+    {
+        throw new RuntimeException(
+            'When property `' . $name . '` '
+            . 'has value ' . '`' . $value . '` '
+            . 'also `' . $key . '` is mandatory'
+        );
     }
 }

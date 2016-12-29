@@ -9,6 +9,8 @@ class Container
 {
     private $resources;
 
+    private $rewrites;
+
     private $allowed = [
         'allowed',
         'allowedRanges',
@@ -17,8 +19,6 @@ class Container
         'mandatory',
         'rules',
     ];
-
-    private $rewrite = [];
 
     public function __construct(array $resources)
     {
@@ -31,19 +31,7 @@ class Container
         $this->rewrites = [];
         $this->globals  = [];
 
-        foreach ($resources['resources'] as $item) {
-            if (isset($item['constraints'])) {
-                foreach ($item['constraints'] as $name => $value) {
-                    if (!in_array($name, $this->allowed)) {
-                        throw new RuntimeException(
-                            'Invalid constraint: '
-                            . 'name ' . $name
-                            . '; value ' . $value
-                        );
-                    }
-                }
-            }
-        }
+        $this->ensureValidConstraints($resources);
 
         foreach ($resources['resources'] as $item) {
             if (isset($item['rewrite'])) {
@@ -58,6 +46,23 @@ class Container
         }
 
         $this->resources = $resources;
+    }
+
+    private function ensureValidConstraints($resources)
+    {
+        foreach ($resources['resources'] as $item) {
+            if (isset($item['constraints'])) {
+                foreach ($item['constraints'] as $name => $value) {
+                    if (!in_array($name, $this->allowed)) {
+                        throw new RuntimeException(
+                            'Invalid constraint: '
+                            . 'name ' . $name
+                            . '; value ' . $value
+                        );
+                    }
+                }
+            }
+        }
     }
 
     public function countResources()
