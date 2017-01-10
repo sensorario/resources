@@ -1,4 +1,4 @@
-# Contributing to Value Object
+# Contributing to sensorario/resources
 
  - check if an issue is not already present
  - create a branch with a name that describe the issue
