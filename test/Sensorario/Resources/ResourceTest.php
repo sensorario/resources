@@ -235,10 +235,10 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals([
-                'name' => 'Sam',
-            ],
-            $foo->properties()
-        );
+            'name' => 'Sam',
+        ],
+        $foo->properties()
+    );
     }
 
     /**
@@ -269,12 +269,12 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals([
-                'credentials' => [
-                    'name' => 'Sam',
-                ]
-            ],
-            $composition->properties()
-        );
+            'credentials' => [
+                'name' => 'Sam',
+            ]
+        ],
+        $composition->properties()
+    );
     }
 
     /**
@@ -453,70 +453,70 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         );
     }
 
-   public function testPropertyType()
-   {
-       $configurator = new Configurator(
-           'foo',
-           new Container([
-               'resources' => [
-                   'foo' => [
-                       'constraints' => [
-                           'mandatory' => [ 'date' ],
-                           'rules' => [ 'date' => [ 'object' => 'DateTime' ] ],
-                       ]
-                   ],
-               ],
-           ])
+    public function testPropertyType()
+    {
+        $configurator = new Configurator(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'mandatory' => [ 'date' ],
+                            'rules' => [ 'date' => [ 'object' => 'DateTime' ] ],
+                        ]
+                    ],
+                ],
+            ])
         );
 
-       $properties = [
-           'date' => new \DateTime(),
-       ];
+        $properties = [
+            'date' => new \DateTime(),
+        ];
 
-       Resource::box($properties, $configurator);
-   }
+        Resource::box($properties, $configurator);
+    }
 
-   /**
-    * @expectedException              RuntimeException
-    * @expectedExceptionMessageRegExp #Value `.*` is not allowed for key `.*`. Allowed values are:#
-    */
-   public function testAllowedValues()
-   {
-       $configurator = new Configurator(
-           'foo',
-           new Container([
-               'resources' => [
-                   'foo' => [
-                       'constraints' => [
-                           'allowed' => [ 'user_type' ],
-                           'allowedValues' => [
-                               'user_type' => [
-                                   4, 
-                                   7,
-                               ],
-                           ],
-                       ],
-                   ],
-               ],
-           ])
+    /**
+     * @expectedException              RuntimeException
+     * @expectedExceptionMessageRegExp #Value `.*` is not allowed for key `.*`. Allowed values are:#
+     */
+    public function testAllowedValues()
+    {
+        $configurator = new Configurator(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [ 'user_type' ],
+                            'allowedValues' => [
+                                'user_type' => [
+                                    4, 
+                                    7,
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ])
         );
 
-       $properties = [ 'user_type' => 3 ];
+        $properties = [ 'user_type' => 3 ];
 
-       Resource::box(
-           $properties,
-           $configurator
-       );
-   }
+        Resource::box(
+            $properties,
+            $configurator
+        );
+    }
 
-   public function testRewriteRulesWithCondition()
-   {
-       $configurator = new Configurator(
-           'foo',
-           new Container([
-               'resources' => [
-                   'foo' => [
-                       'rewrite' => [
+    public function testRewriteRulesWithCondition()
+    {
+        $configurator = new Configurator(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'rewrite' => [
                             'width' => [
                                 'set' => [
                                     'equals_to' => 'height',
@@ -525,116 +525,116 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
                                     'greater_than' => 'height',
                                 ],
                             ],
-                       ],
-                       'constraints' => [
-                           'allowed' => [
-                               'width',
-                               'height',
-                           ],
-                       ],
-                   ], 
-               ],
-           ])
-       );
-       $properties = [
-           'width'  => 3000,
-           'height' => 400,
-       ];
+                        ],
+                        'constraints' => [
+                            'allowed' => [
+                                'width',
+                                'height',
+                            ],
+                        ],
+                    ], 
+                ],
+            ])
+        );
+        $properties = [
+            'width'  => 3000,
+            'height' => 400,
+        ];
 
-       $box = Resource::box(
-           $properties,
-           $configurator
-       );
+        $box = Resource::box(
+            $properties,
+            $configurator
+        );
 
-       $overwritternProperties = [
-           'width'  => 400,
-           'height' => 400,
-       ];
+        $overwritternProperties = [
+            'width'  => 400,
+            'height' => 400,
+        ];
 
-       $overWrittenBox = Resource::box(
-           $overwritternProperties,
-           $configurator
-       );
+        $overWrittenBox = Resource::box(
+            $overwritternProperties,
+            $configurator
+        );
 
-       $this->assertEquals(
-           $overWrittenBox,
-           $box
-       );
-   }
+        $this->assertEquals(
+            $overWrittenBox,
+            $box
+        );
+    }
 
-   /**
-    * @expectedException              RuntimeException
-    * @expectedExceptionMessageRegExp #Value `.*` is out of range: `.*`.#
-    */
-   public function testAcceptRangeOfValues()
-   {
-       $configurator = new Configurator(
-           'foo',
-           new Container([
-               'resources' => [
-                   'foo' => [
-                       'constraints' => [
-                           'allowedRanges' => [
-                               'age' => [
+    /**
+     * @expectedException              RuntimeException
+     * @expectedExceptionMessageRegExp #Value `.*` is out of range: `.*`.#
+     */
+    public function testAcceptRangeOfValues()
+    {
+        $configurator = new Configurator(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowedRanges' => [
+                                'age' => [
                                     'more_than' => 3,
                                     'less_than' => 42,
-                               ],
-                           ],
-                           'allowed' => [
-                               'age'
-                           ],
-                       ],
-                   ],
-               ],
-           ])
-       );
+                                ],
+                            ],
+                            'allowed' => [
+                                'age'
+                            ],
+                        ],
+                    ],
+                ],
+            ])
+        );
 
-       Resource::box(
-           [ 'age' => 2 ],
-           $configurator
-       );
-   }
+        Resource::box(
+            [ 'age' => 2 ],
+            $configurator
+        );
+    }
 
-   public function testAllResourcesInheritGlobalAllowingConfiguration()
-   {
-       $configurator = new Configurator(
-           'foo',
-           new Container([
-               'globals' => [
-                   'allowed' => [
-                       'width',
-                       'height',
-                   ],
-               ],
-               'resources' => [
-                   'foo' => [
-                       'constraints' => [
-                           'allowed' => [
-                               'foo_size',
-                           ],
-                       ],
-                   ], 
-                   'bar' => [
-                       'constraints' => [
-                           'allowed' => [
-                               'bar_size',
-                           ],
-                       ],
-                   ], 
-               ],
-           ])
-       );
+    public function testAllResourcesInheritGlobalAllowingConfiguration()
+    {
+        $configurator = new Configurator(
+            'foo',
+            new Container([
+                'globals' => [
+                    'allowed' => [
+                        'width',
+                        'height',
+                    ],
+                ],
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [
+                                'foo_size',
+                            ],
+                        ],
+                    ], 
+                    'bar' => [
+                        'constraints' => [
+                            'allowed' => [
+                                'bar_size',
+                            ],
+                        ],
+                    ], 
+                ],
+            ])
+        );
 
-       $resource = Resource::box(
-           [],
-           $configurator
-       );
+        $resource = Resource::box(
+            [],
+            $configurator
+        );
 
-       $this->assertEquals(
-           ['foo_size', 'width', 'height'],
-           $resource->allowed()
-       );
-   }
+        $this->assertEquals(
+            ['foo_size', 'width', 'height'],
+            $resource->allowed()
+        );
+    }
 
     /**
      * @expectedException RuntimeException
@@ -672,6 +672,68 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         Resource::box(
             $properties,
             $configurator
+        );
+    }
+
+    /**
+     * @expectedException RuntimeException
+     */
+    public function testEmailValidationFails()
+    {
+        $configurator = new Configurator(
+            'email-resource',
+            new Container([
+                'resources' => [
+                    'email-resource' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'first-email',
+                            ],
+                            'rules' => [
+                                'first-email' => [ 'custom-validator' => 'email' ],
+                            ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $properties = [
+            'first-email' => 'invalid email',
+        ];
+
+        Resource::box($properties, $configurator);
+    }
+
+    public function testEmailValidation()
+    {
+        $configurator = new Configurator(
+            'email-resource',
+            new Container([
+                'resources' => [
+                    'email-resource' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'first-email',
+                            ],
+                            'rules' => [
+                                'first-email' => [ 'custom-validator' => 'email' ],
+                            ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $properties = [
+            'first-email' => 'sensorario@gmail.com',
+        ];
+
+        $resource = Resource::box($properties, $configurator);
+
+        $this->assertEquals(
+            'sensorario@gmail.com',
+            $resource->get('first-email')
         );
     }
 }
