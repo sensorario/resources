@@ -46,6 +46,12 @@ final class RightType implements Validator
                         ? $rule['object']
                         : 'undefined';
 
+                    if (is_numeric($resource->get($key)) && is_string($resource->get($key))) {
+                        throw new \RuntimeException(
+                            'Property `'.$key.'` must be an integer!'
+                        );
+                    }
+
                     throw new RuntimeException(
                         'Attribute `' . $key
                         . '` must be of type `'
