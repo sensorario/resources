@@ -7,13 +7,31 @@ Are you sure that no one have been working on your stuff?
  - check if an issue is not already present
  - create if not exists
 
-## Take care about an issue
+## Create branch name
 
-### Select right branch name
+    - `refactoring/task-description/{destination-branch}`
+    - `feature/task-description/{destination-branch}`
+    - `fix/task-description/{destination-branch}`
 
- - detect destination branch
- - create a branch named like ...
-    - `feature|fix/{destination-branch}/description`
+### Add new feature on master
+
+Always start with `git checkout -b xxx/{branch} {branch}`. For example, if you need to add new feature:
+
+    - `git checkout -b feature/task-description/master master`
+
+### Fix code fix next major release
+
+Every time you need to refactor your code to prepare next release or just to make some other tastks:
+
+    - `refactoring/task-description/{destination-branch}`
+
+### Fixes
+
+Every time you need to fix a bug or just apply a little patch
+
+    - `fix/task-description/{destination-branch}`
+
+## Steps
 
 ### How to fix some bug
 
