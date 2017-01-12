@@ -705,6 +705,33 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
         Resource::box($properties, $configurator);
     }
 
+    /**
+     * @expectedException              RuntimeException
+     * @expectedExceptionMessageRegExp #Property .* must be an integer!#
+     */
+    public function testIntegersCanBeDefinedWithNumberRule()
+    {
+        $configurator = new Configurator(
+            'type-with-number',
+            new Container([
+                'resources' => [
+                    'type-with-number' => [
+                        'constraints' => [
+                            'mandatory' => [ 'a-magic-number' ],
+                            'rules' => [ 'a-magic-number' => [ 'scalar' => 'integer' ] ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $properties = [
+            'a-magic-number' => '42',
+        ];
+
+        $resource = Resource::box($properties, $configurator);
+    }
+
     public function testEmailValidation()
     {
         $configurator = new Configurator(

@@ -3,6 +3,7 @@
  * [close #92] - contributing file improvements
  * [close #90] - email validation
  * [close #98] - open github pages from bash
+ * [close #96] - number as scalar types
  * [close #69] - documentation improvements
  * [close #70] - property become mandatory when a value or array of value
  * [close #71] - remove duplication and set methods as deprecated
