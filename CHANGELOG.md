@@ -1,3 +1,7 @@
+# Release 4.3
+
+ * [close #102] - fix branch names in contributing file
+
 # Release 4.2
 
  * [close #92] - contributing file improvements
