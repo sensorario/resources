@@ -13,8 +13,7 @@ Are you sure that no one have been working on your stuff?
 
  - detect destination branch
  - create a branch named like ...
-    - `{destination-branch}-add-a-feature`
-    - `{destination-branch}-fix-a-bug`
+    - `feature|patch/{destination-branch}/description`
 
 ### How to fix some bug
 
