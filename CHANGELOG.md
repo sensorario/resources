@@ -1,3 +1,7 @@
+# Release 5.0
+
+ * [close #101] - remove ContainerBase class
+
 # Release 4.2
 
  * [close #92] - contributing file improvements
