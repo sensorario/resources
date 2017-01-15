@@ -3,8 +3,7 @@
 /**
  * This file is part of sensorario/resources repository
  *
- * (c) Simone Gentili <sensorario@gmail.com>
- *
+ * (c) Simone Gentili <sensorario@gmail.com> *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -29,13 +28,8 @@ final class ResourcesValidator
         ];
 
         foreach ($validators as $name) {
-            $validator = 'Sensorario'
-                .'\\Resources'
-                .'\\Validators'
-                .'\\Validators'
-                .'\\' . $name
-            ;
-            $validator::check($resource);
+            $validator = ValidatorFactory::fromName($name);
+            $validator->check($resource);
         }
     }
 }

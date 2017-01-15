@@ -17,7 +17,7 @@ use Sensorario\Resources\Validators\Interfaces\Validator;
 
 final class MandatoryProperty implements Validator
 {
-    public static function check(Resource $resource)
+    public function check(Resource $resource)
     {
         foreach ($resource->mandatory() as $key => $value) {
             if (

@@ -16,6 +16,7 @@ use DateTime;
 use PHPUnit_Framework_TestCase;
 use Resources\Bar;
 use Resources\BirthDay;
+use Resources\UndefinedObject;
 use Resources\ComposedResource;
 use Resources\Foo;
 use Resources\MandatoryDependency;
@@ -762,5 +763,91 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
             'sensorario@gmail.com',
             $resource->get('first-email')
         );
+    }
+
+    /** @dataProvider rules */
+    public function testRulesKnowsIfRuleIsDefinedOrNot($expectation, $ruleName)
+    {
+        $configurator = new Configurator(
+            'email-resource',
+            new Container([
+                'resources' => [
+                    'email-resource' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'first-email',
+                            ],
+                            'rules' => [
+                                'first-email' => [ 'custom-validator' => 'email' ],
+                            ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $properties = [
+            'first-email' => 'sensorario@gmail.com',
+        ];
+
+        $resource = Resource::box($properties, $configurator);
+
+        $this->assertEquals(
+            $expectation,
+            $resource->isRuleDefinedFor($ruleName)
+        );
+    }
+
+    public function rules()
+    {
+        return [
+            [true, 'first-email'],
+            [false, 'non-existent-field-name'],
+        ];
+    }
+
+    public function testProvideRule()
+    {
+        $aSpecificRule = [ 'custom-validator' => 'email' ];
+
+        $configurator = new Configurator(
+            'email-resource',
+            new Container([
+                'resources' => [
+                    'email-resource' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'first-email',
+                            ],
+                            'rules' => [
+                                'first-email' => $aSpecificRule,
+                            ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $properties = [
+            'first-email' => 'sensorario@gmail.com',
+        ];
+
+        $resource = Resource::box($properties, $configurator);
+
+        $this->assertEquals(
+            $aSpecificRule,
+            $resource->getRule('first-email')->asArray()
+        );
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage Property date is an object but is not defined in rules
+     */
+    public function testUndefinedObject()
+    {
+        UndefinedObject::box([
+            'date' => new \stdClass(),
+        ]);
     }
 }

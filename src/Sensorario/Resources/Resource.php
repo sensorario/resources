@@ -12,10 +12,8 @@
 namespace Sensorario\Resources;
 
 use RuntimeException;
-use Sensorario\Resources\Validators\ResourcesValidator;
 
-class Resource
-    extends MagicResource
+class Resource extends MagicResource
     implements Interfaces\ResourceInterface
 {
     protected $allowed = [];
@@ -87,5 +85,43 @@ class Resource
                 );
             }
         }
+    }
+
+    public function isRuleDefinedFor($ruleName)
+    {
+        return isset($this->rules()[$ruleName]);
+    }
+
+    public function isRuleNotDefinedFor($ruleName)
+    {
+        return !$this->isRuleDefinedFor($ruleName);
+    }
+
+    public function getRule($ruleName) : Rule
+    {
+        return Rule::fromArray(
+            $this->rules()[$ruleName]
+        );
+    }
+
+    public function isFieldNumeric($fieldName)
+    {
+        return is_numeric($this->get($fieldName));
+    }
+
+    public function isFieldString($fieldName)
+    {
+        return is_string($this->get($fieldName));
+    }
+
+    public function isFieldNumericButString($fieldName)
+    {
+        return $this->isFieldNumeric($fieldName)
+            && $this->isFieldString($fieldName);
+    }
+
+    public function getFieldType($fieldName)
+    {
+        return gettype($this->get($fieldName));
     }
 }

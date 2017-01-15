@@ -17,7 +17,7 @@ use Sensorario\Resources\Validators\Interfaces\Validator;
 
 final class AllowedValues implements Validator
 {
-    public static function check(Resource $resource)
+    public function check(Resource $resource)
     {
         foreach ($resource->properties() as $key => $value) {
             if (isset($resource->allowedValues()[$key])) {
