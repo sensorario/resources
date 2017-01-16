@@ -17,7 +17,7 @@ use Sensorario\Resources\Validators\Interfaces\Validator;
 
 final class AllowedProperties implements Validator
 {
-    public static function check(Resource $resource)
+    public function check(Resource $resource)
     {
         $allowed = array_merge(
             $resource->allowed(),

@@ -19,6 +19,11 @@ abstract class MagicResource
 {
     protected $properties = [];
 
+    private static $methodWhiteList = [
+        'box',
+        'allowedValues'
+    ];
+
     public function __call($functionName, $arguments)
     {
         $propertyName = strtolower($functionName);
@@ -66,17 +71,11 @@ abstract class MagicResource
 
     public static function __callStatic($methodName, array $args)
     {
-        $methodWhiteList = [
-            'box',
-            'allowedValues'
-        ];
-
         $isMethodAllowed = in_array(
             $methodName,
-            $methodWhiteList
+            self::$methodWhiteList
         );
 
-        $properties = isset($args[0]) ? $args[0] : [];
         $configuration = null;
 
         if (
@@ -90,6 +89,10 @@ abstract class MagicResource
         }
 
         if ($isMethodAllowed) {
+            $properties = isset($args[0])
+                ? $args[0]
+                : [];
+
             return new static(
                 $properties,
                 new ResourcesValidator(),
@@ -98,7 +101,8 @@ abstract class MagicResource
         }
 
         throw new RuntimeException(
-            'Invalid factory method `' . $methodName . '`'
+            'Invalid factory method '
+            . '`' . $methodName . '`'
         );
     }
 

@@ -17,7 +17,7 @@ use Sensorario\Resources\Validators\Interfaces\Validator;
 
 final class MandatoryConditional implements Validator
 {
-    public static function check(Resource $resource)
+    public function check(Resource $resource)
     {
         foreach ($resource->mandatory() as $key => $value) {
             if (isset($value['when']['has_value'])) {
@@ -27,7 +27,7 @@ final class MandatoryConditional implements Validator
                 if (is_array($value)) {
                     foreach ($value as $value) {
                         if ($resource->get($name) === $value && $resource->hasNotProperty($key)) {
-                            self::buildException($value, $key);
+                            static::exceptionMessage($key, $value, $key);
                         }
                     }
                 }
@@ -39,11 +39,6 @@ final class MandatoryConditional implements Validator
                 }
             }
         }
-    }
-
-    private static function buildException($value, $key)
-    {
-        static::exceptionMessage($key, $value, $key);
     }
 
     private static function exceptionMessage($name, $value, $key)

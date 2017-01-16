@@ -1,11 +1,19 @@
 <?php
 
+/**
+ * This file is part of sensorario/resources repository
+ *
+ * (c) Simone Gentili <sensorario@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sensorario\Resources;
 
-use \RuntimeException;
+use RuntimeException;
 
 class Container
-    extends ContainerBase
 {
     private $resources;
 
@@ -87,6 +95,8 @@ class Container
                 );
             }
         }
+
+        return true;
     }
 
     public function allowed($resource)
