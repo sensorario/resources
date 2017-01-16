@@ -1,6 +1,7 @@
 # Release 5.0
 
  * [enhance #108] - new ruler component
+ * [enhance #111] - improve RightType with strict comparison for booleans
  * [fix #110] - fix scrutinizer configuration
 
 # Release 4.4
