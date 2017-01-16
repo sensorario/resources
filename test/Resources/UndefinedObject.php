@@ -9,11 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\Resources\Validators\Interfaces;
+namespace Resources;
 
 use Sensorario\Resources\Resource;
 
-interface Validator
+final class UndefinedObject extends Resource
 {
-    public function check(Resource $resources);
+    public function allowed()
+    {
+        return [
+            'date'
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            'date' => 'scalar'
+        ];
+    }
 }

@@ -178,4 +178,30 @@ final class ContainerTest
             $container->rewrites('foo')
         );
     }
+
+    public function testCreationSucceedReturnsTrue()
+    {
+        $container = new Container([
+            'resources' => [
+                'foo' => [
+                    'constraints' => [
+                        'allowed' => [
+                            'foo'
+                        ]
+                    ],
+                ],
+            ],
+        ]);
+
+        $creationSucceed = $container->create(
+            'foo', [
+                'foo' => 'bar',
+            ]
+        );
+
+        $this->assertSame(
+            true,
+            $creationSucceed
+        );
+    }
 }

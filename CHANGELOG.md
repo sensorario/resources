@@ -1,3 +1,9 @@
+# Release 5.0
+
+ * [enhance #108] - new ruler component
+
+# Release 4.4
+
 # Release 4.3
 
  * [close #102] - fix branch names in contributing file

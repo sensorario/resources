@@ -12,12 +12,17 @@ Are you sure that no one have been working on your stuff?
     - `refactoring/task-description/{destination-branch}`
     - `feature/task-description/{destination-branch}`
     - `fix/task-description/{destination-branch}`
+    - `enhance/task-description/{destination-branch}`
 
 ### Add new feature on master
 
 Always start with `git checkout -b xxx/{branch} {branch}`. For example, if you need to add new feature:
 
     - `git checkout -b feature/task-description/master master`
+
+In some cases there are just the needs to add some components. In these case, is suggested enhance branch:
+
+    - `git checkout -b enhance/task-description/master master`
 
 ### Fix code fix next major release
 
