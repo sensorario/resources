@@ -1,6 +1,7 @@
 # Release 5.0
 
  * [enhance #108] - new ruler component
+ * [fix #110] - fix scrutinizer configuration
 
 # Release 4.4
 
