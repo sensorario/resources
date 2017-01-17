@@ -129,8 +129,8 @@ abstract class MagicResource
         }
 
         if ($this->hasNotProperty($propertyName)) {
-            if (isset($this->defaults()[$propertyName])) {
-                return $this->defaults()[$propertyName];
+            if ($prop = $this->defaults()[$propertyName] ?? false) {
+                return $prop;
             }
 
             throw new RuntimeException(
