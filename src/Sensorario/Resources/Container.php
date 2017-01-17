@@ -28,6 +28,8 @@ class Container
         'rules',
     ];
 
+    private $globals;
+
     public function __construct(array $resources)
     {
         if (!isset($resources['resources'])) {
