@@ -30,6 +30,8 @@ class Container
 
     private $globals;
 
+    private $resourceConstraints;
+
     public function __construct(array $resources)
     {
         if (!isset($resources['resources'])) {
@@ -82,16 +84,22 @@ class Container
         );
     }
 
+    private function getResourceConstraints($resource)
+    {
+        if (!$this->resourceConstraints) {
+            $this->resourceConstraints = $this->resources['resources'][$resource]['constraints'];
+        }
+
+        return $this->resourceConstraints;
+    }
+
     public function create($resource, array $constraints)
     {
         foreach ($constraints as $name => $value) {
-            if (!isset($this->resources['resources'][$resource]['constraints']['allowed'])) {
-                throw new RuntimeException(
-                    'Not allowed `' . $name . '` constraint with value `' . $value . '`'
-                );
-            }
-
-            if (!in_array($name, $this->resources['resources'][$resource]['constraints']['allowed'])) {
+            if (
+                !isset($this->getResourceConstraints($resource)['allowed'])
+                || !in_array($name, $this->getResourceConstraints($resource)['allowed'])
+            ) {
                 throw new RuntimeException(
                     'Not allowed `' . $name . '` constraint with value `' . $value . '`'
                 );
@@ -106,10 +114,10 @@ class Container
         $allowed = [];
 
         foreach ($this->allowed as $item) {
-            if (isset($this->resources['resources'][$resource]['constraints'][$item])) {
+            if (isset($this->getResourceConstraints($resource)[$item])) {
                 $allowed = array_merge(
                     $allowed,
-                    $this->resources['resources'][$resource]['constraints'][$item]
+                    $this->getResourceConstraints($resource)[$item]
                 );
             }
         }
@@ -117,12 +125,10 @@ class Container
         return $allowed;
     }
 
-    public function getConstraints(
-        $constraintName,
-        $resource
-    ) {
-        if (isset($this->resources['resources'][$resource]['constraints'][$constraintName])) {
-            return $this->resources['resources'][$resource]['constraints'][$constraintName];
+    public function getConstraints($constraint, $resource) : array
+    {
+        if (isset($this->getResourceConstraints($resource)[$constraint])) {
+            return $this->getResourceConstraints($resource)[$constraint];
         }
 
         return [];
