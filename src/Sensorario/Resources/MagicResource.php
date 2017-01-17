@@ -95,12 +95,8 @@ abstract class MagicResource
         }
 
         if ($isMethodAllowed) {
-            $properties = isset($args[0])
-                ? $args[0]
-                : [];
-
             return new static(
-                $properties,
+                $args[0] ?? [],
                 new ResourcesValidator(),
                 $configuration
             );
