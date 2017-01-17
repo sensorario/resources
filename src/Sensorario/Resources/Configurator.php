@@ -17,6 +17,7 @@ namespace Sensorario\Resources;
  * @method array mandatory() provide resource's mandatory parameters
  * @method array defaults() provide resource's default parameters
  * @method array rules() provide resource's rules
+ * @method array ranges() provide range of available values for a property
  */
 final class Configurator
 {
