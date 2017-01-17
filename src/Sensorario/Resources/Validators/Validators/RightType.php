@@ -54,7 +54,7 @@ final class RightType implements Validator
                     $this->validations
                 );
 
-                if (false == $isValid) {
+                if (false === $isValid) {
                     throw new \RuntimeException(
                         'Oops! Invalid email address'
                     );
