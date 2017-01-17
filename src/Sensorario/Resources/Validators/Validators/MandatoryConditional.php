@@ -24,7 +24,7 @@ final class MandatoryConditional implements Validator
                 $name = $value['when']['property'];
                 $value = $value['when']['has_value'];
 
-                if (is_array($value)) {
+                if ($isArray = is_array($value)) {
                     foreach ($value as $value) {
                         if ($resource->get($name) === $value && $resource->hasNotProperty($key)) {
                             static::exceptionMessage($key, $value, $key);
@@ -32,7 +32,7 @@ final class MandatoryConditional implements Validator
                     }
                 }
 
-                if (!is_array($value)) {
+                if (!$isArray) {
                     if ($resource->get($name) === $value && $resource->hasNotProperty($key)) {
                         self::exceptionMessage($name, $value, $key);
                     }

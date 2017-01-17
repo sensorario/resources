@@ -1,9 +1,10 @@
 # Release 5.0
 
+ * [close #115] - removed duplication
  * [close #113] - fix Resources removing spaces between "MagicResource" and comma
- * [enhance #108] - new ruler component
- * [enhance #111] - improve RightType with strict comparison for booleans
- * [fix #110] - fix scrutinizer configuration
+ * [close #108] - new ruler component
+ * [close #111] - improve RightType with strict comparison for booleans
+ * [close #110] - fix scrutinizer configuration
 
 # Release 4.4
 
