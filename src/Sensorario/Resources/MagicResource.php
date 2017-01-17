@@ -15,6 +15,10 @@ use RuntimeException;
 use Sensorario\Resources\Validators\ResourcesValidator;
 use Sensorario\Resources\Configurator;
 
+/**
+ * @method array defaults() returns resource's default values
+ * @method array rules() returns resource's rules
+ */
 abstract class MagicResource
 {
     protected $properties = [];
@@ -42,6 +46,8 @@ abstract class MagicResource
             . '()` is not yet implemented'
         );
     }
+
+    abstract public function applyConfiguration(Configurator $configurator);
 
     public function __construct(
         array $properties,

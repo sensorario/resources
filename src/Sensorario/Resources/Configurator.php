@@ -11,6 +11,13 @@
 
 namespace Sensorario\Resources;
 
+/**
+ * @method array allowed() provide resource's allowed parameters
+ * @method array allowedValues() provide resource's allowed values parameters
+ * @method array mandatory() provide resource's mandatory parameters
+ * @method array defaults() provide resource's default parameters
+ * @method array rules() provide resource's rules
+ */
 final class Configurator
 {
     private $container;
