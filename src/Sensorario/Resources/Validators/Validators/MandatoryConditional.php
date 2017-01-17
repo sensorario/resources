@@ -27,7 +27,7 @@ final class MandatoryConditional implements Validator
                 if ($isArray = is_array($value)) {
                     foreach ($value as $value) {
                         if ($resource->get($name) === $value && $resource->hasNotProperty($key)) {
-                            static::exceptionMessage($key, $value, $key);
+                            self::exceptionMessage($key, $value, $key);
                         }
                     }
                 }
