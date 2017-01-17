@@ -49,7 +49,7 @@ class Rule
             throw new \RuntimeException(
                 'Oops! Invalid configuration!!!'
                 . 'Type `' . key($this->rule) . '` is not valid. '
-                . 'Available types are ' . var_export(static::$avalableRuleTypes, true)
+                . 'Available types are ' . var_export(self::$avalableRuleTypes, true)
             );
         }
     }
@@ -61,7 +61,7 @@ class Rule
 
     public function isValid()
     {
-        return in_array(key($this->rule), static::$avalableRuleTypes);
+        return in_array(key($this->rule), self::$avalableRuleTypes);
     }
 
     public function is($type)
