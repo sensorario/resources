@@ -12,9 +12,9 @@
 namespace Sensorario\Resources;
 
 use RuntimeException;
+use Sensorario\Resources\Interfaces\ResourceInterface;
 
-class Resource extends MagicResource
-    implements Interfaces\ResourceInterface
+class Resource extends MagicResource implements ResourceInterface
 {
     protected $allowed = [];
 
