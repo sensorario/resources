@@ -11,7 +11,6 @@
 
 namespace Sensorario\Resources\Validators\Validators;
 
-use RuntimeException;
 use Sensorario\Resources\Resource;
 use Sensorario\Resources\Validators\Interfaces\Validator;
 
@@ -22,7 +21,7 @@ final class AllowedRanges implements Validator
         foreach ($resource->properties() as $key => $value) {
             if (isset($resource->ranges()[$key])) {
                 if ($value < $resource->ranges()[$key]['more_than']) {
-                    throw new RuntimeException(
+                    throw new \Sensorario\Resources\Exceptions\OutOfRangeException(
                         'Value `' . $value . '` is out of range: '
                         . '`'
                         . $resource->ranges()[$key]['more_than']

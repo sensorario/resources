@@ -3,7 +3,7 @@
 
     <testsuites>
         <testsuite name="Resources">
-            <directory>./test</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 
@@ -11,7 +11,7 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
             <exclude>
-                <directory>test/**</directory>
+                <directory>tests/**</directory>
             </exclude>
         </whitelist>
     </filter>

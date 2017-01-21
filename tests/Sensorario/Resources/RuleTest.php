@@ -11,7 +11,7 @@
 
 namespace Sensorario\Resources\Test\Resources;
 
-use Sensorario\Resources\Rule;
+use Sensorario\Resources\Rulers\Rule;
 
 class RuleTest extends \PHPUnit_Framework_TestCase
 {
@@ -41,8 +41,8 @@ class RuleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Oops
+     * @expectedException \Sensorario\Resources\Exceptions\InvalidTypeException
+     * @expectedExceptionMessageRegex #Oops! Invalid configuration!!!Type `foo` is not valid.#
      */
     public function testInvalidTypeIsNotAllowed()
     {

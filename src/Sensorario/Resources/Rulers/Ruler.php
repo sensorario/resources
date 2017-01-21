@@ -11,7 +11,6 @@
 
 namespace Sensorario\Resources\Rulers;
 
-use RuntimeException;
 use Sensorario\Resources\Resource;
 use Sensorario\Resources\Validators\Interfaces\Validator;
 use Egulias\EmailValidator\EmailValidator;
@@ -41,7 +40,7 @@ class Ruler
     public function getRuleFromResource()
     {
         if (!$this->resource) {
-            throw new \RuntimeException(
+            throw new \Sensorario\Resources\Exceptions\UndefinedResourceException(
                 'Oops! Cant get rule without resource'
             );
         }
@@ -73,12 +72,12 @@ class Ruler
     {
         if ($this->typeMismatch()) {
             if ($this->resource->isFieldNumericButString($this->fieldName)) {
-                throw new \RuntimeException(
+                throw new \Sensorario\Resources\Exceptions\WrongPropertyValueException(
                     'Property `'.$this->fieldName.'` must be an integer!'
                 );
             }
 
-            throw new RuntimeException(
+            throw new \Sensorario\Resources\Exceptions\AttributeTypeException(
                 'Attribute `' . $this->fieldName
                 . '` must be of type '
                 . '`' . $this->rule->getExpectedType() . '`'
@@ -90,7 +89,7 @@ class Ruler
     {
         if ($this->classMismatch()) {
             if ($this->rule->isValueNotAnObject()) {
-                throw new RuntimeException(
+                throw new \Sensorario\Resources\Exceptions\NotObjectTypeFoundException(
                     'Attribute `' . $this->fieldName
                     . '` must be an object of type ' . $this->rule->getValue()
                 );
@@ -105,7 +104,7 @@ class Ruler
         }
 
         if ($this->rule->isNotMail()) {
-            throw new \RuntimeException(
+            throw new \Sensorario\Resources\Exceptions\InvalidCustomValidatorException(
                 'Oops! `'. $this->rule->getRuleType() .'` custom validator is not available. Only email is.'
             );
         }
