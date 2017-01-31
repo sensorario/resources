@@ -1,0 +1,23 @@
+#!/usr/local/bin/php
+<?php
+
+passthru('clear');
+
+$currentBranch = shell_exec('git branch | grep "*"');
+
+$currentRelease = floatval(substr($currentBranch, 2, strlen($currentBranch)));
+
+$describe = shell_exec('git describe --tags');
+
+$descriptions = explode('-', $describe);
+
+$version = explode('.', $descriptions[0]);
+
+$major = explode('.', $version[0])[0];
+$minor = explode('.', $version[1])[0];
+$patch = explode('.', $version[2])[0];
+
+$patch++;
+
+passthru("git tag $major.$minor.$patch");
+passthru("git describe --tags");
