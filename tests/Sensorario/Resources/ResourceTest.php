@@ -292,15 +292,33 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
 
     public function testPropertiesAccessor()
     {
-        $foo = Foo::box([
-            'name' => 'Sam',
-        ]);
+        $aSpecificRule = [ 'custom-validator' => 'email' ];
 
-        $this->assertEquals([
-            'name' => 'Sam',
-        ],
-        $foo->properties()
-    );
+        $configurator = new Configurator(
+            'email-resource',
+            new Container([
+                'resources' => [
+                    'email-resource' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'name',
+                            ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $properties = [
+            'name' => 'Simone',
+        ];
+
+        $resource = Resource::box($properties, $configurator);
+
+        $this->assertEquals(
+            $properties,
+            $resource->properties()
+        );
     }
 
     /**
