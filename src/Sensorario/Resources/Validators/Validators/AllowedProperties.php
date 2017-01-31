@@ -11,7 +11,6 @@
 
 namespace Sensorario\Resources\Validators\Validators;
 
-use RuntimeException;
 use Sensorario\Resources\Resource;
 use Sensorario\Resources\Validators\Interfaces\Validator;
 
@@ -35,7 +34,7 @@ final class AllowedProperties implements Validator
                 }
 
                 if (!$isAllowed) {
-                    throw new RuntimeException(
+                    throw new \Sensorario\Resources\Exceptions\NotAllowedKeyException(
                         "Key `" . get_class($resource)
                         . "::\$$key` with value `" .  $value
                         . "` is not allowed"

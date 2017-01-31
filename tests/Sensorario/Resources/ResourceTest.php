@@ -31,7 +31,7 @@ use Sensorario\Resources\Validators\ResourcesValidator;
 final class ResourceTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException              RuntimeException
+     * @expectedException              \Sensorario\Resources\Exceptions\UndefinedMethodException
      * @expectedExceptionMessageRegExp #Method `.*::.*()` is not yet implemented#
      */
     public function testExceptionIsThrownWhenNotYetImplementedMethodIsCalled()
@@ -45,7 +45,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\NotAllowedKeyException
      * @expectedExceptionMessageRegExp #Key `.*::.*` is not allowed#
      */
     public function testNotAllowedFieldThroghRuntimeException()
@@ -58,7 +58,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\PropertyException
      * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
@@ -88,7 +88,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        RuntimeException
+     * @expectedException        Sensorario\Resources\Exceptions\PropertyNameEmptyException
      * @expectedExceptionMessage Oops! Property name requested is empty string!!
      */
     public function testExceptionMessageInCaseOfEmptyPropertyName()
@@ -105,7 +105,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\FactoryMethodException
      * @expectedExceptionMessageRegExp #Invalid factory method#
      */
     public function testFactoryMethods()
@@ -177,7 +177,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException RuntimeException
+     * @expectedException Sensorario\Resources\Exceptions\NoValuesException
      */
     public function testThroughExceptionWhenNoValuesProvided()
     {
@@ -186,18 +186,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
-     * @expectedExceptionMessage Value `42` is not allowed for key `someApiParameter`
-     */
-    public function testAllowedValueForAField()
-    {
-        SomeApiRequest::box([
-            'someApiParameter' => 42
-        ]);
-    }
-
-    /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\AttributeTypeException
      * @expectedExceptionMessageRegExp #Attribute `.*` must be of type `array`#
      */
     public function testPropertyCouldBeAScalar()
@@ -208,18 +197,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
-     * @expectedExceptionMessageRegExp #Attribute `.*` must be of type `.*`#
-     */
-    public function testPropertyCouldBeAnObject()
-    {
-        BirthDay::box([
-            'date' => 'not a date',
-        ]);
-    }
-
-    /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\NotObjectTypeFoundException
      * @expectedExceptionMessageRegExp #Attribute `.*` must be an object of type DateTime#
      */
     public function testPropertyCouldBeTheRightnObject()
@@ -243,7 +221,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\PropertyNotSetException
      * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
      */
     public function testWhenCondition()
@@ -279,7 +257,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\PropertyException
      * @expectedExceptionMessageRegExp #When property `.*` has value `.*` also `.*` is mandatory#
      */
     public function testMandatoryValuesWhenPropertyAssumeAValue()
@@ -298,7 +276,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\PropertyWithoutRuleException
      * @expectedExceptionMessageRegExp #When property `.*` is an object class, must be defined in Resources::rules()#
      */
     public function testAnExceptionIsThrownIfAPropertyIsAnObjectButClassInNotDefinedInRuleMethod()
@@ -396,7 +374,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\PropertyNotSetException
      * @expectedExceptionMessageRegExp #Property `.*::.*` is mandatory but not set#
      */
     public function testDependentMandatoryProperties()
@@ -478,7 +456,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\UnexpectedValueException
      * @expectedExceptionMessageRegExp #Value `.*` is not allowed for key `.*`. Allowed values are:#
      */
     public function testAllowedValues()
@@ -564,7 +542,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\OutOfRangeException
      * @expectedExceptionMessageRegExp #Value `.*` is out of range: `.*`.#
      */
     public function testAcceptRangeOfValues()
@@ -638,7 +616,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException RuntimeException
+     * @expectedException Sensorario\Resources\Exceptions\PropertyException
      */
     public function testHasMandatoryPropertiesWhenAnotherOneHasAParticularValue()
     {
@@ -677,7 +655,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException RuntimeException
+     * @expectedException Sensorario\Resources\Exceptions\EmailException
      */
     public function testEmailValidationFails()
     {
@@ -707,7 +685,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              RuntimeException
+     * @expectedException              Sensorario\Resources\Exceptions\WrongPropertyValueException
      * @expectedExceptionMessageRegExp #Property .* must be an integer!#
      */
     public function testIntegersCanBeDefinedWithNumberRule()
@@ -841,7 +819,7 @@ final class ResourceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException Sensorario\Resources\Exceptions\PropertyWithoutRuleException
      * @expectedExceptionMessage Property date is an object but is not defined in rules
      */
     public function testUndefinedObject()

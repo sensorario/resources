@@ -11,7 +11,6 @@
 
 namespace Sensorario\Resources\Validators\Validators;
 
-use RuntimeException;
 use Sensorario\Resources\Resource;
 use Sensorario\Resources\Validators\Interfaces\Validator;
 

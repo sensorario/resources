@@ -11,8 +11,6 @@
 
 namespace Sensorario\Resources;
 
-use RuntimeException;
-
 class Container
 {
     private $resources;
@@ -35,7 +33,7 @@ class Container
     public function __construct(array $resources)
     {
         if (!isset($resources['resources'])) {
-            throw new RuntimeException(
+            throw new \Sensorario\Resources\Exceptions\EmptyConfigurationException(
                 'resources element is not defined'
             );
         }
@@ -66,7 +64,7 @@ class Container
             if (isset($item['constraints'])) {
                 foreach ($item['constraints'] as $name => $value) {
                     if (!in_array($name, $this->allowed)) {
-                        throw new RuntimeException(
+                        throw new \Sensorario\Resources\Exceptions\InvalidConstraintException(
                             'Invalid constraint: '
                             . 'name ' . $name
                             . '; value ' . $value
@@ -100,7 +98,7 @@ class Container
                 !isset($this->getResourceConstraints($resource)['allowed'])
                 || !in_array($name, $this->getResourceConstraints($resource)['allowed'])
             ) {
-                throw new RuntimeException(
+                throw new \Sensorario\Resources\Exceptions\NotAllowedConstraintException(
                     'Not allowed `' . $name . '` constraint with value `' . $value . '`'
                 );
             }

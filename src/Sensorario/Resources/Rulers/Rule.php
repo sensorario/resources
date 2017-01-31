@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensorario\Resources;
+namespace Sensorario\Resources\Rulers;
 
 class Rule
 {
@@ -46,7 +46,7 @@ class Rule
     public function ensureRuleNameIsValid()
     {
         if (!$this->isValid()) {
-            throw new \RuntimeException(
+            throw new \Sensorario\Resources\Exceptions\InvalidTypeException(
                 'Oops! Invalid configuration!!!'
                 . 'Type `' . key($this->rule) . '` is not valid. '
                 . 'Available types are ' . var_export(self::$avalableRuleTypes, true)

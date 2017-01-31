@@ -14,11 +14,11 @@ namespace Sensorario\Resources\Test\Resources;
 use PHPUnit_Framework_TestCase;
 use Sensorario\Resources\Container;
 
-final class ContainerTest
-    extends PHPUnit_Framework_TestCase
+final class ContainerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException        \RuntimeException
+     * @expectedException \Sensorario\Resources\Exceptions\EmptyConfigurationException
+     * @expectedExceptionMessage resources element is not defined
      */
     public function testConfigurationCannotBeEmpty()
     {
@@ -55,7 +55,7 @@ final class ContainerTest
     }
 
     /**
-     * @expectedException              \RuntimeException
+     * @expectedException \Sensorario\Resources\Exceptions\InvalidConstraintException
      * @expectedExceptionMessageRegExp /Invalid constraint/
      */
     public function testResourceDefinesConstraints()
@@ -72,7 +72,7 @@ final class ContainerTest
     }
 
     /**
-     * @expectedException              \RuntimeException
+     * @expectedException              \Sensorario\Resources\Exceptions\NotAllowedConstraintException
      * @expectedExceptionMessageRegExp /Not allowed `foo` constraint/
      */
     public function testCannotCreateResourceWithoutAllowedConstraints()
@@ -81,30 +81,6 @@ final class ContainerTest
             'resources' => [
                 'foo' => [
                     'constraints' => [
-                    ],
-                ],
-            ],
-        ]);
-
-        $container->create(
-            'foo', [
-                'foo' => 'bar',
-            ]
-        );
-    }
-
-    /**
-     * @expectedException              \RuntimeException
-     * @expectedExceptionMessageRegExp /Not allowed `foo` constraint/
-     */
-    public function test()
-    {
-        $container = new Container([
-            'resources' => [
-                'foo' => [
-                    'constraints' => [
-                        'allowed' => [
-                        ]
                     ],
                 ],
             ],

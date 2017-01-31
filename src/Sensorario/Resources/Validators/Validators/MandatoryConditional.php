@@ -11,7 +11,6 @@
 
 namespace Sensorario\Resources\Validators\Validators;
 
-use RuntimeException;
 use Sensorario\Resources\Resource;
 use Sensorario\Resources\Validators\Interfaces\Validator;
 
@@ -43,7 +42,7 @@ final class MandatoryConditional implements Validator
 
     private static function exceptionMessage($name, $value, $key)
     {
-        throw new RuntimeException(
+        throw new \Sensorario\Resources\Exceptions\PropertyException(
             'When property `' . $name . '` '
             . 'has value ' . '`' . $value . '` '
             . 'also `' . $key . '` is mandatory'

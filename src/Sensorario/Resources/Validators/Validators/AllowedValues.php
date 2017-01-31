@@ -11,7 +11,6 @@
 
 namespace Sensorario\Resources\Validators\Validators;
 
-use RuntimeException;
 use Sensorario\Resources\Resource;
 use Sensorario\Resources\Validators\Interfaces\Validator;
 
@@ -23,7 +22,7 @@ final class AllowedValues implements Validator
             if (isset($resource->allowedValues()[$key])) {
                 $allowedValues = $resource->allowedValues()[$key];
                 if (!in_array($value, $allowedValues)) {
-                    throw new RuntimeException(
+                    throw new \Sensorario\Resources\Exceptions\UnexpectedValueException(
                         'Value `' . $value . '` is not allowed '
                         . 'for key `' . $key . '`. '
                         . 'Allowed values are: ' . var_export($allowedValues, true)

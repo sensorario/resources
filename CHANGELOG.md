@@ -1,5 +1,6 @@
 # Release 5.0
 
+ * [close #117] - introduced custom exceptions
  * [close #116] - replaced static with self becase class is final
  * [close #115] - removed duplication
  * [close #113] - fix Resources removing spaces between "MagicResource" and comma

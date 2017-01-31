@@ -19,7 +19,7 @@ use Sensorario\Resources\Container;
 class RulerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException \RuntimeException
+     * @expectedException \Sensorario\Resources\Exceptions\InvalidCustomValidatorException
      * @expectedExceptionMessage Oops! `custom-validator` custom validator is not available. Only email is.
      */
     public function test()
@@ -55,7 +55,7 @@ class RulerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException \Sensorario\Resources\Exceptions\UndefinedResourceException
      * @expectedExceptionMessage Oops! Cant get rule without resource
      */
     public function testCantGetRuleWithoutRecource()

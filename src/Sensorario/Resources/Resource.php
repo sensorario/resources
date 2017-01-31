@@ -11,8 +11,8 @@
 
 namespace Sensorario\Resources;
 
-use RuntimeException;
 use Sensorario\Resources\Interfaces\ResourceInterface;
+use Sensorario\Resources\Rulers\Rule;
 
 class Resource extends MagicResource implements ResourceInterface
 {

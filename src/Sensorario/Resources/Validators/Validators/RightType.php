@@ -13,9 +13,8 @@ namespace Sensorario\Resources\Validators\Validators;
 
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
-use RuntimeException;
 use Sensorario\Resources\Resource;
-use Sensorario\Resources\Rule;
+use Sensorario\Resources\Rulers\Rule;
 use Sensorario\Resources\Rulers\Ruler;
 use Sensorario\Resources\Validators\Interfaces\Validator;
 
@@ -55,7 +54,7 @@ final class RightType implements Validator
                 );
 
                 if (false === $isValid) {
-                    throw new \RuntimeException(
+                    throw new \Sensorario\Resources\Exceptions\EmailException(
                         'Oops! Invalid email address'
                     );
                 }

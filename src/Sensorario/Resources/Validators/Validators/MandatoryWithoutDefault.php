@@ -11,7 +11,6 @@
 
 namespace Sensorario\Resources\Validators\Validators;
 
-use RuntimeException;
 use Sensorario\Resources\Resource;
 use Sensorario\Resources\Validators\Interfaces\Validator;
 
@@ -25,7 +24,7 @@ final class MandatoryWithoutDefault implements Validator
                 $resource->hasNotProperty($value) &&
                 !isset($resource->defaults()[$value])
             ) {
-                throw new RuntimeException(
+                throw new \Sensorario\Resources\Exceptions\PropertyException(
                     "Property `" . get_class($resource)
                     . "::\$$value` is mandatory but not set. "
                     . "Mandatory fields are: "

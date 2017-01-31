@@ -11,9 +11,9 @@
 
 namespace Sensorario\Resources;
 
-use RuntimeException;
-use Sensorario\Resources\Validators\ResourcesValidator;
 use Sensorario\Resources\Configurator;
+use Sensorario\Resources\Exceptions\EmptyComnfigurationException;
+use Sensorario\Resources\Validators\ResourcesValidator;
 
 /**
  * @method array defaults() returns resource's default values
@@ -40,7 +40,7 @@ abstract class MagicResource
             return $this->defaults()[$propertyName];
         }
 
-        throw new RuntimeException(
+        throw new \Sensorario\Resources\Exceptions\UndefinedMethodException(
             'Method `' . get_class($this)
             . '::' . $functionName 
             . '()` is not yet implemented'
@@ -64,7 +64,7 @@ abstract class MagicResource
 
         foreach ($properties as $k => $v) {
             if ('object' === gettype($v) && !isset($this->rules()[$k])) {
-                throw new RuntimeException(
+                throw new \Sensorario\Resources\Exceptions\PropertyWithoutRuleException(
                     'When property `' . $k . '` is an object class, must be defined in Resources::rules()'.
                     ' but rules here are equals to ' . var_export($this->rules(), true)
                     . ' And properties are ' . var_export($this->properties, true)
@@ -102,7 +102,7 @@ abstract class MagicResource
             );
         }
 
-        throw new RuntimeException(
+        throw new \Sensorario\Resources\Exceptions\FactoryMethodException(
             'Invalid factory method '
             . '`' . $methodName . '`'
         );
@@ -123,7 +123,7 @@ abstract class MagicResource
     final public function get($propertyName)
     {
         if ('' == $propertyName) {
-            throw new RuntimeException(
+            throw new \Sensorario\Resources\Exceptions\PropertyNameEmptyException(
                 'Oops! Property name requested is empty string!!'
             );
         }
@@ -133,7 +133,7 @@ abstract class MagicResource
                 return $prop;
             }
 
-            throw new RuntimeException(
+            throw new \Sensorario\Resources\Exceptions\NoValuesException(
                 'No value nor method `'
                 . $propertyName
                 . '` found in this resource'
@@ -166,7 +166,7 @@ abstract class MagicResource
         foreach ($properties as $k => $v) {
             if ('object' === gettype($v)) {
                 if (!isset($this->rules()[$k]['object'])) {
-                    throw new RuntimeException(
+                    throw new \Sensorario\Resources\Exceptions\PropertyWithoutRuleException(
                         'Property ' . $k . ' is an object but is not defined in rules'
                     );
                 }

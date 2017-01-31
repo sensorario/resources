@@ -9,10 +9,10 @@ Are you sure that no one have been working on your stuff?
 
 ## Create branch name
 
-    - `refactoring/task-description/{destination-branch}`
-    - `feature/task-description/{destination-branch}`
-    - `fix/task-description/{destination-branch}`
-    - `enhance/task-description/{destination-branch}`
+    - `[refactoring/]task-description/{destination-branch}`
+    - `[feature/]task-description/{destination-branch}`
+    - `[fix/]task-description/{destination-branch}`
+    - `[enhance/]task-description/{destination-branch}`
 
 ### Add new feature on master
 
