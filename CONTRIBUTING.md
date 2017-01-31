@@ -26,7 +26,7 @@ In some cases there are just the needs to add some components. In these case, is
 
 ### Fix code fix next major release
 
-Every time you need to refactor your code to prepare next release or just to make some other tastks:
+Every time you need to refactoring your code to prepare next release or just to make some other tasks:
 
     - `refactoring/task-description/{destination-branch}`
 
@@ -42,7 +42,7 @@ Every time you need to fix a bug or just apply a little patch
 
  - select issue
  - create branch named with issue number from right branch
- - fix `changelog` file
+ - fix `CHANGELOG` file
  - code!
  - remember tests if necessary
  - squash all your commits
@@ -53,7 +53,7 @@ Every time you need to fix a bug or just apply a little patch
 
  - select issue
  - create branch named with issue number from master
- - fix `changelog` file
+ - fix `CHANGELOG` file
  - code!
  - remember tests if necessary
  - squash all your commits
@@ -72,6 +72,7 @@ Every time you need to fix a bug or just apply a little patch
 
 ### Accept bug fix
 
+   - remember fix merge message with [close #XXX] message
    - merge on relative minor/master
    - increment patch release number
    - tag branch X.Y.{+1}
@@ -91,6 +92,6 @@ Every time you need to fix a bug or just apply a little patch
 
 ## Commit message
 
-Always, when a new feature or new fix were added, also `CHANGELOG` should be updated. Commit message should be the same added in changelog.
+Always, when a new feature or new fix were added, also `CHANGELOG` should be updated. Commit message should be the same added in `CHANGELOG`.
 
 Commit message must be `[closed #42] - message`
