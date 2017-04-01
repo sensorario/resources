@@ -1,0 +1,4 @@
+git checkout master
+git pull origin master
+git fetch -a --prune
+git branch --merged | grep -v '*' | xargs git branch -D
