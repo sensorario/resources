@@ -11,12 +11,13 @@
 
 namespace Sensorario\Resources\Test\Resources;
 
-use Sensorario\Resources\Resource;
-use Sensorario\Resources\Rulers\Ruler;
+use PHPUnit\Framework\TestCase;
 use Sensorario\Resources\Configurator;
 use Sensorario\Resources\Container;
+use Sensorario\Resources\Resource;
+use Sensorario\Resources\Rulers\Ruler;
 
-class RulerTest extends \PHPUnit_Framework_TestCase
+class RulerTest extends TestCase
 {
     /**
      * @expectedException \Sensorario\Resources\Exceptions\InvalidCustomValidatorException

@@ -12,12 +12,12 @@
 namespace Sensorario\Resources\Test\Sensorario\Helpers;
 
 use DateTime;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Sensorario\Resources\Helpers\PropertyTypeExtractor;
 use Resources\BirthDay;
 use Resources\Foo;
 
-final class PropertyTypeExtractorTest extends PHPUnit_Framework_TestCase
+final class PropertyTypeExtractorTest extends TestCase
 {
     public function testIsClassName()
     {
