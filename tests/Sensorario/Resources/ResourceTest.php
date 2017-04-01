@@ -36,12 +36,20 @@ final class ResourceTest extends TestCase
      */
     public function testExceptionIsThrownWhenNotYetImplementedMethodIsCalled()
     {
-        $foo = Foo::box([
-            'name'    => 'Simone',
-            'surname' => 'Gentili',
-        ]);
+        $configurator = new Configurator(
+            'empty_resource',
+            new Container([
+                'resources' => [
+                    'empty_resource' => [
+                        'constraints' => [],
+                    ],
+                ],
+            ])
+        );
 
-        $foo->notYetImplementedMethod();
+        $resource = Resource::box([], $configurator);
+
+        $resource->notYetImplementedMethod();
     }
 
     /**
@@ -50,11 +58,27 @@ final class ResourceTest extends TestCase
      */
     public function testNotAllowedFieldThroghRuntimeException()
     {
-        Foo::box([
-            'name'    => 'Simone',
+        $configurator = new Configurator(
+            'empty_resource',
+            new Container([
+                'resources' => [
+                    'empty_resource' => [
+                        'constraints' => [
+                            'allowedValues' => [
+                                'name',
+                                'surname',
+                            ],
+                        ],
+                    ],
+                ],
+            ])
+        );
+
+        $resource = Resource::box([
+            'name' => 'Simone',
             'surname' => 'Gentili',
-            'not'     => 'allowed',
-        ]);
+            'not allowed' => 'foo',
+        ], $configurator);
     }
 
     /**
@@ -63,27 +87,52 @@ final class ResourceTest extends TestCase
      */
     public function testMissingMandatoryFieldThroghRuntimeException()
     {
-        Foo::box([]);
+        $configurator = new Configurator(
+            'empty_resource',
+            new Container([
+                'resources' => [
+                    'empty_resource' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'name',
+                            ],
+                        ],
+                    ],
+                ],
+            ])
+        );
+
+        $resource = Resource::box([
+            'surname' => 'Gentili',
+        ], $configurator);
     }
 
     public function testMandatoryFieldsAreAuthomaticallyAllowed()
     {
-        Foo::box([
-            'name'    => 'Simone',
-            'surname' => 'Gentili',
-        ]);
-    }
+        $configurator = new Configurator(
+            'empty_resource',
+            new Container([
+                'resources' => [
+                    'empty_resource' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'name',
+                                'surname',
+                            ],
+                        ],
+                    ],
+                ],
+            ])
+        );
 
-    public function testResourcesHasMagicMethod()
-    {
-        $foo = Foo::box([
+        $resource = Resource::box([
             'name'    => 'Simone',
             'surname' => 'Gentili',
-        ]);
+        ], $configurator);
 
         $this->assertEquals(
             'Simone',
-            $foo->name()
+            $resource->name()
         );
     }
 
@@ -93,14 +142,30 @@ final class ResourceTest extends TestCase
      */
     public function testExceptionMessageInCaseOfEmptyPropertyName()
     {
-        $foo = Foo::box([
+        $configurator = new Configurator(
+            'empty_resource',
+            new Container([
+                'resources' => [
+                    'empty_resource' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'name',
+                                'surname',
+                            ],
+                        ],
+                    ],
+                ],
+            ])
+        );
+
+        $resource = Resource::box([
             'name'    => 'Simone',
             'surname' => 'Gentili',
-        ]);
+        ], $configurator);
 
         $this->assertEquals(
             'Simone',
-            $foo->get('')
+            $resource->get('')
         );
     }
 
@@ -110,16 +175,34 @@ final class ResourceTest extends TestCase
      */
     public function testFactoryMethods()
     {
-        Bar::invalidFactoryName();
+        Resource::invalidFactoryName();
     }
 
     public function testCanHaveDefaultValues()
     {
-        $foo = Bar::box();
+        $configurator = new Configurator(
+            'empty_resource',
+            new Container([
+                'resources' => [
+                    'empty_resource' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'name',
+                            ],
+                            'defaults' => [
+                                'name' => 'Firefox',
+                            ],
+                        ],
+                    ],
+                ],
+            ])
+        );
+
+        $resource = Resource::box([], $configurator);
 
         $this->assertEquals(
             'Firefox',
-            $foo->name()
+            $resource->name()
         );
     }
 
@@ -209,15 +292,33 @@ final class ResourceTest extends TestCase
 
     public function testPropertiesAccessor()
     {
-        $foo = Foo::box([
-            'name' => 'Sam',
-        ]);
+        $aSpecificRule = [ 'custom-validator' => 'email' ];
 
-        $this->assertEquals([
-            'name' => 'Sam',
-        ],
-        $foo->properties()
-    );
+        $configurator = new Configurator(
+            'email-resource',
+            new Container([
+                'resources' => [
+                    'email-resource' => [
+                        'constraints' => [
+                            'mandatory' => [
+                                'name',
+                            ],
+                        ]
+                    ],
+                ],
+            ])
+        );
+
+        $properties = [
+            'name' => 'Simone',
+        ];
+
+        $resource = Resource::box($properties, $configurator);
+
+        $this->assertEquals(
+            $properties,
+            $resource->properties()
+        );
     }
 
     /**
