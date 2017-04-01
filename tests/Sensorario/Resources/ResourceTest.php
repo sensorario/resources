@@ -13,7 +13,7 @@ namespace Sensorario\Resources\Test\Resources;
 
 use DateInterval;
 use DateTime;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Resources\Bar;
 use Resources\BirthDay;
 use Resources\UndefinedObject;
@@ -28,7 +28,7 @@ use Sensorario\Resources\Container;
 use Sensorario\Resources\Resource;
 use Sensorario\Resources\Validators\ResourcesValidator;
 
-final class ResourceTest extends PHPUnit_Framework_TestCase
+final class ResourceTest extends TestCase
 {
     /**
      * @expectedException              \Sensorario\Resources\Exceptions\UndefinedMethodException

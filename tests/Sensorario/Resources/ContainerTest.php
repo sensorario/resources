@@ -11,10 +11,10 @@
 
 namespace Sensorario\Resources\Test\Resources;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Sensorario\Resources\Container;
 
-final class ContainerTest extends PHPUnit_Framework_TestCase
+final class ContainerTest extends TestCase
 {
     /**
      * @expectedException \Sensorario\Resources\Exceptions\EmptyConfigurationException

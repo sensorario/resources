@@ -11,9 +11,10 @@
 
 namespace Sensorario\Resources\Test\Resources;
 
+use PHPUnit\Framework\TestCase;
 use Sensorario\Resources\Rulers\Rule;
 
-class RuleTest extends \PHPUnit_Framework_TestCase
+class RuleTest extends TestCase
 {
     /**
      * @expectedException \LogicException

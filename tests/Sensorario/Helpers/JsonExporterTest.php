@@ -12,13 +12,13 @@
 namespace Sensorario\Helpers;
 
 use DateTime;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Resources\BirthDay;
 use Sensorario\Resources\Helpers\JsonExporter;
 use Sensorario\Resources\Resources\Resource;
 use Sensorario\Resources\Validators\ResourcesValidator;
 
-final class JsonExporterTest extends PHPUnit_Framework_TestCase
+final class JsonExporterTest extends TestCase
 {
     public function testCouldExportInJsonFormat()
     {
