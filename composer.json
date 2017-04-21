@@ -21,7 +21,8 @@
         "egulias/email-validator": "~2.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0"
+        "phpunit/phpunit": "^6.0",
+        "codeclimate/php-test-reporter": "dev-master"
     },
     "extra": {
         "branch-alias": {

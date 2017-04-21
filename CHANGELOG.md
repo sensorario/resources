@@ -1,5 +1,6 @@
 # Release 5.0
 
+ * [close #129] - add scrutinizer configuration for coverage
  * [close #126] - add new refresh script
  * [close #119] - add CircleCI configuration
  * [close #118] - replaced sample test classes with Resource::box() and configuration
