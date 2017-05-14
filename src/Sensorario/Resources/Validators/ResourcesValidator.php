@@ -10,25 +10,32 @@
 
 namespace Sensorario\Resources\Validators;
 
+use Sensorario\Container\Container;
 use Sensorario\Resources\Resource;
 
 final class ResourcesValidator
 {
     public function validate(Resource $resource)
     {
+        $container = ValidatorContainer::load();
+
         $validators = [
-            'RightType',
-            'MandatoryConditional',
-            'MandatoryProperty',
-            'MandatoryWithoutDefault',
-            'AllowedProperties',
-            'AllowedValues',
-            'RewriteValues',
-            'AllowedRanges',
+            'right.type',
+            'mandatory.conditional',
+            'mandatory.property',
+            'mandatory.without.default',
+            'allowed.properties',
+            'allowed.values',
+            'rewrite.values',
+            'allowed.ranges',
+            'right.type',
         ];
 
         foreach ($validators as $name) {
-            $validator = ValidatorFactory::fromName($name);
+            if ($container->contains($name)) {
+                $validator = $container->get($name);
+            }
+
             $validator->check($resource);
         }
     }

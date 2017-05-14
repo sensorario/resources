@@ -1,3 +1,7 @@
+# Release 6.0
+
+ * [close #132] - introduce `sensorario/container` component
+
 # Release 5.0
 
  * [close #129] - add scrutinizer configuration for coverage

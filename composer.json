@@ -18,7 +18,8 @@
     },
     "require": {
         "php": ">=7.1.0",
-        "egulias/email-validator": "~2.1"
+        "egulias/email-validator": "~2.1",
+        "sensorario/container": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0",
@@ -28,5 +29,8 @@
         "branch-alias": {
             "dev-master": "6.0-dev"
         }
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }

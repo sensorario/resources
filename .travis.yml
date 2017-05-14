@@ -1,10 +1,9 @@
 language: php
 
 php:
-    - 7.0
-    - 7.1
+    - 7.1.5
 
 install:
     - composer install
 
-script: vendor/bin/phpunit
+script: bin/phpunit

@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    working_directory: /var/www/html
+    docker:
+      - image: php:7.1-apache
+    steps:
+      - run: apt-get update && apt-get -y install git
+      - checkout
+      - run:
+          name: Install Composer
+          command: |
+            php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
+            php composer-setup.php
+            php -r "unlink('composer-setup.php');"
+      - run: php composer.phar install
+      - run: ./bin/phpunit

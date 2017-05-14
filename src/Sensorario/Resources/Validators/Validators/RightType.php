@@ -12,7 +12,9 @@
 namespace Sensorario\Resources\Validators\Validators;
 
 use Egulias\EmailValidator\EmailValidator;
+use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
+use Egulias\EmailValidator\Validation\RFCValidation;
 use Sensorario\Resources\Resource;
 use Sensorario\Resources\Rulers\Rule;
 use Sensorario\Resources\Rulers\Ruler;
@@ -22,14 +24,16 @@ final class RightType implements Validator
 {
     private $validator;
 
-    private $validations;
+    private $multi;
 
-    public function __construct(
-        EmailValidator $validator,
-        MultipleValidationWithAnd $validations
-    ) {
-        $this->validator = $validator;
-        $this->validations = $validations;
+    public function __construct()
+    {
+        $this->validator = new EmailValidator();
+
+        $this->validations = new MultipleValidationWithAnd([
+            new RFCValidation(),
+            new DNSCheckValidation()
+        ]);
     }
 
     public function check(Resource $resource)
