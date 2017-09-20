@@ -25,21 +25,17 @@ final class AllowedProperties implements Validator
 
         foreach ($resource->properties() as $key => $value) {
             if (!in_array($key, $allowed)) {
-                $isAllowed = false;
-
                 foreach ($allowed as $kk => $vv) {
                     if (!is_numeric($kk) && $resource->hasProperty($vv['when']['property'])) {
-                        $isAllowed = true;
+                        return;
                     }
                 }
 
-                if (!$isAllowed) {
-                    throw new \Sensorario\Resources\Exceptions\NotAllowedKeyException(
-                        "Key `" . get_class($resource)
-                        . "::\$$key` with value `" . $value
-                        . "` is not allowed"
-                    );
-                }
+                throw new \Sensorario\Resources\Exceptions\NotAllowedKeyException(
+                    "Key `" . get_class($resource)
+                    . "::\$$key` with value `" . $value
+                    . "` is not allowed"
+                );
             }
         }
     }
