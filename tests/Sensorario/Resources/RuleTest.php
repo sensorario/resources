@@ -25,7 +25,7 @@ class RuleTest extends TestCase
         $rule = Rule::fromArray([]);
     }
 
-    public function test()
+    public function testContainsConfigurationAsArray()
     {
         $rule = Rule::fromArray(
             $ruleConfiguration = [
@@ -66,7 +66,7 @@ class RuleTest extends TestCase
         );
     }
 
-    public function testIs()
+    public function testCheckIfValueIsOfRightObjectType()
     {
         $rule = Rule::fromArray(
             $ruleConfiguration = [
@@ -76,25 +76,8 @@ class RuleTest extends TestCase
             ]
         );
 
-        $this->assertSame(
-            true,
-            $rule->is(Rule::TYPE_OBJECT)
-        );
-    }
-
-    public function testIsNot()
-    {
-        $rule = Rule::fromArray(
-            $ruleConfiguration = [
-                Rule::TYPE_OBJECT => [
-                    '\DateTime',
-                ]
-            ]
-        );
-
-        $this->assertSame(
-            false,
-            $rule->isNot(Rule::TYPE_OBJECT)
-        );
+        $this->assertSame(true, $rule->is(Rule::TYPE_OBJECT));
+        $this->assertSame(false, $rule->isNot(Rule::TYPE_OBJECT));
+        $this->assertSame(['\DateTime'], $rule->getExpectedType());
     }
 }

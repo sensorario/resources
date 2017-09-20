@@ -56,7 +56,7 @@ class Rule
 
     public function asArray() : array
     {
-         return $this->rule;
+        return $this->rule;
     }
 
     public function isValid()

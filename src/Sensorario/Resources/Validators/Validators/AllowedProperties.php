@@ -36,7 +36,7 @@ final class AllowedProperties implements Validator
                 if (!$isAllowed) {
                     throw new \Sensorario\Resources\Exceptions\NotAllowedKeyException(
                         "Key `" . get_class($resource)
-                        . "::\$$key` with value `" .  $value
+                        . "::\$$key` with value `" . $value
                         . "` is not allowed"
                     );
                 }

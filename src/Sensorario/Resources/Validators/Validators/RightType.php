@@ -16,7 +16,6 @@ use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use Sensorario\Resources\Resource;
-use Sensorario\Resources\Rulers\Rule;
 use Sensorario\Resources\Rulers\Ruler;
 use Sensorario\Resources\Validators\Interfaces\Validator;
 

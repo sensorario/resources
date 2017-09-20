@@ -12,7 +12,6 @@
 namespace Sensorario\Resources;
 
 use Sensorario\Resources\Configurator;
-use Sensorario\Resources\Exceptions\EmptyComnfigurationException;
 use Sensorario\Resources\Validators\ResourcesValidator;
 
 /**
@@ -65,7 +64,7 @@ abstract class MagicResource
         foreach ($properties as $k => $v) {
             if ('object' === gettype($v) && !isset($this->rules()[$k])) {
                 throw new \Sensorario\Resources\Exceptions\PropertyWithoutRuleException(
-                    'When property `' . $k . '` is an object class, must be defined in Resources::rules()'.
+                    'When property `' . $k . '` is an object class, must be defined in Resources::rules()' .
                     ' but rules here are equals to ' . var_export($this->rules(), true)
                     . ' And properties are ' . var_export($this->properties, true)
                 );
