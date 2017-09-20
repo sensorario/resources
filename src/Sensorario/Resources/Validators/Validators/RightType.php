@@ -23,16 +23,9 @@ final class RightType implements Validator
 {
     private $validator;
 
-    private $multi;
-
     public function __construct()
     {
         $this->validator = new EmailValidator();
-
-        $this->validations = new MultipleValidationWithAnd([
-            new RFCValidation(),
-            new DNSCheckValidation()
-        ]);
     }
 
     public function check(Resource $resource)
@@ -53,7 +46,10 @@ final class RightType implements Validator
 
                 $isValid = $this->validator->isValid(
                     $resource->get($key),
-                    $this->validations
+                    new MultipleValidationWithAnd([
+                        new RFCValidation(),
+                        new DNSCheckValidation()
+                    ])
                 );
 
                 if (false === $isValid) {
