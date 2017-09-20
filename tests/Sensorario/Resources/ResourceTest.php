@@ -333,13 +333,6 @@ final class ResourceTest extends TestCase
         ]);
     }
 
-    public function testShouldNotFail()
-    {
-        MandatoryDependency::box([
-            'foo' => 'bar',
-        ]);
-    }
-
     public function testResourcesComposition()
     {
         $composition = ComposedResource::box([
@@ -365,14 +358,6 @@ final class ResourceTest extends TestCase
     {
         UserCreationEvent::box([
             'type' => 'guest',
-        ]);
-    }
-
-    public function test()
-    {
-        UserCreationEvent::box([
-            'type' => 'human',
-            'username' => 'Sensorario',
         ]);
     }
 
@@ -531,29 +516,6 @@ final class ResourceTest extends TestCase
             [ 'mandatory_property' ],
             $container->allowed('foo')
         );
-    }
-
-    public function testPropertyType()
-    {
-        $configurator = new Configurator(
-            'foo',
-            new Container([
-                'resources' => [
-                    'foo' => [
-                        'constraints' => [
-                            'mandatory' => [ 'date' ],
-                            'rules' => [ 'date' => [ 'object' => 'DateTime' ] ],
-                        ]
-                    ],
-                ],
-            ])
-        );
-
-        $properties = [
-            'date' => new \DateTime(),
-        ];
-
-        Resource::box($properties, $configurator);
     }
 
     /**
@@ -929,4 +891,36 @@ final class ResourceTest extends TestCase
             'date' => new \stdClass(),
         ]);
     }
+
+    /**
+     * @expectedException \Sensorario\Resources\Exceptions\InvalidCustomValidatorException
+     * @expectedExceptionMessage Oops! `custom-validator` custom validator is not available. Only email is.
+     */
+    public function testDenyCustomValidatorDifferentFromEmail()
+    {
+        $configurator = new Configurator(
+            'foo',
+            new Container([
+                'resources' => [
+                    'foo' => [
+                        'constraints' => [
+                            'allowed' => [
+                                'property_name',
+                            ],
+                            'rules' => [
+                                'property_name' => [
+                                    'custom-validator' => 'foo',
+                                ]
+                            ]
+                        ],
+                    ],
+                ]
+            ])
+        );
+
+        Resource::box([
+            'property_name' => '42',
+        ], $configurator);
+    }
+
 }

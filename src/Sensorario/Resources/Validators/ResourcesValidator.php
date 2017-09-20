@@ -10,7 +10,6 @@
 
 namespace Sensorario\Resources\Validators;
 
-use Sensorario\Container\Container;
 use Sensorario\Resources\Resource;
 
 final class ResourcesValidator
@@ -33,10 +32,8 @@ final class ResourcesValidator
 
         foreach ($validators as $name) {
             if ($container->contains($name)) {
-                $validator = $container->get($name);
+                $container->get($name)->check($resource);
             }
-
-            $validator->check($resource);
         }
     }
 }

@@ -35,9 +35,9 @@ final class Configurator
 
     public function __call($method, $bar)
     {
-         return $this->container->$method(
-             $this->resourceName
-         );
+        return $this->container->$method(
+            $this->resourceName
+        );
     }
 
     public function resourceName()

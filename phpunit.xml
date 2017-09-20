@@ -2,17 +2,14 @@
 <phpunit bootstrap="./vendor/autoload.php" colors="true">
 
     <testsuites>
-        <testsuite name="Resources">
-            <directory>./tests</directory>
+        <testsuite name="suite">
+            <directory>tests/</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-            <exclude>
-                <directory>tests/**</directory>
-            </exclude>
+            <directory suffix=".php">src/</directory>
         </whitelist>
     </filter>
 

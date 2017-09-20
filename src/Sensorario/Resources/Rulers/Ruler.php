@@ -73,7 +73,7 @@ class Ruler
         if ($this->typeMismatch()) {
             if ($this->resource->isFieldNumericButString($this->fieldName)) {
                 throw new \Sensorario\Resources\Exceptions\WrongPropertyValueException(
-                    'Property `'.$this->fieldName.'` must be an integer!'
+                    'Property `' . $this->fieldName . '` must be an integer!'
                 );
             }
 
@@ -105,7 +105,7 @@ class Ruler
 
         if ($this->rule->isNotMail()) {
             throw new \Sensorario\Resources\Exceptions\InvalidCustomValidatorException(
-                'Oops! `'. $this->rule->getRuleType() .'` custom validator is not available. Only email is.'
+                'Oops! `' . $this->rule->getRuleType() . '` custom validator is not available. Only email is.'
             );
         }
     }

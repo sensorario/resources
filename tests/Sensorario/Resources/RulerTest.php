@@ -20,47 +20,12 @@ use Sensorario\Resources\Rulers\Ruler;
 class RulerTest extends TestCase
 {
     /**
-     * @expectedException \Sensorario\Resources\Exceptions\InvalidCustomValidatorException
-     * @expectedExceptionMessage Oops! `custom-validator` custom validator is not available. Only email is.
-     */
-    public function test()
-    {
-        $configurator = new Configurator(
-            'foo',
-            new Container([
-                'resources' => [
-                    'foo' => [
-                        'constraints' => [
-                            'allowed' => [
-                                'property_name',
-                            ],
-                            'rules' => [
-                                'property_name' => [
-                                    'custom-validator' => 'foo',
-                                ]
-                            ]
-                        ],
-                    ],
-                ]
-            ])
-        );
-
-        Resource::box([
-            'property_name' => '42',
-        ], $configurator);
-    }
-
-    public function setUp()
-    {
-        $this->ruler = new Ruler();
-    }
-
-    /**
      * @expectedException \Sensorario\Resources\Exceptions\UndefinedResourceException
      * @expectedExceptionMessage Oops! Cant get rule without resource
      */
     public function testCantGetRuleWithoutRecource()
     {
-        $this->ruler->getRuleFromResource();
+        $ruler = new Ruler();
+        $ruler->getRuleFromResource();
     }
 }
