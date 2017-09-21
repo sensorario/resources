@@ -22,6 +22,8 @@ abstract class MagicResource
 {
     protected $properties = [];
 
+    protected $validator;
+
     private static $methodWhiteList = [
         'box',
         'allowedValues'
@@ -53,7 +55,9 @@ abstract class MagicResource
         ResourcesValidator $validator,
         Configurator $configuration = null
     ) {
-        $this->properties = $properties;
+        $this->properties    = $properties;
+        $this->validator     = $validator;
+        $this->configuration = $configuration;
 
         if ($configuration) {
             $this->applyConfiguration(
@@ -61,17 +65,13 @@ abstract class MagicResource
             );
         }
 
-        foreach ($properties as $k => $v) {
-            if ('object' === gettype($v) && !isset($this->rules()[$k])) {
-                throw new \Sensorario\Resources\Exceptions\PropertyWithoutRuleException(
-                    'When property `' . $k . '` is an object class, must be defined in Resources::rules()' .
-                    ' but rules here are equals to ' . var_export($this->rules(), true)
-                    . ' And properties are ' . var_export($this->properties, true)
-                );
-            }
-        }
+        $this->init();
+    }
 
-        $validator->validate($this);
+    private function init()
+    {
+        $this->ensurePropertiesConsistency();
+        $this->validate();
     }
 
     public static function __callStatic($methodName, array $args)
@@ -181,5 +181,23 @@ abstract class MagicResource
         }
 
         return $properties;
+    }
+
+    public function validate()
+    {
+        $this->validator->validate($this);
+    }
+
+    public function ensurePropertiesConsistency()
+    {
+        foreach ($this->properties as $k => $v) {
+            if ('object' === gettype($v) && !isset($this->rules()[$k])) {
+                throw new \Sensorario\Resources\Exceptions\PropertyWithoutRuleException(
+                    'When property `' . $k . '` is an object class, must be defined in Resources::rules()' .
+                    ' but rules here are equals to ' . var_export($this->rules(), true)
+                    . ' And properties are ' . var_export($this->properties, true)
+                );
+            }
+        }
     }
 }
