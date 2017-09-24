@@ -10,6 +10,10 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src/</directory>
+            <exclude>
+                <directory suffix=".php">src/Sensorario/Resources/Exceptions/</directory>
+                <directory suffix=".php">src/Sensorario/Resources/Interfaces/</directory>
+            </exclude>
         </whitelist>
     </filter>
 
