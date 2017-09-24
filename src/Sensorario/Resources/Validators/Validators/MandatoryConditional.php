@@ -23,29 +23,25 @@ final class MandatoryConditional implements Validator
                 $name = $value['when']['property'];
                 $value = $value['when']['has_value'];
 
-                if ($isArray = is_array($value)) {
-                    foreach ($value as $value) {
-                        if ($resource->get($name) === $value && $resource->hasNotProperty($key)) {
-                            self::exceptionMessage($key, $value, $key);
-                        }
+                if (is_array($value)) {
+                    foreach ($value as $item) {
+                        $this->ensurePropertyNameHasKey($resource, $item, $name, $key);
                     }
-                }
-
-                if (!$isArray) {
-                    if ($resource->get($name) === $value && $resource->hasNotProperty($key)) {
-                        self::exceptionMessage($name, $value, $key);
-                    }
+                } else {
+                    $this->ensurePropertyNameHasKey($resource, $value, $name, $key);
                 }
             }
         }
     }
 
-    private static function exceptionMessage($name, $value, $key)
+    public function ensurePropertyNameHasKey(Resource $resource, $value, $name, $key)
     {
-        throw new \Sensorario\Resources\Exceptions\PropertyException(
-            'When property `' . $name . '` '
-            . 'has value ' . '`' . $value . '` '
-            . 'also `' . $key . '` is mandatory'
-        );
+        if ($resource->get($name) === $value && $resource->hasNotProperty($key)) {
+            throw new \Sensorario\Resources\Exceptions\PropertyException(
+                'When property `' . $name . '` '
+                . 'has value ' . '`' . $value . '` '
+                . 'also `' . $key . '` is mandatory'
+            );
+        }
     }
 }
