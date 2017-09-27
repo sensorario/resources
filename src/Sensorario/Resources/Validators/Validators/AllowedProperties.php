@@ -16,23 +16,48 @@ use Sensorario\Resources\Validators\Interfaces\Validator;
 
 final class AllowedProperties implements Validator
 {
+    private $resource;
+
+    private $allowed;
+
     public function check(Resource $resource)
     {
-        $allowed = array_merge(
-            $resource->allowed(),
-            $resource->mandatory()
-        );
+        $this->resource = $resource;
 
-        foreach ($allowed as $kk => $vv) {
-            if (!is_numeric($kk) && isset($vv['when']) && $resource->hasProperty($vv['when']['property'])) {
-                return;
+        $this->buildAllowedProperties();
+
+        if ($this->checkShouldBeSkipped()) {
+            return;
+        }
+
+        $this->ensurePropertyIsAllowed();
+    }
+
+    private function buildAllowedProperties()
+    {
+        $this->allowed = array_merge(
+            $this->resource->allowed(),
+            $this->resource->mandatory()
+        );
+    }
+
+    private function checkShouldBeSkipped()
+    {
+        foreach ($this->allowed as $kk => $vv) {
+            if (!is_numeric($kk) && isset($vv['when']) && $this->resource->hasProperty($vv['when']['property'])) {
+                return true;
             }
         }
 
-        foreach ($resource->properties() as $key => $value) {
-            if (!in_array($key, $allowed)) {
+        return false;
+    }
+
+    public function ensurePropertyIsAllowed()
+    {
+        foreach ($this->resource->properties() as $key => $value) {
+            if (!in_array($key, $this->allowed)) {
                 throw new \Sensorario\Resources\Exceptions\NotAllowedKeyException(
-                    "Key `" . get_class($resource)
+                    "Key `" . get_class($this->resource)
                     . "::\$$key` with value `" . $value
                     . "` is not allowed"
                 );
