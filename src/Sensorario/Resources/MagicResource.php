@@ -121,11 +121,7 @@ abstract class MagicResource
 
     final public function get($propertyName)
     {
-        if ('' == $propertyName) {
-            throw new \Sensorario\Resources\Exceptions\PropertyNameEmptyException(
-                'Oops! Property name requested is empty string!!'
-            );
-        }
+        $this->ensurePropertyNameIsNotEmpty($propertyName);
 
         if ($this->hasNotProperty($propertyName)) {
             if ($prop = $this->defaults()[$propertyName] ?? false) {
@@ -198,6 +194,15 @@ abstract class MagicResource
                     . ' And properties are ' . var_export($this->properties, true)
                 );
             }
+        }
+    }
+
+    public function ensurePropertyNameIsNotEmpty($propertyName)
+    {
+        if ('' == $propertyName) {
+            throw new \Sensorario\Resources\Exceptions\PropertyNameEmptyException(
+                'Oops! Property name requested is empty string!!'
+            );
         }
     }
 }
