@@ -16,6 +16,10 @@ use Sensorario\Resources\Validators\Interfaces\Validator;
 
 final class AllowedProperties implements Validator
 {
+    private $resource;
+
+    private $allowed;
+
     public function check(Resource $resource)
     {
         $this->resource = $resource;
