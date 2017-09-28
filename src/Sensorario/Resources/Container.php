@@ -32,11 +32,7 @@ class Container
 
     public function __construct(array $resources)
     {
-        if (!isset($resources['resources'])) {
-            throw new \Sensorario\Resources\Exceptions\EmptyConfigurationException(
-                'resources element is not defined'
-            );
-        }
+        $this->ensureResourcesItemIsDefined();
 
         $this->rewrites = [];
         $this->globals  = [];
@@ -180,5 +176,14 @@ class Container
             'allowedRanges',
             $resource
         );
+    }
+
+    public function ensureResourcesItemIsDefined($resources)
+    {
+        if (!isset($resources['resources'])) {
+            throw new \Sensorario\Resources\Exceptions\EmptyConfigurationException(
+                'resources element is not defined'
+            );
+        }
     }
 }
