@@ -16,6 +16,7 @@ use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use Sensorario\Resources\Resource;
+use Sensorario\Resources\Rulers\Rule;
 use Sensorario\Resources\Rulers\Ruler;
 use Sensorario\Resources\Validators\Interfaces\Validator;
 
@@ -41,26 +42,32 @@ final class RightType implements Validator
 
             $rule->ensureRuleNameIsValid();
 
-            if ($rule->isCustom()) {
-                $ruler->ensureRuleTypeIsEmail();
+            $this->ensureEmailIsValid($rule, $resource, $key, $ruler);
 
-                $isValid = $this->validator->isValid(
-                    $resource->get($key),
-                    new MultipleValidationWithAnd([
-                        new RFCValidation(),
-                        new DNSCheckValidation()
-                    ])
-                );
-
-                if (false === $isValid) {
-                    throw new \Sensorario\Resources\Exceptions\EmailException(
-                        'Oops! Invalid email address'
-                    );
-                }
-            }
 
             $ruler->ensureTypeIsValid();
             $ruler->ensureClassIsValid();
+        }
+    }
+
+    private function ensureEmailIsValid(Rule $rule, Resource $resource, $key, $ruler)
+    {
+        if ($rule->isCustom()) {
+            $ruler->ensureRuleTypeIsEmail();
+
+            $isValid = $this->validator->isValid(
+                $resource->get($key),
+                new MultipleValidationWithAnd([
+                    new RFCValidation(),
+                    new DNSCheckValidation()
+                ])
+            );
+
+            if (false === $isValid) {
+                throw new \Sensorario\Resources\Exceptions\EmailException(
+                    'Oops! Invalid email address'
+                );
+            }
         }
     }
 }
