@@ -39,13 +39,7 @@ class Container
 
         $this->ensureValidConstraints($resources);
 
-        foreach ($resources['resources'] as $item) {
-            if (isset($item['rewrite'])) {
-                foreach ($item['rewrite'] as $field => $rewriteRule) {
-                    $this->rewrites[$field] = $rewriteRule;
-                }
-            }
-        }
+        $this->fillInRewrites($resources['resources']);
 
         if (isset($resources['globals'])) {
             $this->globals = $resources['globals'];
@@ -184,6 +178,17 @@ class Container
             throw new \Sensorario\Resources\Exceptions\EmptyConfigurationException(
                 'resources element is not defined'
             );
+        }
+    }
+
+    public function fillInRewrites(array $resources)
+    {
+        foreach ($resources as $item) {
+            if (isset($item['rewrite'])) {
+                foreach ($item['rewrite'] as $field => $rewriteRule) {
+                    $this->rewrites[$field] = $rewriteRule;
+                }
+            }
         }
     }
 }
