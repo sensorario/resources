@@ -32,7 +32,7 @@ class Container
 
     public function __construct(array $resources)
     {
-        $this->ensureResourcesItemIsDefined();
+        $this->ensureResourcesItemIsDefined($resources);
 
         $this->rewrites = [];
         $this->globals  = [];
