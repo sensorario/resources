@@ -160,18 +160,10 @@ abstract class MagicResource
 
         foreach ($properties as $k => $v) {
             if ('object' === gettype($v)) {
-                if (!isset($this->rules()[$k]['object'])) {
-                    throw new \Sensorario\Resources\Exceptions\PropertyWithoutRuleException(
-                        'Property ' . $k . ' is an object but is not defined in rules'
-                    );
-                }
+                $this->ensurePropertyIsAnObjectDefined($k);
 
                 if ($this->rules()[$k]['object'] === '\\Sensorario\\Resources\\Resource') {
                     $properties[$k] = $v->properties();
-                }
-
-                if ($this->rules()[$k]['object'] === 'array') {
-                    $properties[$k] = (array) $v;
                 }
             }
         }
@@ -202,6 +194,15 @@ abstract class MagicResource
         if ('' == $propertyName) {
             throw new \Sensorario\Resources\Exceptions\PropertyNameEmptyException(
                 'Oops! Property name requested is empty string!!'
+            );
+        }
+    }
+
+    public function ensurePropertyIsAnObjectDefined($k)
+    {
+        if (!isset($this->rules()[$k]['object'])) {
+            throw new \Sensorario\Resources\Exceptions\PropertyWithoutRuleException(
+                'Property ' . $k . ' is an object but is not defined in rules'
             );
         }
     }
