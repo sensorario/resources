@@ -12,6 +12,7 @@
 namespace Sensorario\Resources;
 
 use Sensorario\Resources\Configurator;
+use Sensorario\Resources\Exceptions\FactoryMethodException;
 use Sensorario\Resources\Validators\ResourcesValidator;
 
 /**
@@ -76,35 +77,18 @@ abstract class MagicResource
 
     public static function __callStatic($methodName, array $args)
     {
-        $isMethodAllowed = in_array(
-            $methodName,
-            self::$methodWhiteList
-        );
-
+        $isMethodAllowed = in_array($methodName, self::$methodWhiteList);
         $configuration = null;
 
-        if (
-            isset($args[1])
-            && 'Sensorario\Resources\Configurator' == get_class($args[1])
-        ) {
-            $configuration = new Configurator(
-                $args[1]->resourceName(),
-                $args[1]->container()
-            );
+        if (isset($args[1]) && 'Sensorario\Resources\Configurator' == get_class($args[1])) {
+            $configuration = new Configurator($args[1]->resourceName(), $args[1]->container());
         }
 
         if ($isMethodAllowed) {
-            return new static(
-                $args[0] ?? [],
-                new ResourcesValidator(),
-                $configuration
-            );
+            return new static($args[0] ?? [], new ResourcesValidator(), $configuration);
         }
 
-        throw new \Sensorario\Resources\Exceptions\FactoryMethodException(
-            'Invalid factory method '
-            . '`' . $methodName . '`'
-        );
+        throw new FactoryMethodException('Invalid factory method ' . '`' . $methodName . '`');
     }
 
     final public function hasProperty($propertyName)
