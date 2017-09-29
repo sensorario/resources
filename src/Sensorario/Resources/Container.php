@@ -53,15 +53,20 @@ class Container
         foreach ($resources['resources'] as $item) {
             if (isset($item['constraints'])) {
                 foreach ($item['constraints'] as $name => $value) {
-                    if (!in_array($name, $this->allowed)) {
-                        throw new \Sensorario\Resources\Exceptions\InvalidConstraintException(
-                            'Invalid constraint: '
-                            . 'name ' . $name
-                            . '; value ' . $value
-                        );
-                    }
+                    $this->ensureNameIsAllowed($name, $value);
                 }
             }
+        }
+    }
+
+    public function ensureNameIsAllowed($name, $value)
+    {
+        if (!in_array($name, $this->allowed)) {
+            throw new \Sensorario\Resources\Exceptions\InvalidConstraintException(
+                'Invalid constraint: '
+                . 'name ' . $name
+                . '; value ' . $value
+            );
         }
     }
 
