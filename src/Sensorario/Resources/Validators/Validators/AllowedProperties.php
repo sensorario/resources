@@ -24,7 +24,7 @@ final class AllowedProperties implements Validator
     {
         $this->resource = $resource;
         $this->buildAllowedProperties();
-        if (!$this->checkShouldBeSkipped()) {
+        if (null === $this->checkShouldBeSkipped()) {
             $this->ensurePropertyIsAllowed();
         }
     }
