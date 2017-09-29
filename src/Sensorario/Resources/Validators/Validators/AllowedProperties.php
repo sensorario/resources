@@ -23,14 +23,10 @@ final class AllowedProperties implements Validator
     public function check(Resource $resource)
     {
         $this->resource = $resource;
-
         $this->buildAllowedProperties();
-
-        if ($this->checkShouldBeSkipped()) {
-            return;
+        if (!$this->checkShouldBeSkipped()) {
+            $this->ensurePropertyIsAllowed();
         }
-
-        $this->ensurePropertyIsAllowed();
     }
 
     private function buildAllowedProperties()
@@ -48,8 +44,6 @@ final class AllowedProperties implements Validator
                 return true;
             }
         }
-
-        return false;
     }
 
     public function ensurePropertyIsAllowed()
@@ -57,9 +51,7 @@ final class AllowedProperties implements Validator
         foreach ($this->resource->properties() as $key => $value) {
             if (!in_array($key, $this->allowed)) {
                 throw new \Sensorario\Resources\Exceptions\NotAllowedKeyException(
-                    "Key `" . get_class($this->resource)
-                    . "::\$$key` with value `" . $value
-                    . "` is not allowed"
+                    "Key `" . get_class($this->resource) . "::\$$key` with value `" . $value . "` is not allowed"
                 );
             }
         }
