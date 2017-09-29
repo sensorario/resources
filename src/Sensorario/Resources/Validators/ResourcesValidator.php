@@ -10,11 +10,11 @@
 
 namespace Sensorario\Resources\Validators;
 
-use Sensorario\Resources\Resource;
+use Sensorario\Resources\MagicResource;
 
 final class ResourcesValidator
 {
-    public function validate(Resource $resource)
+    public function validate(MagicResource $resource)
     {
         $container = ValidatorContainer::load();
 
