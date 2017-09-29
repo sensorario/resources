@@ -23,13 +23,7 @@ final class MandatoryConditional implements Validator
                 $name = $value['when']['property'];
                 $value = $value['when']['has_value'];
 
-                if (is_array($value)) {
-                    foreach ($value as $item) {
-                        $this->ensurePropertyNameHasKey($resource, $item, $name, $key);
-                    }
-                } else {
-                    $this->ensurePropertyNameHasKey($resource, $value, $name, $key);
-                }
+                $this->ensurePropertyKey($resource, $value, $name, $key);
             }
         }
     }
@@ -42,6 +36,17 @@ final class MandatoryConditional implements Validator
                 . 'has value ' . '`' . $value . '` '
                 . 'also `' . $key . '` is mandatory'
             );
+        }
+    }
+
+    public function ensurePropertyKey($resource, $value, $name, $key)
+    {
+        if (is_array($value)) {
+            foreach ($value as $item) {
+                $this->ensurePropertyNameHasKey($resource, $item, $name, $key);
+            }
+        } else {
+            $this->ensurePropertyNameHasKey($resource, $value, $name, $key);
         }
     }
 }
