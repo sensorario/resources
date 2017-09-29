@@ -25,6 +25,8 @@ abstract class MagicResource
 
     protected $validator;
 
+    protected $configuration;
+
     private static $methodWhiteList = [
         'box',
         'allowedValues'
