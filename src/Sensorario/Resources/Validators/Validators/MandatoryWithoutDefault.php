@@ -19,19 +19,17 @@ final class MandatoryWithoutDefault implements Validator
     public function check(Resource $resource)
     {
         foreach ($resource->mandatory() as $key => $value) {
-            if (
-                is_numeric($key) &&
-                $resource->hasNotProperty($value) &&
-                !isset($resource->defaults()[$value])
-            ) {
-                throw new \Sensorario\Resources\Exceptions\PropertyException(
-                    "Property `" . get_class($resource)
-                    . "::\$$value` is mandatory but not set. "
-                    . "Mandatory fields are: "
-                    . join(',', $resource->mandatory())
-                    . "."
-                );
-            }
+            $this->ensureMandatoryPropertyIsValizable($key, $value, $resource);
+        }
+    }
+
+    public function ensureMandatoryPropertyIsValizable($key, $value, $resource)
+    {
+        if (is_numeric($key) && $resource->hasNotProperty($value) && !isset($resource->defaults()[$value])) {
+            throw new \Sensorario\Resources\Exceptions\PropertyException(
+                "Property `" . get_class($resource) . "::\$$value` is mandatory but not set. "
+                . "Mandatory fields are: " . join(',', $resource->mandatory()) . "."
+            );
         }
     }
 }
