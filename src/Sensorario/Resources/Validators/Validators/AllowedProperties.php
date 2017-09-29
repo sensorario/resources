@@ -40,7 +40,7 @@ final class AllowedProperties implements Validator
     private function checkShouldBeSkipped()
     {
         foreach ($this->allowed as $kk => $vv) {
-            if (!is_numeric($kk) && isset($vv['when']) && $this->resource->hasProperty($vv['when']['property'])) {
+            if ($this->mustSkip($kk, $vv)) {
                 return true;
             }
         }
@@ -55,5 +55,12 @@ final class AllowedProperties implements Validator
                 );
             }
         }
+    }
+
+    public function mustSkip($key, $value)
+    {
+        return !is_numeric($key) &&
+            isset($value['when']) &&
+            $this->resource->hasProperty($value['when']['property']);
     }
 }
