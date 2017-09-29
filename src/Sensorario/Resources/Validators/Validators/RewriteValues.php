@@ -21,14 +21,19 @@ final class RewriteValues implements Validator
         foreach ($resource->properties() as $key => $value) {
             if (isset($resource->rewrites()[$key])) {
                 $when = $resource->rewrites()[$key]['when']; 
-                $set = $resource->rewrites()[$key]['set']; 
 
-                if (isset($when['greater_than'])) {
-                    if ($resource->get($key) > $resource->get($when['greater_than'])) {
-                        $resource->set($key, $resource->get($set['equals_to']));
-                    }
-                }
+                $this->overwriteValueIfGreaterThan($when, $resource, $key);
             }
+        }
+    }
+
+    public function overwriteValueIfGreaterThan($when, $resource, $propertyToBeReplaced)
+    {
+        if (isset($when['greater_than']) && $resource->get($propertyToBeReplaced) > $resource->get($when['greater_than'])) {
+            $resource->set(
+                $propertyToBeReplaced,
+                $resource->get($resource->rewrites()[$propertyToBeReplaced]['set']['equals_to'])
+            );
         }
     }
 }
