@@ -46,7 +46,7 @@ abstract class MagicResource
 
         throw new \Sensorario\Resources\Exceptions\UndefinedMethodException(
             'Method `' . get_class($this)
-            . '::' . $functionName 
+            . '::' . $functionName
             . '()` is not yet implemented'
         );
     }
