@@ -17,7 +17,7 @@ final class MandatoryDependency extends Resource
 {
     const FOO             = 'foo';
     const MELLO           = 'mello';
-    const MANDATORY_MELLO = 'mandatory_mello';
+    const MANDATORY_MELLO = 'makes_mello_mandatory';
 
     public function mandatory()
     {
@@ -25,7 +25,7 @@ final class MandatoryDependency extends Resource
             MandatoryDependency::FOO,
             MandatoryDependency::MELLO => [
                 'when' => [
-                    'property' => 'mandatory_mello',
+                    'property' => 'makes_mello_mandatory',
                     'condition' => 'is_present',
                 ]
             ],

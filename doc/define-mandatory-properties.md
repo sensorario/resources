@@ -30,6 +30,7 @@ public static function mandatory()
 ```php
 use Sensorario\Resources\Configurator;
 use Sensorario\Resources\Container;
+use Sensorario\Resources\Resource;
 
 $configurator = new Configurator(
   'foo',

@@ -17,6 +17,7 @@
  - [Default values][2]
  - [Example][10]
  - [Global configuration][12]
+ - [Mandatory conditional example][16]
  - [Mandatory properties][5]
  - [Overridable values][11]
  - [Property type][6]
@@ -40,3 +41,4 @@
  [13]: doc/ranges.md
  [14]: doc/raw-example.md
  [15]: doc/symfony-example.md
+ [16]: doc/macrocategory-category-subcategory.md
