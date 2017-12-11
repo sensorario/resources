@@ -1,6 +1,7 @@
 # Release 6.0
 
  * [close #132] - introduce `sensorario/container` component
+ * [close #152] - fix mandatory properties and documentation
 
 # Release 5.0
 
