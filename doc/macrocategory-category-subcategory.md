@@ -16,10 +16,10 @@ use Sensorario\Resources\Container;
 use Sensorario\Resources\Resource;
 
 $configurator = new Configurator(
-    'mt-distribution',
+    'company-name',
     new Container([
         'resources' => [
-            'mt-distribution' => [
+            'company-name' => [
                 'constraints' => [
                     'allowed' => [
                         'macrocategory',
