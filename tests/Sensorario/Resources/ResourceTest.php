@@ -329,7 +329,7 @@ final class ResourceTest extends TestCase
     {
         MandatoryDependency::box([
             'foo' => 'bar',
-            'mandatory_mello' => 'bar',
+            'makes_mello_mandatory' => 'bar',
         ]);
     }
 

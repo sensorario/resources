@@ -18,12 +18,17 @@ final class MandatoryProperty implements Validator
 {
     public function check(Resource $resource)
     {
-        foreach ($resource->mandatory() as $key => $value) {
+        foreach ($resource->mandatory() as $mandatoryProperty => $value) {
             if (isset($value['when']['condition'])) {
-                throw new \Sensorario\Resources\Exceptions\PropertyNotSetException(
-                    "Property `" . get_class($resource)
-                    . "::\${$key}` is mandatory but not set"
-                );
+                $when = $value['when'];
+                if ('is_present' == $when['condition']) {
+                    if (!$resource->hasProperty($mandatoryProperty)) {
+                        throw new \Sensorario\Resources\Exceptions\PropertyNotSetException(
+                            "Property `" . get_class($resource)
+                            . "::\${$mandatoryProperty}` is mandatory but not set"
+                        );
+                    }
+                }
             }
         }
     }
