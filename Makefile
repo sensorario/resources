@@ -5,3 +5,4 @@ suite:
 .SENSORARIO: coverage
 coverage:
 	php ./bin/phpunit --coverage-html /tmp/coverage/
+	open /tmp/coverage/index.html
