@@ -1,7 +1,7 @@
 .SENSORARIO: suite
 suite:
-	./runtests.sh
+	php -d display_errors ./bin/phpunit --stop-on-failure
 
 .SENSORARIO: coverage
 coverage:
-	./runtests.sh
+	php ./bin/phpunit --coverage-html /tmp/coverage/
