@@ -13,5 +13,6 @@ jobs:
             php composer-setup.php
             php -r "unlink('composer-setup.php');"
       - run: apt-get install -y zlib1g-dev libicu-dev g++ && docker-php-ext-configure intl && docker-php-ext-install intl
+      - run: ls && echo $PWD
       - run: php composer.phar install
       - run: ./bin/phpunit
