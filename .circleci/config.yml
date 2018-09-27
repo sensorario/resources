@@ -5,6 +5,7 @@ jobs:
     docker:
       - image: php:7.1-apache
     steps:
+      - run: ls && echo $PWD
       - run: apt-get update && apt-get -y install git
       - run:
           name: Install Composer
