@@ -6,12 +6,12 @@ jobs:
       - image: php:7.1-apache
     steps:
       - run: apt-get update && apt-get -y install git
-      - run: apt-get install -y zlib1g-dev libicu-dev g++ && docker-php-ext-configure intl && docker-php-ext-install intl
       - run:
           name: Install Composer
           command: |
             php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
             php composer-setup.php
             php -r "unlink('composer-setup.php');"
+      - run: apt-get install -y zlib1g-dev libicu-dev g++ && docker-php-ext-configure intl && docker-php-ext-install intl
       - run: php composer.phar install
       - run: ./bin/phpunit
