@@ -1,5 +1,6 @@
 # Release 6.0
 
+ * [feature] - [Tools/Validator] add new validator component
  * [feature] - added make file to facilitate deveopement
  * [close #132] - introduce `sensorario/container` component
  * [close #152] - fix mandatory properties and documentation

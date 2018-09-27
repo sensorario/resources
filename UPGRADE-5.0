@@ -1,5 +1,0 @@
-# Upgrade from 4.x
-
-## `./refresh` script
-
-This script aims to restore master branch with latest update. It also delete all merged branches.

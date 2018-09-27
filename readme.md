@@ -24,6 +24,7 @@
  - [Raw example][14]
  - [Symfony example][15]
  - [Tests][8]
+ - [Tools][17]
 
 
  [1]: doc/create-resources.md
@@ -42,3 +43,4 @@
  [14]: doc/raw-example.md
  [15]: doc/symfony-example.md
  [16]: doc/macrocategory-category-subcategory.md
+ [17]: doc/tools.md
