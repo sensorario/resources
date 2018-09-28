@@ -12,6 +12,8 @@ class Validator
 
     private $constraints;
 
+    private $error;
+
     public function setData(array $data)
     {
         $this->data = $data;
@@ -41,7 +43,13 @@ class Validator
 
             return Response::success();
         } catch (\Exception $e) {
+            $this->error = $e->getMessage();
             return Response::failure();
         }
+    }
+
+    public function error()
+    {
+        return $this->error;
     }
 }

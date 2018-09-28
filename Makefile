@@ -1,5 +1,5 @@
 install:
-	php composer.phar install
+	composer install
 
 suite:
 	php -d display_errors ./bin/phpunit --stop-on-failure

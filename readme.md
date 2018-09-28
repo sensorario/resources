@@ -20,8 +20,8 @@
  - [Mandatory conditional example][16]
  - [Mandatory properties][5]
  - [Overridable values][11]
- - [Property type][6]
  - [Raw example][14]
+ - [Rules][6]
  - [Symfony example][15]
  - [Tests][8]
  - [Tools][17]
@@ -32,7 +32,7 @@
  [3]: doc/define-allowed-properties.md
  [4]: doc/define-allowed-values.md
  [5]: doc/define-mandatory-properties.md
- [6]: doc/define-property-type.md
+ [6]: doc/rules.md
  [7]: doc/define-resources-via-array.md
  [8]: doc/tests.md
  [9]: doc/compose-resources.md
