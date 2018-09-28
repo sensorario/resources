@@ -279,6 +279,27 @@ final class ResourceTest extends TestCase
         ]);
     }
 
+    public function testCantFailWheneverFoo()
+    {
+        $value = SomeApiRequest::box([
+            'someApiParameter' => 'hello',
+            'fields' => [
+                'foo',
+                'bar',
+            ]
+        ]);
+
+        $json = json_encode($value->properties());
+
+        $this->assertEquals(json_encode([
+            'someApiParameter' => 'hello',
+            'fields' => [
+                'foo',
+                'bar',
+            ]
+        ]), $json);
+    }
+
     /**
      * @expectedException              Sensorario\Resources\Exceptions\NotObjectTypeFoundException
      * @expectedExceptionMessageRegExp #Attribute `.*` must be an object of type DateTime#

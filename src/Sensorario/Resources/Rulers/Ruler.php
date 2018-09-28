@@ -65,7 +65,10 @@ class Ruler
     {
         return $this->isNotCustom()
             && !($this->resource->get($this->fieldName) instanceof \Sensorario\Resources\Resource)
-            && get_class($this->resource->get($this->fieldName)) != $this->rule->getValue();
+            && (
+                is_object($this->resource->get($this->fieldName)) && 
+                get_class($this->resource->get($this->fieldName)) != $this->rule->getValue()
+            );
     }
 
     public function ensureTypeIsValid()
@@ -77,11 +80,15 @@ class Ruler
                 );
             }
 
-            throw new \Sensorario\Resources\Exceptions\AttributeTypeException(
-                'Attribute `' . $this->fieldName
-                . '` must be of type '
-                . '`' . $this->rule->getExpectedType() . '`'
-            );
+            if ($this->rule->getExpectedType() == 'array') {
+                if (gettype($this->resource->get($this->fieldName)) != 'array') {
+                    throw new \Sensorario\Resources\Exceptions\AttributeTypeException(
+                        'Attribute `' . $this->fieldName
+                        . '` must be of type '
+                        . '`' . $this->rule->getExpectedType() . '`'
+                    );
+                }
+            }
         }
     }
 
