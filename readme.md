@@ -23,6 +23,7 @@
  - [Raw example][14]
  - [Rules][6]
  - [Symfony example][15]
+ - [Symfony4 example][18]
  - [Tests][8]
  - [Tools][17]
 
@@ -44,3 +45,4 @@
  [15]: doc/symfony-example.md
  [16]: doc/macrocategory-category-subcategory.md
  [17]: doc/tools.md
+ [18]: doc/symfony4-example.md
